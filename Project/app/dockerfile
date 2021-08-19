@@ -1,0 +1,25 @@
+# pull the Node.js Docker image
+FROM node:alpine
+
+# create the directory inside the container
+WORKDIR /usr/src/app
+
+# copy the package.json files from local machine to the workdir in container
+COPY package*.json ./
+
+# run npm install in our local machine
+RUN npm install
+RUN npm i -S pdf-to-base64
+RUN npm install web3
+RUN npm install solc@0.8.0
+
+
+# copy the generated modules and all other files to the container
+COPY . .
+
+# our app is running on port 5000 within the container, so need to expose it
+EXPOSE 5000
+EXPOSE 9200
+
+# the command that starts our app
+CMD ["node", "index.js"]
