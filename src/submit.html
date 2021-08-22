@@ -5,21 +5,41 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-        <h1>Submit</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <label for="title">Title</label>
-            <input id="title" name="title" type="text" value="Example title" required>
-            <br>
-            <label for="author">Author</label>
-            <input id="author" name="author" type="text" value="Frederik Schmidt" required>
-            <br>
-            <label for="file">File</label>
-            <input id="file" name="file" type="file" required>
-            <br>
-            <input id="submit" type="submit">
-        </form>
+        <header>
+            <h1>Peer</h1>
+            <h2>Open Source Student Theses</h2>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Index</a></li>
+                    <li><a href="./search.html">Search</a></li>
+                    <li><a href="./submit.html">Submit</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h3>Submit</h3>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text" value="Example title" required>
+                <br>
+                <label for="author">Author</label>
+                <input id="author" name="author" type="text" value="Frederik Schmidt" required>
+                <br>
+                <label for="file">File</label>
+                <input id="file" name="file" type="file" required>
+                <br>
+                <input id="submit" type="submit">
+            </form>               
+        </main>
+        <footer>
+        </footer>
+        <!-- Load React. -->
+        <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
+        <!-- Load our React component. -->
+        <script src="js/app.js"></script>
         <script src="./js/script.js"></script>
-    
     </body>
 </html>
