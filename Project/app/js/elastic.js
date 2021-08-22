@@ -33,7 +33,7 @@ async function indexPDF(filename, id, title, author, year) {
   try {
 	
     //creates base64 string 
-	var base64pdf = await pdf2base64("/usr/src/app/data/"+filename); //hier auf Pfad achten
+	var base64pdf = await pdf2base64("/usr/src/app/data/"+filename); //hier auf Pfad achten (PDF einfach in Ordner Data ablegen)
 			    
 					await esclient.index({
 							index : index, 

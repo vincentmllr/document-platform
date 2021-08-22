@@ -1,8 +1,12 @@
 pragma solidity ^0.8.0;
+
 contract Counter {
-  uint public trasactionCount = 0;
-  
-  function AddTransaction() public {
-    trasactionCount++;
-  }
+    uint256 public count;
+    
+    constructor() {
+        count = 8;
+    }
+    function reset() public {
+        count = 0;
+    }
 }
