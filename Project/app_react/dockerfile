@@ -1,0 +1,22 @@
+# pull the official base image
+FROM node:alpine
+# set working direction
+WORKDIR /usr/src/app                     
+# /app
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install application dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install && npm i -S pdf-to-base64 && npm install web3 && npm install solc@0.8.0
+# add app
+COPY . ./
+
+# our app is running on port 5000 within the container, so need to expose it
+EXPOSE 5000
+EXPOSE 8545
+EXPOSE 9200
+
+# start app
+CMD ["npm", "start"]
