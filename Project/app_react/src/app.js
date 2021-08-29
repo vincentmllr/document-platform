@@ -24,7 +24,7 @@ class Search extends React.Component {
     this.state = {
       value:"",
       log:"",
-      result:"Result should appear here HALLLO"
+      result:"Result should appear here"
     }
   }
   
