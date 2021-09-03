@@ -1,25 +1,35 @@
-pragma solidity ^0.5.1;
+pragma solidity 0.5.1;
 
   
-contract test {
+contract WissenschaftlicheArbeit {
     
-    Arbeit[] public arbeit;
+    string public titel;
+    string public autor;
+    string public suchindex;
+    string public hashcode;
     
-    int256 public anzahlArbeiten ;
-    
-    struct Arbeit{
-    
-    string _titel;
-    string _autor;
-   
-    
+    constructor(string memory _titel, string memory _autor, string memory _suchindex, string memory _hashcode)public{
+        
+        titel =_titel;
+        autor = _autor;
+        suchindex = _suchindex;
+        hashcode = _hashcode;
     }
-  
     
-    function addArbeit(string memory _titel, string memory _autor) public {
-        arbeit.push(Arbeit(_titel, _autor));
-        anzahlArbeiten += 1;
-       
+    function getSuchindex()public view returns(string memory){
+        return suchindex;
+    }
+    
+    function aendereTitel(string memory _titel) public{
+        titel = _titel;
         
     }
+    
+    function aendereAutor(string memory _autor) public{
+        autor = _autor;
+        
+    }
+   
+
+    
 }
