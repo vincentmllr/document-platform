@@ -38,9 +38,11 @@ async function start() {
   app.listen(5000, () => console.log('Server is up and running')); //Unwichtig für dich Adrian, habe ich nur drin, damit das Programm weiterläuft
 
   const compf = await ganache.compileContract("Incrementer.sol","Incrementer"); //Hier werden die .sol Dateien aus dem Ordner smart_contracts eingelesen und compiliert, zurück bekommt man eine Variable mit der Compilierten Datei
+  //const wissenschaftlicheArbeit = await ganache.deploy(Mathe, Mueller);
+  
   const incrementer = await ganache.deploy(compf,[19], account_from); //Diese Datei übergibt man zusammen mit einer Liste an Argumenten für den Konstruktor (hier [19]) und dem Account, um die Funktion Deploy auszuführen, wobei damit eine Transaktion auf der Blockchain ausgeführt wird und ein weiter Block erstellt wird (denke weil Automining)  
   //Zurück gibt die Funktion Deploy ein JSON aus dem Vertrag (hier icrementer.contract) und der Adresse des Vertrags (hier incrementer.address)
-
+// const suchIndex = await wissenschaftlicheArbeit.contract.methods.getSuchindex();
   const data = await incrementer.contract.methods.number().call(); //über .methods  und .call() kann man nun vom Smart contract die Variable number auslesen.
   console.log(`The current number stored is: ${data}`); //hier wird sie ausgegeben
 
