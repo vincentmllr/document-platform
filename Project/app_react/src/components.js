@@ -75,7 +75,7 @@ class Search extends React.Component {
       this.setState({results: resultsArray});
     };
     
-    handleBlu = () => {
+    handleBlur = () => {
     };
     
     render() {       
@@ -113,27 +113,24 @@ List.propTypes = {
 class SubmitForm extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      id: null,
-      title: null,
-      author: null,
-      year: null,
-      file: null,
-      fileName: null,
+      thesisToSubmit: new Thesis(),
+      thesisCounter: 15,
     };
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitting...");
+    this.state.thesisToSubmit.id = this.state.thesisCounter;
+    this.state.thesisCounter += 1;
+    const thesisToSubmit = this.state.thesisToSubmit;
+    elastic.indexPDF(thesisToSubmit.fileName, thesisToSubmit.id, thesisToSubmit.title, thesisToSubmit.author, thesisToSubmit.year);
+    console.log("Submited!");
+  };
+
   handleClick = () => {
-      console.log("Submitting...");
-      const id = this.state.id;
-      const title = this.state.title;
-      const author = this.state.author;
-      const year = this.state.year;
-      const fileName = this.state.fileName;
-      const thesisToSubmit = new Thesis(id, title, author, year, fileName);
-      // elastic.indexPDF(thesisToSubmit) (#TODO How it should work later)
-      elastic.indexPDF(fileName, id, title, author, year);
   };
 
   handleChange = (event) => {
@@ -141,10 +138,11 @@ class SubmitForm extends React.Component {
     const file = event.target.files[0];
     const cb = (err, result) => {
       if (result) {
-        this.setState({
-          file: result,
-          fileName: event.target.files[0].name
-        });
+        this.state.thesisToSubmit.fileName = event.target.files[0].name;
+        //this.setState({
+        //  file: result,
+        //  fileName: event.target.files[0].name
+        //});
       };
     };
 
@@ -186,30 +184,61 @@ class SubmitForm extends React.Component {
   };
 
   render() {
-      return (
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label for="title">Title</label>
+          <br/>
+          <input 
+            id="title"
+            type="text"
+            placeholder="Test Title"
+            onChange={(e) => this.state.thesisToSubmit.title = e.target.value}
+            required
+          />
+          <br/>
+          <label for="author">Author</label>
+          <br/>
+          <input
+            id="author"
+            type="text"
+            placeholder="Frederik Schmidt"
+            onChange={(e) => this.state.thesisToSubmit.author = e.target.value}
+            required
+          />
+          <br/>
+          <label for="year">Year</label>
+          <br/>
+          <input
+            id="year"
+            type="year"
+            placeholder="2021"
+            onChange={(e) => this.state.thesisToSubmit.year = e.target.value}
+            required
+          />
+          <br/>
+          <label for="file">File</label>
+          <br/>
+          <input
+            type="file"
+            id="file"
+            name="filetobase64"
+            onChange={this.handleChange}
+            accept="application/pdf"
+          />
+          <br/>
+          <input
+            id="submit"
+            type="submit"
+          />
+        </form>
+        {this.state.file ?
           <div>
-              <form action="" method="POST" enctype="multipart/form-data">
-                  <label for="title">Title</label>
-                  <br></br>
-                  <input id="title" name="title" type="text" placeholder="Test Title" required></input>
-                  <br></br>
-                  <label for="author">Author</label>
-                  <br></br>
-                  <input id="author" name="author" type="text" placeholder="Frederik Schmidt" required></input>
-                  <br></br>
-                  <label for="file">File</label>
-                  <br></br>
-                  <input type="file" id="file" name="filetobase64" onChange={this.handleChange} accept="application/pdf" />
-                  <br></br>
-                  <input id="submit" type="submit" onClick={this.handleClick}></input>
-              </form>
-              {this.state.file ?
-                <div>
-                  <h6>File "{this.state.fileName}" as Base64:</h6>
-                  <p>{this.state.file}.</p>
-                </div> : null}
-          </div>
-      );
+            <h6>File "{this.state.fileName}" as Base64:</h6>
+            <p>{this.state.file}.</p>
+          </div> : null}
+      </div>
+    );
   }
 
 }
