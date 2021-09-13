@@ -1,10 +1,10 @@
 //Imports and global variables
-const { Client } = require("elasticsearch");  // Muss man womöglich seperat installieren: npm install elasticsearch
+const { Client } = require("elasticsearch"); 
                    require("dotenv").config();
 
 const elasticUrl = process.env.ELASTIC_URL || "http://localhost:9200";
 const esclient   = new Client({ node: elasticUrl });
-const pdf2base64 = require('pdf-to-base64'); //muss man installiern: npm install pdf-to-base64
+const pdf2base64 = require('pdf-to-base64'); //muss man installiern
 const index = "peerindex";
 
 /**
@@ -32,9 +32,9 @@ async function createIndex() {
 async function indexPDF(filename, id, title, author, year) { 
   try {
 	
-    //creates base64 string 
-	var base64pdf = await pdf2base64("/usr/src/app/src/data"+filename); //hier auf Pfad achten (PDF einfach in Ordner Data ablegen)
-			    
+  //creates base64 string 
+	var base64pdf = await pdf2base64("/usr/src/app/src/data/"+filename); //hier auf Pfad achten (PDF einfach in Ordner Data ablegen)
+
 					await esclient.index({
 							index : index, 
 							id : id,
@@ -101,25 +101,21 @@ try {
     }
   }	
 	
-	const { body: { hits } } = await esclient.search({
+  const res = await esclient.search({
     index: index, 
     body:  query
   });
   
-  const results = hits.total.value;
-  const values  = hits.hits.map((hit) => {
-    return {
-      id:     hit._id,
-      title:  hit._source.title,
-      author: hit._source.author,
-      score:  hit._score
-    }
-  });
-  
-  return {
-    results,
-    values
+  var results = [];
+  for (let hit in res ) {
+    results.push({
+      title:hit.title,
+      author:hit.author
+    });
   }
+
+  return JSON.stringify(res);
+
 }  catch (err) {
     console.error(`An error occurred while searching PDF`);
     console.error(err);
@@ -140,33 +136,29 @@ try {
   "query": { 
     "bool": { 
       "should": [
-        { "match": { "title":  {query: title, boost: 2, fuzziness: "auto"  }}},
+        { "match": { "title":  {query: title , boost: 2, fuzziness: "auto"  }}},
         { "match": { "author" : {query: author, boost: 1 }}},
-		{ "match": { "year" : year}}
+		{ "match": { year : year}}
 	  ]
     }
   }
 }	
 	
-	const { body: { hits } } = await esclient.search({
-    index: index, 
-    body:  query
-  });
-  
-  const results = hits.total.value;
-  const values  = hits.hits.map((hit) => {
-    return {
-      id:     hit._id,
-      title:  hit._source.title,
-      author: hit._source.author,
-      score:  hit._score
-    }
-  });
+const res = await esclient.search({
+  index: index, 
+  body:  query
+});
 
-  return {
-    results,
-    values
-  }
+var results = [];
+for (let hit in res ) {
+  results.push({
+    title:hit.title,
+    author:hit.author
+  });
+}
+
+return JSON.stringify(res);
+
 }  catch (err) {
     console.error(`An error occurred while searching PDF`);
     console.error(err);

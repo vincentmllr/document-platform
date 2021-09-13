@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { Thesis } from './thesis';
+import { PropTypes } from 'prop-types';
 const elastic = require("./elastic");
+const ganache = require("./ganache");
+var accounts; //Adressen der Accounts, wird von Metamask zurückgegeben
+var incrementer; //Variable für Conract
+
 
 
 export class Headline extends React.Component {
@@ -42,35 +48,66 @@ class Search extends React.Component {
       super(props)
       this.state = {
         value:"",
-        result:"Result should appear here"
+        results: [],
       };
     }
     
-    handleClick() {
+    handleClick = () => {
       this.handleChange();
-    }
+    };
     
-    async handleChange(event) {
+    handleChange = async (event) => {
       this.setState({value: event.target.value});
-      const result = await elastic.simpleSearchPDF("TestPDF","Thasilo","");
-      this.setState({result: `Found: "${result}"`});
       console.log(`Searching for: "${this.state.value}"...`);
-    }
+      const resultsJSON = await elastic.advancedSearchPDF(event.target.value, "", " ");
+      const resultsObject = JSON.parse(resultsJSON);
+      var resultsArray = [];
+      var gotResults = (resultsObject.hits.total.value !== 0);
+      if (gotResults) {
+        for(let hit of resultsObject.hits.hits) {
+          let hitID = hit._id;
+          let hitTitle = hit._source.title;
+          let hitAuthor = hit._source.author;
+          let hitYear = hit._source.year;
+          resultsArray.push(new Thesis(hitID, hitTitle, hitAuthor, hitYear, "Example Filename"));
+        }
+      }
+      this.setState({results: resultsArray});
+    };
     
-    handleBlur() {
-    }
+    handleBlu = () => {
+    };
     
     render() {       
       return (
         <div id="searchbar">
-          <input type="text" placeholder="Enter Search Term" value={this.state.value} onBlur={this.handleBlur.bind(this)} onChange={this.handleChange.bind(this)}></input>
+          <input type="text" placeholder="Enter Search Term" value={this.state.value} onBlur={this.handleBlur} onChange={this.handleChange}></input>
           <button style={{display:'true'}} onClick={() => this.handleClick()}>Search</button>
           <p>{this.state.result}</p>
+          <List thesisList={this.state.results} />
+          {console.log("Render List")}
         </div>
       );
-    }
+    };
 }
 
+class List extends React.Component {
+
+  render() {
+    return (
+      <ul>
+        {this.props.thesisList.length === 0 ? <li>Nothing Found. Try it with a different term.</li> : null}
+        {this.props.thesisList.map((thesis) => <li key={thesis.title}>{thesis.title}, {thesis.author}, {thesis.year}</li>)}
+      </ul>
+    );
+  }
+
+}
+
+List.propTypes = {
+  thesisList: PropTypes.string,
+  string: PropTypes.string,
+}
 
 
 class SubmitForm extends React.Component {
@@ -94,6 +131,8 @@ class SubmitForm extends React.Component {
       const author = this.state.author;
       const year = this.state.year;
       const fileName = this.state.fileName;
+      const thesisToSubmit = new Thesis(id, title, author, year, fileName);
+      // elastic.indexPDF(thesisToSubmit) (#TODO How it should work later)
       elastic.indexPDF(fileName, id, title, author, year);
   };
 
