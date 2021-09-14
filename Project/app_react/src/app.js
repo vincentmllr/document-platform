@@ -29,16 +29,15 @@ class App extends React.Component {
     this.state = {
       results: [],
     };
-    const thesisArray = [];
+    const exampleTheses = [];
     for(let i = 0; i < 10; i++) {
-      thesisArray.push(new Thesis(i, `Thesis ${i}`, `Author ${i}`, (2000 + i), `testpdf.pdf`));
+      exampleTheses.push(new Thesis(i, `Thesis ${i}`, `Author ${i}`, (2000 + i), `testpdf.pdf`));
     }
     elastic.createIndex();
-
-    for(let thesis of thesisArray) {
+    for(let thesis of exampleTheses) {
       elastic.indexPDF(thesis.fileName, thesis.id, thesis.title, thesis.author, thesis.year);
     }
-    elastic.indexPDF("Kabel.pdf",10,"Wie man Kabel verlegt","VDE", "2015");  //Hier werden PDFs indexiert, man übergibt den Dateinahmen, eine Eindeutige ID, Titel, Autor und Jahr
+    elastic.indexPDF("Kabel.pdf",10,"Wie man Kabel verlegt","VDE", "2015");
     elastic.indexPDF("RWE_Abschlussarbeit.pdf",11,"Abschlussarbeit RWE","Thasilo","2020");
     elastic.indexPDF("testpdf.pdf",12,"TestPDF","Ich", "2021");
   }
