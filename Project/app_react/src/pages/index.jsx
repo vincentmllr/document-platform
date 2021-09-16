@@ -1,15 +1,22 @@
 import React from "react";
 //import App from "../app";
 //import Navigation from "../app";
-import {Headline, Navigation, Search} from "../components";
+import {Header, Navigation, Search} from "../components";
 
 
 const IndexPage = () => {
   return (
-    <div className="Index">
-      <Headline />
-      <Navigation />
-      <Search />
+    <div className="index container-fluid">
+      <header>
+        <Header />
+      </header>
+      <body>
+        <div className="body row">
+          <Search />
+        </div>
+      </body>
+      <footer>
+      </footer>
     </div>
   );
 };

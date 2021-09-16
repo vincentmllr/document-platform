@@ -1,5 +1,5 @@
 import React from "react";
-import { Headline, Navigation, SubmitForm } from "../components";
+import { Header, Navigation, SubmitForm } from "../components";
 
 class SubmitPage extends React.Component {
 
@@ -7,8 +7,7 @@ class SubmitPage extends React.Component {
 
     return (
       <div>
-        <Headline />
-        <Navigation />
+        <Header />
         <SubmitForm />
       </div>
     );
