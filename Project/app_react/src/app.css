@@ -1,0 +1,76 @@
+/* Hide Overflow */
+body {
+    overflow-x: hidden;
+}
+
+/* Card Alignment */
+.card {
+    margin: 30px;
+    align-items: center;
+    text-align: center;
+}  
+
+/* Header Jumbotron */
+.jumbotron{
+    background-color: #fafafa;
+    margin-bottom: -20px;
+    background: #fff;
+    text-align: center;
+    border-radius: 0;
+}
+
+/* Footer Jumbotron */
+.jumbotron-fluid {
+    background: lightgrey;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Margin for Menu */
+.outframe { 
+    padding: 0 20px;
+}
+
+/* Shadow Effect for Button, Collapse & Cards */
+.btn-spl {
+    box-shadow: 0 1px 4px rgba(100, 20, 100, .6);
+    border-radius: 0px;
+}
+
+/* Heading with Divider */
+.title {
+    line-height: 2.5;
+    text-align: center;
+}
+
+.title span {
+    display: inline-block;
+    position: relative;  
+}
+
+.title span:before,
+.title span:after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    top: 0;
+    width: 75%;
+    margin-top:35px;
+}
+
+.title span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.title span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+.card-img-top {
+    width: 40%;
+    height: auto;
+}

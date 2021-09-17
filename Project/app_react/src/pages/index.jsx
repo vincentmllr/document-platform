@@ -1,21 +1,25 @@
 import React from "react";
 //import App from "../app";
 //import Navigation from "../app";
-import {Header, Navigation, Search} from "../components";
+import {CardDeck, Footer, Header, HeroHeader, Navigation, Search} from "../components";
 
 
 const IndexPage = () => {
   return (
     <div className="index container-fluid">
+      <Navigation />
       <header>
-        <Header />
       </header>
       <body>
-        <div className="body row">
-          <Search />
+        <div>
+          <HeroHeader />
+        </div>
+        <div>
+          <CardDeck />
         </div>
       </body>
       <footer>
+        <Footer />
       </footer>
     </div>
   );

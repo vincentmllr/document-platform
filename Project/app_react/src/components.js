@@ -17,41 +17,89 @@ export class Header extends React.Component {
 
     render () {
         return (
-        <div className="header container-fluid row">
-          <div className="col">
-            <h1>Peer</h1>
-            <h2>Open Source Student Theses</h2>
-          </div>
-          <div className="col">
             <Navigation />
-          </div>
-        </div>
         );
     }
 }
 
 
 class Navigation extends React.Component {
-    render() { // fixed-top navbar-toggleable-md navbar-inverse bg-primary // <a class="navbar-brand" href="#">
-                //<img src="../public/favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="logo" />
-                //Logo
-                //</a>
+    render() { // fixed-top navbar-toggleable-md navbar-inverse bg-primary
       return (
-        <nav className="navbar navbar-expand-md">
+        <nav className="navbar navbar-expand-md" role="navigation">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          <a class="navbar-brand" href="/">
+            <img src="assets/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""/>
+            peer
+          </a>
           <div class="collapse navbar-collapse" id="navbar">
             <ul className="navbar-nav">
               <li class="nav-item outframe"><Link className="nav-link" to="/">Index</Link> </li>
               <li class="nav-item outframe"><Link className="nav-link" to="/search">Search</Link></li>
               <li class="nav-item outframe"><Link className="nav-link" to="/submit">Submit</Link></li>
-              <LogIn />
             </ul>
+            <LogIn className="" />
           </div>
         </nav>
       )
     };
+}
+
+
+export class HeroHeader extends React.Component {
+  render () {
+    return (
+      <div class="jumbotron">
+        <h1 class="display-3">peer</h1>
+        <p class="lead">Open Source Student Theses</p>
+        <Search/>
+      </div>
+    );
+  }
+}
+
+export class CardDeck extends React.Component {
+  render () {
+    return (
+      <div class="card-deck row">
+        <div class="card btn-spl col">
+          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="document symbol"/>
+          <div class="card-block">
+            <h4 class="card-title">Thesis 1</h4>
+            <p class="card-text">Abstract Teaser...</p>
+            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Uploaded: Yesterday</small>
+          </div>
+        </div>
+        <div class="card btn-spl col">
+          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="Card image cap"/>
+          <div class="card-block">
+            <h4 class="card-title">Thesis 2</h4>
+            <p class="card-text">Abstract Teaser...</p>
+            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Uploaded: Yesterday</small>
+          </div>
+        </div>
+        <div class="card btn-spl col">
+          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="Card image cap"/>
+          <div class="card-block">
+            <h4 class="card-title">Thesis 3</h4>
+            <p class="card-text">Abstract Teaser...</p>
+            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Uploaded: Yesterday</small>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 
@@ -281,47 +329,52 @@ class SubmitForm extends React.Component {
   render() {
     return (
       <div>
+        <h3 className="title">Submit your Thesis:</h3>
         <form onSubmit={this.handleSubmit}>
-          <label for="title">Title</label>
-          <br/>
-          <input 
-            id="title"
-            type="text"
-            placeholder="Test Title"
-            onChange={(e) => this.state.thesisToSubmit.title = e.target.value}
-            required
-          />
-          <br/>
-          <label for="author">Author</label>
-          <br/>
-          <input
-            id="author"
-            type="text"
-            placeholder="Frederik Schmidt"
-            onChange={(e) => this.state.thesisToSubmit.author = e.target.value}
-            required
-          />
-          <br/>
-          <label for="year">Year</label>
-          <br/>
-          <input
-            id="year"
-            type="year"
-            placeholder="2021"
-            onChange={(e) => this.state.thesisToSubmit.year = e.target.value}
-            required
-          />
-          <br/>
-          <label for="file">File</label>
-          <br/>
-          <input
-            type="file"
-            id="file"
-            name="filetobase64"
-            onChange={this.handleChange}
-            accept="application/pdf"
-          />
-          <br/>
+          <div className="form-group">
+            <label for="title">Title</label>
+            <input 
+              id="title"
+              className="form-control"
+              type="text"
+              placeholder="Test Title"
+              onChange={(e) => this.state.thesisToSubmit.title = e.target.value}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label for="author">Author</label>
+            <input
+              id="author"
+              className="form-control"
+              type="text"
+              placeholder="Frederik Schmidt"
+              onChange={(e) => this.state.thesisToSubmit.author = e.target.value}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label for="year">Year</label>
+            <input
+              id="year"
+              className="form-control"
+              type="year"
+              placeholder="2021"
+              onChange={(e) => this.state.thesisToSubmit.year = e.target.value}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label for="file">File</label>
+            <input
+              type="file"
+              className="form-control"
+              id="file"
+              name="filetobase64"
+              onChange={this.handleChange}
+              accept="application/pdf"
+            />
+          </div>
           <input
             id="submit"
             type="submit"
@@ -343,26 +396,17 @@ class SubmitForm extends React.Component {
 
 }
 
-
-/* function FileInput(props) {
-
-  const [ file, setFile ] = useState(null)
-  const [ fileName, setFileName ] = useState(null)
-
-  
-
-  
-
-  return (
-    <div className="FileInput">
-      <div className="upload-area">
-        { fileName && <p className="filename">{fileName.name}</p> }
-        
+export class Footer extends React.Component {
+  render () {
+    return (
+    <div class="jumbotron-fluid">
+      <div class="container">
+        <h2>footer section</h2>
+        <p class="lead">&copy; All Rights Reserved </p>
       </div>
-      <br/>
-      {file ? <textarea id="base64File" rows="30" cols="150" value={file} readOnly></textarea> : null }
     </div>
-  )
-}*/
+    );
+  }
+}
 
-export { Navigation, Search, SubmitForm};
+export { Navigation, Search, SubmitForm}; // TODO löschen und abändern

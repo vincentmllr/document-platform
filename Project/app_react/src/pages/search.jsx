@@ -3,9 +3,13 @@ import { Header, Navigation, Search } from "../components";
 
 const SearchPage = () => {
     return (
-      <div>
-        <Header />
-        <Search />
+      <div className="container-fluid">
+        <div className="row">
+          <Header />
+        </div>
+        <div className="row">
+          <Search />
+        </div>
       </div>
     );
   };
