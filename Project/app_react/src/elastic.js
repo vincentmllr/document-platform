@@ -132,7 +132,7 @@ async function advancedSearchPDF(title, author, year) {
 
 try {
   const query = {
-  "min_score": 0.1,	  
+  "min_score": 0.000001,	  
   "query": { 
     "bool": { 
       "should": [
