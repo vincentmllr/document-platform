@@ -6,20 +6,20 @@ contract scientificWork {
     string path;
     string hashcode;
     bool isSignt = false;
-    address changeExaminer; 
+    address examiner; 
    
    
     
-    constructor(string memory _title, string memory _author, string memory _path, string memory _hashcode, address _changeExaminer)public{
+    constructor(string memory _title, string memory _author, string memory _path, string memory _hashcode, address _examiner)public{
         
         title =_title;
         author = _author;
         path = _path;
         hashcode = _hashcode;
-        changeExaminer = _changeExaminer;
+        examiner = _examiner;
     }
       modifier onlyExaminer(){
-        require(msg.sender == changeExaminer);
+        require(msg.sender == examiner);
         _;
     }
     
@@ -27,6 +27,11 @@ contract scientificWork {
         isSignt = true;
         
     }
+    
+    function getAllInformation() public view returns(string memory, string memory, string memory, string memory, address, bool){
+        return (title, author, path, hashcode, examiner, isSignt);
+    }
+    
   
     function getPath()public view returns(string memory){
         return path;
