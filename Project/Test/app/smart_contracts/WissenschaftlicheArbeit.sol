@@ -1,44 +1,44 @@
 pragma solidity 0.5.1;
 
-contract WissenschaftlicheArbeit {
-    string titel;
-    string autor;
-    string pfad;
+contract scientificWork {
+    string title;
+    string author;
+    string path;
     string hashcode;
     bool isSignt = false;
-    address adresseDesPruefers; 
+    address changeExaminer; 
    
    
     
-    constructor(string memory _titel, string memory _autor, string memory _pfad, string memory _hashcode, address _adresseDesPruefers)public{
+    constructor(string memory _title, string memory _author, string memory _path, string memory _hashcode, address _changeExaminer)public{
         
-        titel =_titel;
-        autor = _autor;
-        pfad = _pfad;
+        title =_title;
+        author = _author;
+        path = _path;
         hashcode = _hashcode;
-        adresseDesPruefers = _adresseDesPruefers;
+        changeExaminer = _changeExaminer;
     }
-      modifier onlyPruefer(){
-        require(msg.sender == adresseDesPruefers);
+      modifier onlyExaminer(){
+        require(msg.sender == changeExaminer);
         _;
     }
     
-        function arbeitSigen() public onlyPruefer {
+        function signScientificWork() public onlyExaminer {
         isSignt = true;
         
     }
   
-    function getPfad()public view returns(string memory){
-        return pfad;
+    function getPath()public view returns(string memory){
+        return path;
     }
     
-    function aendereTitel(string memory _titel) public{
-        titel = _titel;
+    function changeTitle(string memory _title) public{
+        title = _title;
         
     }
     
-    function aendereAutor(string memory _autor) public{
-        autor = _autor;
+    function changeAuthor(string memory _author) public{
+        author = _author;
         
     }
     
