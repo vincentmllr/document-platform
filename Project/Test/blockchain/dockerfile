@@ -1,0 +1,7 @@
+FROM node:alpine
+
+RUN npm install -g ganache-cli
+
+EXPOSE 8545
+
+CMD ["ganache-cli", "--mnemonic", "horn hammer original lemon chapter weird gun pond fortune blush cupboard cat", "-h", "0.0.0.0"]
