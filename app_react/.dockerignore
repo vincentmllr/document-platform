@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+# build # War automatisch ignoriert
+.dockerignore
+**/.git
+**/.DS_Store
+**/node_modules

@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+    nodejs:
+        restart: always
+        build:
+            context: ./app
+        ports:
+            - "5000:5000"
+        environment:
+            - ES_HOST=elasticsearch
+            - ELASTIC_URL=http://elasticsearch:9200
+        links:
+            - elasticsearch
+        depends_on:
+            elasticsearch:
+                condition: service_healthy
+        container_name: nodejs
+    nginx:
+        restart: always
+        build:
+            context: ./nginx
+        ports:
+            - "80:80"
+        container_name: nginx
+    elasticsearch:
+        build: elastic/
+        ports:
+            - 9200:9200
+        container_name: elasticsearch
+        healthcheck:
+            test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+            interval: 15s
+            timeout: 30s
+            retries: 5
+    ganache:
+        restart: always
+        build:
+            context: ./blockchain
+        ports:
+            - "8545:8545"
+        container_name: ganache
