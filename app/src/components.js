@@ -198,7 +198,7 @@ class Search extends React.Component {
     handleChange = async (event) => {
       this.setState({value: event.target.value});
       console.log(`Searching for: "${event.target.value}"...`);
-      const resultsJSON = await elastic.advancedSearchPDF(event.target.value, "", " ");
+      const resultsJSON = await elastic.advancedSearchPDF(event.target.value, "Max Mustermann", "2021");
       console.log(resultsJSON);
       var resultsObject;
       if(resultsJSON !== undefined) {

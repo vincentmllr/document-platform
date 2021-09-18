@@ -4,25 +4,31 @@ import React from "react";
 import {CardDeck, Footer, Header, HeroHeader, Navigation, Search} from "../components";
 
 
-const IndexPage = () => {
-  return (
-    <div className="index container-fluid">
-      <Navigation />
-      <header>
-      </header>
-      <body>
-        <div>
-          <HeroHeader />
-        </div>
-        <div>
-          <CardDeck />
-        </div>
-      </body>
-      <footer>
-        <Footer />
-      </footer>
-    </div>
-  );
+class IndexPage extends React.Component {
+
+  constructor (props) {
+    super(props);
+  }
+  render () {
+    return (
+      <div className="index container-fluid">
+        <Navigation />
+        <header>
+        </header>
+        <body>
+          <div>
+            <HeroHeader />
+          </div>
+          <div>
+            <CardDeck />
+          </div>
+        </body>
+        <footer>
+          <Footer />
+        </footer>
+      </div>
+    );
+  }
 };
 
 export default IndexPage;

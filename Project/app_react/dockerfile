@@ -19,4 +19,8 @@ EXPOSE 8545
 EXPOSE 9200
 
 # start app
-CMD ["npm", "start"]
+CMD ["npm", "run", "build"]
+# FROM nginx
+
+# COPY container /
+# COPY build /usr/share/nginx/html
