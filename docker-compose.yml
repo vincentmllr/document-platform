@@ -1,27 +1,17 @@
 version: "3.8"
 services:
-    nodejs:
+    ngnix_react:
         restart: always
         build:
-            context: ./app_react
+            context: ./app
         ports:
-            - "5000:5000"
-        environment:
-            - ES_HOST=elasticsearch
-            - ELASTIC_URL=http://elasticsearch:9200
+            - "8081:80"
         links:
             - elasticsearch
         depends_on:
             elasticsearch:
                 condition: service_healthy
-        container_name: nodejs
-    nginx:
-        restart: always
-        build:
-            context: ./nginx
-        ports:
-            - "80:80"
-        container_name: nginx
+        container_name: ngnix_react
     elasticsearch:
         build: elastic/
         ports:

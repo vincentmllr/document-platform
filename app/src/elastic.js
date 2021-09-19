@@ -60,7 +60,7 @@ export async function indexPDF(filename, id, title, author, year) {
 /**
 * adding requiered pipeline for indexing PDFs
 */
-export async function addPipeline(){
+async function addPipeline(){
   await esclient.ingest.putPipeline({
 	id: 'attachment',
     body: {
@@ -101,7 +101,6 @@ try {
     }
   }	
 	
-<<<<<<< HEAD:app/src/elastic.js
   const res = await esclient.search({
     index: index, 
     body:  query
@@ -109,26 +108,13 @@ try {
   
   var results = [];
   for (let hit in res ) {
-=======
-  const res = await esclient.helpers.search({
-    index: index, 
-    body:  query
-  });
-
-  var results = [];
-  for await (let hit of res ) {
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
     results.push({
       title:hit.title,
       author:hit.author
     });
   }
 
-<<<<<<< HEAD:app/src/elastic.js
   return JSON.stringify(res);
-=======
-  return results;
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
 
 }  catch (err) {
     console.error(`An error occurred while searching PDF`);
@@ -146,7 +132,7 @@ export async function advancedSearchPDF(title, author, year) {
 
 try {
   const query = {
-  "min_score": 0.1,	  
+  "min_score": 0,	  
   "query": { 
     "bool": { 
       "should": [
@@ -158,45 +144,23 @@ try {
   }
 }	
 	
-<<<<<<< HEAD:app/src/elastic.js
 const res = await esclient.search({
-=======
-const res = await esclient.helpers.search({
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
   index: index, 
   body:  query
 });
 
 var results = [];
-<<<<<<< HEAD:app/src/elastic.js
 for (let hit in res ) {
-=======
-for await (let hit of res ) {
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
   results.push({
     title:hit.title,
     author:hit.author
   });
 }
 
-<<<<<<< HEAD:app/src/elastic.js
 return JSON.stringify(res);
-=======
-return results;
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
 
 }  catch (err) {
     console.error(`An error occurred while searching PDF`);
     console.error(err);
     }	
 }
-
-
-
-// module.exports = {
-//   esclient,
-//   createIndex,
-//   indexPDF,
-//   simpleSearchPDF,
-//   advancedSearchPDF
-// };
