@@ -3,8 +3,9 @@ import { React, Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  /*Switch,
-  Link,
+  Switch,
+  HashRouter,
+  /*Link,
   Redirect*/
 } from "react-router-dom";
 import { Author, Examiner, Review, Thesis } from './model';
@@ -21,6 +22,10 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      loggedIn: true,
+    };
+    this.name = "Bob";
     elastic.createIndex();
     elastic.indexPDF("Kabel.pdf",10,"Wie man Kabel verlegt","VDE", "2015");
     elastic.indexPDF("RWE_Abschlussarbeit.pdf",11,"Abschlussarbeit RWE","Thasilo","2020");
@@ -67,11 +72,13 @@ class App extends Component {
   render () {
     return (
       <div>
-        <Router>
-          <Route exact path="/" component={IndexPage} />
-          <Route exact path="/submit" component={SubmitPage} />
-          <Route exact path="/search" component={SearchPage} />
-        </Router>
+        <HashRouter>
+          <Switch>
+            <Route exact path="/" component={IndexPage} />
+            <Route exact path="/submit" component={SubmitPage} />
+            <Route exact path="/search" component={SearchPage} />
+          </Switch>
+        </HashRouter>
       </div>
     );
   }

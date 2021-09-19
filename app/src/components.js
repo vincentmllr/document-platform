@@ -285,25 +285,44 @@ class SubmitForm extends React.Component {
   handleChange = (event) => {
     console.log("Handle Change!")
     const file = event.target.files[0];
-    const cb = (err, result) => {
+    console.log(file);
+
+    const callBackFunction = (error, result) => {
       if (result) {
-        this.state.thesisToSubmit.fileName = event.target.files[0].name;
-        //this.setState({
-        //  file: result,
-        //  fileName: event.target.files[0].name
-        //});
+        this.setState({
+            file: result,
+            fileName: event.target.files[0].name
+        });
       };
     };
 
     const reader = new FileReader();
-    reader.readAsDataURL(file)
-    reader.onload = function () {
-      cb(null, reader.result)
-    }
-    reader.onerror = function (error) {
-      cb(error, null)
-    }
+    reader.readAsDataURL(file);
+    reader.onload = () => callBackFunction(null, reader.result);
+    reader.onerror = (error) => callBackFunction(error, null);
   };
+
+  //-------------------------------------------------------
+  // Für Joni zum ausschneiden:
+  // Function to get a file to base64:
+  convertFileToBase64 = (file) => {
+
+    const callBackFunction = (error, result) => {
+      if (result) {
+        // This happens when the conversion was successful:
+        const fileName = file.name;
+        const fileAsBase64 = result;
+        // Use those constants as needed
+      };
+    };
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => callBackFunction(null, reader.result);
+    reader.onerror = (error) => callBackFunction(error, null);
+
+  };
+  //-------------------------------------------------------
 
 
 
@@ -387,12 +406,16 @@ class SubmitForm extends React.Component {
             class="btn btn-success"
           />
         </form>
-        {this.state.file ?
+        <div>
+            <h6>File "{this.state.fileName}" as Base64:</h6>
+            <p>{this.state.file}.</p>
+        </div>
+        {/* {this.state.file ?
           <div>
             <h6>File "{this.state.fileName}" as Base64:</h6>
             <p>{this.state.file}.</p>
           </div> : null
-        }
+        } */}
         <DeployContract />
         <br />
         <TestContract />
