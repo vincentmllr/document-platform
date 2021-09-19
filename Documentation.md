@@ -5,3 +5,8 @@ Open Source Student Theses
 - Structure
 - Getting Started
 - Interfaces (important Functions)
+- Known Bugs
+
+### Known Bugs
+- MetaMask Account zurücksetzen
+- Long connecting with Ganache in MetaMask

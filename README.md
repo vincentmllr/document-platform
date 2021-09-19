@@ -4,14 +4,15 @@ Open Source Student Theses
 ## Quick Start
 
 ### Prerequisites
-- Install Node Modules?
-- Install MetaMaskPlugin
+- Install Node Modules
 - Start Docker Containers
-- Import MetaMask Account from Ganache
+- Install and Setup MetaMaskPlugin
 - CORS unblock PlugIn
 
 #### Install Node Modules
-Install requirements with: yarn install ?
+1. Install yarn from https://yarnpkg.com/.
+2. Go to /app.
+3. Install requirements with: yarn install.
 
 #### Start Docker Containers
 ##### How to start the app-Container seperate
@@ -19,6 +20,14 @@ Install requirements with: yarn install ?
 2. yarn build
 3. docker build -t app .
 4. docker run -p 8081:80 -it app
+
+#### Install and Setup MetaMaskPlugin
+1. Install MetaMask Browser-PlugIn
+2. Open PlugIn
+3. Add "Special RPS": Name: Ganache, URL: http://localhost:8545, ChainID: 1337
+4. Go to Docker Destop in the console from our ganache container
+5. Copy first entry of list "private keys" in console 
+6. Import Account: Enter private key from step before
 
 ## Documentation
 For further details see: "./Documentation.md".
