@@ -4,7 +4,6 @@ const { Client } = require("elasticsearch");
 
 const elasticUrl = process.env.ELASTIC_URL || "http://localhost:9200";
 const esclient   = new Client({ node: elasticUrl });
-const pdf2base64 = require('pdf-to-base64'); //muss man installiern
 const index = "peerindex";
 
 /**
@@ -29,19 +28,16 @@ export async function createIndex() {
 * indexing PDF
 * @param filename, id, title, author
 */
-export async function indexPDF(filename, id, title, author, year) { 
+export async function indexPDF(base64pdf, id, title, author, year) { 
   try {
-	
-  //creates base64 string 
-	var base64pdf = await pdf2base64("/usr/src/app/src/data/"+filename); //hier auf Pfad achten (PDF einfach in Ordner Data ablegen)
-
+    base64pdf = base64pdf.substring(base64pdf.indexOf(",") + 1);
 					await esclient.index({
 							index : index, 
 							id : id,
 							pipeline: "attachment",
 							body : {
 									title : title,
-									author : author,
+									author : author.name,
 									year : year,
 									pdf : base64pdf
 									
@@ -164,3 +160,13 @@ return JSON.stringify(res);
     console.error(err);
     }	
 }
+
+
+
+/*module.exports = {
+  esclient,
+  createIndex,
+  indexPDF,
+  simpleSearchPDF,
+  advancedSearchPDF
+};*/
