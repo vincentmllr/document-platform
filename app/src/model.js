@@ -1,7 +1,7 @@
 
 export class Thesis {
 
-    constructor(id, title, author, examiner, date, language, country, abstract, grade, filePath, fileName, reviews){
+    constructor(id, title, author, examiner, date, language, country, abstract, grade, file, fileBase64, filePath, fileName, reviews){
         this.id = id;
         this.title = title;
         this.author = author;
@@ -11,6 +11,8 @@ export class Thesis {
         this.country = country;
         this.abstract = abstract;
         this.grade = grade;
+        this.file = file;
+        this.fileBase64 = fileBase64;
         this.filePath = filePath;
         this.fileName = fileName;
         this.reviews = reviews;

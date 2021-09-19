@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Thesis } from './model';
 import { PropTypes } from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import logo from "./assets/logo_cap_512.png";
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 var accounts = []; //Adressen der Accounts, wird von Metamask zurückgegeben
@@ -31,14 +34,11 @@ class Navigation extends React.Component {
             <span class="navbar-toggler-icon"></span>
           </button>
           <a class="navbar-brand" href="/">
-            <img src="assets/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""/>
-            peer
+            <img src={logo} width="60" height="60" class="d-inline-block align-top" alt=""/>
           </a>
           <div class="collapse navbar-collapse" id="navbar">
             <ul className="navbar-nav">
-              <li class="nav-item outframe"><Link className="nav-link" to="/">Index</Link> </li>
-              <li class="nav-item outframe"><Link className="nav-link" to="/search">Search</Link></li>
-              <li class="nav-item outframe"><Link className="nav-link" to="/submit">Submit</Link></li>
+              <li class="nav-item outframe"><Link className="btn btn-success" to="/submit">Submit</Link></li>
             </ul>
             <LogIn className="" />
           </div>
@@ -182,15 +182,24 @@ function Back(handleClick) {
 }
 
 
-class Search extends React.Component {
+class Search extends Component {
   
     constructor(props) {
-      super(props)
+      super(props);
       this.state = {
         value:"",
         results: [],
       };
     }
+
+    onKeyUp = (event) => {
+      // if (event.charCode === 13) {
+      //   console.log("Redirect to Search Page")
+      //   this.setState({ value: event.target.value });
+      //   this.props.history.push('#/search/');
+      //   return  <Redirect  to="#/search/" />;
+      // }
+    };
     
     handleClick = () => {
       this.handleChange();
@@ -226,13 +235,8 @@ class Search extends React.Component {
     render() {       
       return (
         <div id="searchbar">
-          <input type="text" placeholder="Enter Search Term" value={this.state.value} onBlur={this.handleBlur} onChange={this.handleChange}></input>
-          <button
-            style={{display:'true'}}
-            class="btn btn-primary"
-            onClick={() => this.handleClick()}>
-              Search
-          </button>
+          <input type="text" placeholder="Enter Search Term" value={this.state.value} onBlur={this.handleBlur} onChange={this.handleChange} onKeyPress={this.onKeyUp}></input>
+          <Link className="btn btn-primary" to="/search">Search</Link>
           <p>{this.state.result}</p>
           <List thesisList={this.state.results} />
         </div>
@@ -253,11 +257,6 @@ class List extends React.Component {
 
 }
 
-List.propTypes = {
-  thesisList: PropTypes.string,
-  string: PropTypes.string,
-}
-
 
 class SubmitForm extends React.Component {
 
@@ -275,7 +274,7 @@ class SubmitForm extends React.Component {
     this.state.thesisToSubmit.id = this.state.thesisCounter;
     this.state.thesisCounter += 1;
     const thesisToSubmit = this.state.thesisToSubmit;
-    elastic.indexPDF(thesisToSubmit.fileName, thesisToSubmit.id, thesisToSubmit.title, thesisToSubmit.author, thesisToSubmit.year);
+    elastic.indexPDF(this.state.file, thesisToSubmit.id, thesisToSubmit.title, thesisToSubmit.author, thesisToSubmit.year);
     console.log("Submited!");
   };
 
@@ -285,13 +284,15 @@ class SubmitForm extends React.Component {
   handleChange = (event) => {
     console.log("Handle Change!")
     const file = event.target.files[0];
+    this.state.thesisToSubmit.file = file;
     console.log(file);
 
     const callBackFunction = (error, result) => {
       if (result) {
+        // this.thesisToSubmit.fileBase64 = result;
         this.setState({
-            file: result,
-            fileName: event.target.files[0].name
+          file: result,
+          fileName: event.target.files[0].name
         });
       };
     };
@@ -312,6 +313,7 @@ class SubmitForm extends React.Component {
         // This happens when the conversion was successful:
         const fileName = file.name;
         const fileAsBase64 = result;
+        console.log(result);
         // Use those constants as needed
       };
     };
@@ -323,33 +325,6 @@ class SubmitForm extends React.Component {
 
   };
   //-------------------------------------------------------
-
-
-
-  fileToBase64 = (file, cb) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = function () {
-      cb(null, reader.result)
-    }
-    reader.onerror = function (error) {
-      cb(error, null)
-    }
-  };
-
-  onUploadFileChange = (target) => {
-    if (target.files < 1 || !target.validity.valid) {
-      return
-    }
-    this.fileToBase64(target.files[0], (err, result) => {
-      if (result) {
-        //this.setState({
-        //  file: result,
-        //  fileName: target.files[0].name
-        //});
-      }
-    })
-  };
 
   render() {
     return (
@@ -433,6 +408,7 @@ export class Footer extends React.Component {
         <h2>footer section</h2>
         <p class="lead">&copy; All Rights Reserved </p>
       </div>
+      <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
     );
   }
