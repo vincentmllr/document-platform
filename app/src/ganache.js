@@ -1,4 +1,7 @@
 //const fs = require('fs');
+
+import { addRandomSuffix } from 'pdf-lib';
+
 //Const solc = require('solc');
 const Web3 = require('web3');
 var web3;
@@ -62,3 +65,24 @@ export const deploy = async (args, account) => {
       
       return contract;
 };
+
+export async function getAllContracts() {
+   var addressList = [];
+   var blockNo = await web3.eth.getBlockNumber()
+   for (let i = 1; i <= blockNo; i++) {
+      var block = await web3.eth.getBlock(i);
+      var transaction = await web3.eth.getTransaction(block.transactions);
+      var receipt = await web3.eth.getTransactionReceipt(transaction.hash);
+      addressList.push(receipt.contractAddress)
+      addressList.push(receipt.to)
+   }
+  
+   addressList = addressList.filter(n => n);
+   addressList = addressList.map(address => address.toLowerCase());
+   addressList= [...new Set(addressList)];
+   
+   return addressList;
+}
+
+
+
