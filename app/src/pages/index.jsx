@@ -11,18 +11,6 @@ class IndexPage extends Component {
     super(props);
   }
 
-  handleClick = async () => {
-    console.log("Search for results...")
-    const result = await elastic.advancedSearchPDF("TestPDF", "Ich", "2021");
-    console.log(" Ergebnis: " + result);
-  };
-
-  // handleSearch = (searchTerm, searchResults) => {
-  //   console.log("Search Term arrived at Index:" + searchTerm + ", " + searchResults);
-  //   //this.setState({searchTerm: searchTerm});
-  //   this.props.handleSearch(searchTerm);
-  // };
-
   render () {
     return (
         <div className="App">

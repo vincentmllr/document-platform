@@ -12,6 +12,7 @@ import { Author, Examiner, Review, Thesis } from './model';
 import IndexPage from './pages';
 import SubmitPage from './pages/submit';
 import SearchPage from './pages/search';
+import ThesisPage from './pages/thesis';
 
 const elastic = require("./elastic");
 const ganache = require("./ganache");
@@ -23,7 +24,9 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: true,
-      searchTerm: "Search Term",
+      searchTerm: "",
+      searchResults: [],
+      chosenThesis: new Thesis(),
     };
     this.name = "Bob";
     
@@ -105,9 +108,13 @@ class App extends Component {
 
   handleSearch = (searchTerm, searchResults) => {
     console.log("Search Term arrived at App:" + searchTerm + ", " + searchResults);
-    this.setState({searchTerm: searchTerm});
+    this.setState({searchTerm: searchTerm,
+                   searchResults: searchResults});
   };
 
+  handleShow = (chosenThesis) => {
+    this.setState({chosenThesis: chosenThesis});
+  };
 
 
   render () {
@@ -118,6 +125,7 @@ class App extends Component {
             <Route exact path="/" render={() => <IndexPage handleSearch={this.handleSearch}/>} />
             <Route exact path="/submit" component={SubmitPage} />
             <Route exact path="/search" render={() => <SearchPage searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/>} />
+            <Route exact path="/thesis" render={() => <ThesisPage chosenThesis={this.state.chosenThesis}/>} />
           </Switch>
         </HashRouter>
       </div>
