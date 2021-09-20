@@ -3,7 +3,7 @@ const { Client } = require("elasticsearch");
                    require("dotenv").config();
 
 const elasticUrl = process.env.ELASTIC_URL || "http://localhost:9200";
-const esclient   = new Client({ node: elasticUrl });
+export const esclient   = new Client({ node: elasticUrl });
 const index = "peerindex";
 
 /**
@@ -56,7 +56,7 @@ export async function indexPDF(base64pdf, id, title, author, year) {
 /**
 * adding requiered pipeline for indexing PDFs
 */
-async function addPipeline(){
+export async function addPipeline(){
   await esclient.ingest.putPipeline({
 	id: 'attachment',
     body: {

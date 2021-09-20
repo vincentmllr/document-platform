@@ -17,6 +17,12 @@ class IndexPage extends Component {
     console.log(" Ergebnis: " + result);
   };
 
+  // handleSearch = (searchTerm, searchResults) => {
+  //   console.log("Search Term arrived at Index:" + searchTerm + ", " + searchResults);
+  //   //this.setState({searchTerm: searchTerm});
+  //   this.props.handleSearch(searchTerm);
+  // };
+
   render () {
     return (
         <div className="App">
@@ -25,7 +31,7 @@ class IndexPage extends Component {
         </header>
         <body>
           <div>
-            <HeroHeader />
+            <HeroHeader handleSearch={this.props.handleSearch}/>
           </div>
           <div>
             <CardDeck />

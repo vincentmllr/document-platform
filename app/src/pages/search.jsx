@@ -1,7 +1,16 @@
 import { Component } from "react";
-import { Header, Navigation, Search } from "../components";
+import { Header, Navigation, Search, List } from "../components";
 
 class SearchPage extends Component {
+
+    constructor (props) {
+      super(props);
+      this.state = {
+        searchTerm: "",
+        searchResults: [],
+      };
+    }
+
     render () {
       return (
         <div>
@@ -9,7 +18,8 @@ class SearchPage extends Component {
             <Header />
           </div>
           <div className="row">
-            <Search />
+            <Search searchTerm={this.props.searchTerm} handleSearch={this.props.handleSearch}/>
+            <List searchTerm={"Test"} thesisList={[]}/>
           </div>
         </div>
       );

@@ -30,15 +30,15 @@ class Navigation extends React.Component {
     render() { // fixed-top navbar-toggleable-md navbar-inverse bg-primary
       return (
         <nav className="navbar navbar-expand-md" role="navigation">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <a class="navbar-brand" href="/">
+          <a className="navbar-brand" href="/">
             <img src={logo} width="60" height="60" class="d-inline-block align-top" alt=""/>
           </a>
-          <div class="collapse navbar-collapse" id="navbar">
+          <div className="collapse navbar-collapse" id="navbar">
             <ul className="navbar-nav">
-              <li class="nav-item outframe"><Link className="btn btn-success" to="/submit">Submit</Link></li>
+              <li className="nav-item outframe"><Link className="btn btn-success" to="/submit">Submit</Link></li>
             </ul>
             <LogIn className="" />
           </div>
@@ -49,12 +49,17 @@ class Navigation extends React.Component {
 
 
 export class HeroHeader extends React.Component {
+
+  constructor (props) {
+    super(props);
+  }
+
   render () {
     return (
       <div class="jumbotron">
         <h1 class="display-3">peer</h1>
         <p class="lead">Open Source Student Theses</p>
-        <Search/>
+        <Search handleSearch={this.props.handleSearch}/>
       </div>
     );
   }
@@ -187,12 +192,16 @@ class Search extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        value:"",
-        results: [],
+        searchTerm: "",
+        searchResults: [],
       };
+      this.state.searchTerm = this.props.searchTerm;
     }
 
     onKeyUp = (event) => {
+      console.log(`Searching for ${event.target.value}...`);
+      this.props.handleSearch(event.target.value);
+      event.preventDefault();
       // if (event.charCode === 13) {
       //   console.log("Redirect to Search Page")
       //   this.setState({ value: event.target.value });
@@ -206,45 +215,45 @@ class Search extends Component {
     };
     
     handleChange = async (event) => {
-      this.setState({value: event.target.value});
-      console.log(`Searching for: "${event.target.value}"...`);
-      const resultsJSON = await elastic.advancedSearchPDF(event.target.value, "Max Mustermann", "2021");
-      console.log(resultsJSON);
-      var resultsObject;
-      if(resultsJSON !== undefined) {
-        resultsObject = JSON.parse(resultsJSON);
-      
-      var resultsArray = [];
-      var gotResults = (resultsObject.hits.total.value !== 0);
-      if (gotResults) {
-        for(let hit of resultsObject.hits.hits) {
-          let hitID = hit._id;
-          let hitTitle = hit._source.title;
-          let hitAuthor = hit._source.author;
-          let hitYear = hit._source.year;
-          resultsArray.push(new Thesis(hitID, hitTitle, hitAuthor, hitYear, "Example Filename"));
+      this.setState({searchTerm: event.target.value});
+      const resultsJSON = await elastic.simpleSearchPDF(event.target.searchTerm);
+      var gotResults = resultsJSON !== undefined;
+      if(gotResults) {
+        var resultsObject = JSON.parse(resultsJSON);
+        var resultsArray = [];
+        gotResults = (resultsObject.hits.total.value !== 0);
+        if (gotResults) {
+          for(let hit of resultsObject.hits.hits) {
+            let hitID = hit._id;
+            let hitTitle = hit._source.title;
+            let hitAuthor = hit._source.author;
+            let hitYear = hit._source.year;
+             // TODO: auf neue Parameter anpassen: resultsArray.push(new Thesis(hitID, hitTitle, hitAuthor, hitYear, "Example Filename"));
+          }
         }
-      }
-      this.setState({results: resultsArray});
-    };
-    };
-    
-    handleBlur = () => {
+        this.setState({searchResults: resultsArray});
+      };
+      this.props.handleSearch(this.state.searchTerm, this.state.searchResults);
     };
     
-    render() {       
+    render() {     
+      // TODO Es könnte sein, dass die Ergebnisse nicht aktualisiert werden wenn man schon auf der Search Seite ist und den Searhc Button drückt
+      // TODO Link/Button könnte abhängig von Parent andere Funktion aufrufen oder vielleicht unterschiedliche Componenten returnen
+      // TODO Hinzufügen der "Enter"-Funktion; Testweise entfernt von input: onKeyPress={this.onKeyUp}
       return (
         <div id="searchbar">
-          <input type="text" placeholder="Enter Search Term" value={this.state.value} onBlur={this.handleBlur} onChange={this.handleChange} onKeyPress={this.onKeyUp}></input>
+          <input type="text" placeholder="Enter Search Term" value={this.state.searchTerm} onChange={this.handleChange} ></input>
           <Link className="btn btn-primary" to="/search">Search</Link>
-          <p>{this.state.result}</p>
-          <List thesisList={this.state.results} />
         </div>
       );
     };
 }
 
-class List extends React.Component {
+export class List extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
@@ -270,10 +279,10 @@ class SubmitForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting...");
     this.state.thesisToSubmit.id = this.state.thesisCounter;
     this.state.thesisCounter += 1;
     const thesisToSubmit = this.state.thesisToSubmit;
+    console.log("Submitting..." + thesisToSubmit);
     elastic.indexPDF(this.state.file, thesisToSubmit.id, thesisToSubmit.title, thesisToSubmit.author, thesisToSubmit.year);
     console.log("Submited!");
   };
@@ -413,5 +422,23 @@ export class Footer extends React.Component {
     );
   }
 }
+
+// export function convertFileToBase64(file) {
+
+//   const callBackFunction = (error, result) => {
+//     if (result) {
+//       const fileName = file.name;
+//       const fileAsBase64 = result;
+//       return result;
+//     };
+//   };
+
+//   const reader = new FileReader();
+//   reader.readAsDataURL(file);
+//   reader.onload = () => callBackFunction(null, reader.result);
+//   reader.onerror = (error) => callBackFunction(error, null);
+
+
+// }
 
 export { Navigation, Search, SubmitForm}; // TODO löschen und abändern

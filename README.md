@@ -29,6 +29,15 @@ Open Source Student Theses
 5. Copy first entry of list "private keys" in console 
 6. Import Account: Enter private key from step before
 
+#### Making Changes
+To test your changes in /app:
+1. In /app: yarn start
+2. Open //localhost:3000
+To deploy your changes and test them in the docker environment:
+1. In /app: yarn build
+2. In /peer: docker-compose up --build
+3. Open //localhost:8081
+
 ## Documentation
 For further details see: "./Documentation.md".
 
