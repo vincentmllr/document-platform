@@ -1,5 +1,5 @@
 //Imports and global variables
-const { Client } = require("elasticsearch"); 
+const { Client } = require("@elastic/elasticsearch"); 
                    require("dotenv").config();
 
 const elasticUrl = process.env.ELASTIC_URL || "http://localhost:9200";
@@ -10,7 +10,7 @@ const index = "peerindex";
 /**
 * createIndex named by const index
 */
-export async function createIndex() { 
+async function createIndex() { 
   try {
 	const indExists = await esclient.indices.exists({index : index}); //check if index exists
 	if (!indExists.body) {
@@ -29,12 +29,12 @@ export async function createIndex() {
 * indexing PDF
 * @param filename, id, title, author
 */
-export async function indexPDF(filename, id, title, author, year) { 
+async function indexPDF(filename, id, title, author, year) { 
   try {
 	
-  //creates base64 string 
-	var base64pdf = await pdf2base64("/usr/src/app/src/data/"+filename); //hier auf Pfad achten (PDF einfach in Ordner Data ablegen)
-
+    //creates base64 string 
+	var base64pdf = await pdf2base64("/usr/src/app/data/"+filename); //hier auf Pfad achten (PDF einfach in Ordner Data ablegen)
+			    
 					await esclient.index({
 							index : index, 
 							id : id,
@@ -60,7 +60,7 @@ export async function indexPDF(filename, id, title, author, year) {
 /**
 * adding requiered pipeline for indexing PDFs
 */
-export async function addPipeline(){
+async function addPipeline(){
   await esclient.ingest.putPipeline({
 	id: 'attachment',
     body: {
@@ -87,7 +87,7 @@ export async function addPipeline(){
 * @param keyoword
 * @return JSON with Results
 */
-export async function simpleSearchPDF(keyword) {
+async function simpleSearchPDF(keyword) {
 
 try {	
   const query = {
@@ -101,15 +101,6 @@ try {
     }
   }	
 	
-<<<<<<< HEAD:app/src/elastic.js
-  const res = await esclient.search({
-    index: index, 
-    body:  query
-  });
-  
-  var results = [];
-  for (let hit in res ) {
-=======
   const res = await esclient.helpers.search({
     index: index, 
     body:  query
@@ -117,18 +108,13 @@ try {
 
   var results = [];
   for await (let hit of res ) {
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
     results.push({
       title:hit.title,
       author:hit.author
     });
   }
 
-<<<<<<< HEAD:app/src/elastic.js
-  return JSON.stringify(res);
-=======
   return results;
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
 
 }  catch (err) {
     console.error(`An error occurred while searching PDF`);
@@ -142,7 +128,7 @@ try {
 * @param title, author, year
 * @return JSON with Results
 */
-export async function advancedSearchPDF(title, author, year) {
+async function advancedSearchPDF(title, author, year) {
 
 try {
   const query = {
@@ -150,40 +136,28 @@ try {
   "query": { 
     "bool": { 
       "should": [
-        { "match": { "title":  {query: title , boost: 2, fuzziness: "auto"  }}},
+        { "match": { "title":  {query: title, boost: 2, fuzziness: "auto"  }}},
         { "match": { "author" : {query: author, boost: 1 }}},
-		{ "match": { year : year}}
+		{ "match": { "year" : year}}
 	  ]
     }
   }
 }	
 	
-<<<<<<< HEAD:app/src/elastic.js
-const res = await esclient.search({
-=======
 const res = await esclient.helpers.search({
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
   index: index, 
   body:  query
 });
 
 var results = [];
-<<<<<<< HEAD:app/src/elastic.js
-for (let hit in res ) {
-=======
 for await (let hit of res ) {
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
   results.push({
     title:hit.title,
     author:hit.author
   });
 }
 
-<<<<<<< HEAD:app/src/elastic.js
-return JSON.stringify(res);
-=======
 return results;
->>>>>>> 7ec1f32205595bdf61144067493fe1548eb35062:Project/Test/app/js/elastic.js
 
 }  catch (err) {
     console.error(`An error occurred while searching PDF`);
@@ -193,10 +167,10 @@ return results;
 
 
 
-// module.exports = {
-//   esclient,
-//   createIndex,
-//   indexPDF,
-//   simpleSearchPDF,
-//   advancedSearchPDF
-// };
+module.exports = {
+  esclient,
+  createIndex,
+  indexPDF,
+  simpleSearchPDF,
+  advancedSearchPDF
+};
