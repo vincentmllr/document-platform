@@ -19,7 +19,7 @@ class IndexPage extends Component {
         </header>
         <body>
           <div>
-            <HeroHeader handleSearch={this.props.handleSearch}/>
+            <HeroHeader handleSearch={this.props.handleSearch} />
           </div>
           <div>
             <CardDeck />

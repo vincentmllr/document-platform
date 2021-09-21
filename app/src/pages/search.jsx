@@ -18,7 +18,7 @@ class SearchPage extends Component {
             <Header loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
           </div>
           <div className="row">
-            <Search searchTerm={this.props.searchTerm} handleSearch={this.props.handleSearch}/>
+            <Search searchTerm={this.props.searchTerm} handleSearch={this.props.handleSearch} onIndexPage={false}/>
             <List searchTerm={this.props.searchTerm} thesisList={this.props.searchResults} handleView={this.props.handleView}/>
           </div>
         </div>

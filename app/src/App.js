@@ -50,7 +50,7 @@ class App extends Component {
           "Institute of Applied Informatics and Formal Description Methods",
           "aifb.kit.edu",
           "nd"),
-        new Date(),
+        "2021",
         "German",
         "Germany",
         "Karlsruhe Institute for Technology",

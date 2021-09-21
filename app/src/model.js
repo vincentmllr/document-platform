@@ -6,7 +6,7 @@ export class Thesis {
         title="",
         author=new Author(),
         examiner=new Examiner(),
-        date = new Date(),
+        year = "",
         language = "",
         country = "",
         university = "",
@@ -22,7 +22,7 @@ export class Thesis {
         this.title = title;
         this.author = author;
         this.examiner = examiner;
-        this.date = date;
+        this.year = year;
         this.language = language;
         this.country = country;
         this.university = university;
@@ -45,14 +45,14 @@ export class Author {
         university = "",
         fieldOfStudy = "",
         studyInterests = "",
-        metaMaskAdress = ""
+        metaMaskAddress = ""
     ) {
         this.name = name;
         this.email = email;
         this.university = university;
         this.fieldOfStudy = fieldOfStudy;
         this.studyInterests = studyInterests;
-        this.metaMaskAdress = metaMaskAdress;
+        this.metaMaskAdress = metaMaskAddress;
     }
 
 }
@@ -65,14 +65,14 @@ export class Examiner {
         university = "",
         institute = "",
         website = "",
-        metaMaskAdress = ""
+        metaMaskAddress = ""
     ) {
         this.name = name;
         this.email = email;
         this.university = university;
         this.institute = institute;
         this.website = website;
-        this.metaMaskAdress = metaMaskAdress;
+        this.metaMaskAdress = metaMaskAddress;
     }
 }
 
