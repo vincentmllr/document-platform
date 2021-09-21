@@ -4,10 +4,9 @@ import {Header, SubmitForm} from "../components";
 class SubmitPage extends Component {
 
   render() {
-
     return (
       <div>
-        <Header />
+        <Header loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
         <SubmitForm />
       </div>
     );

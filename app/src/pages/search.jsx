@@ -15,7 +15,7 @@ class SearchPage extends Component {
       return (
         <div>
           <div className="row">
-            <Header />
+            <Header loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
           </div>
           <div className="row">
             <Search searchTerm={this.props.searchTerm} handleSearch={this.props.handleSearch}/>

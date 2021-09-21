@@ -15,7 +15,7 @@ class IndexPage extends Component {
     return (
         <div className="App">
         <header>
-          <Navigation />
+          <Header loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
         </header>
         <body>
           <div>

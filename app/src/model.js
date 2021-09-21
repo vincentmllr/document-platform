@@ -1,7 +1,23 @@
 
 export class Thesis {
 
-    constructor(id, title, author, examiner, date, language, country, university, abstract, grade, file, fileBase64, filePath, fileName, reviews){
+    constructor(
+        id=0,
+        title="",
+        author=new Author(),
+        examiner=new Examiner(),
+        date = new Date(),
+        language = "",
+        country = "",
+        university = "",
+        abstract = "",
+        grade = "",
+        file = "",
+        fileBase64 = "",
+        filePath = "",
+        fileName = "",
+        reviews =[]
+    ) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -23,7 +39,14 @@ export class Thesis {
 
 export class Author {
 
-    constructor (name, email, university, fieldOfStudy, studyInterests, metaMaskAdress) {
+    constructor (
+        name = "",
+        email = "",
+        university = "",
+        fieldOfStudy = "",
+        studyInterests = "",
+        metaMaskAdress = ""
+    ) {
         this.name = name;
         this.email = email;
         this.university = university;
@@ -36,7 +59,14 @@ export class Author {
 
 export class Examiner {
 
-    constructor (name, email, university, institute, website, metaMaskAdress) {
+    constructor (
+        name = "", 
+        email = "",
+        university = "",
+        institute = "",
+        website = "",
+        metaMaskAdress = ""
+    ) {
         this.name = name;
         this.email = email;
         this.university = university;

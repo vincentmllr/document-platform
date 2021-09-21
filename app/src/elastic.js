@@ -74,7 +74,8 @@ async function addPipeline() {
 */
 export async function indexPDF(thesis) {
   try {
-    var base64pdf = thesis.fileBase64.substring(base64pdf.indexOf(",") + 1); //delete some chars at beginning of base64 which are not necessery
+    var base64pdf = thesis.fileBase64;
+    base64pdf = thesis.fileBase64.substring(base64pdf.indexOf(",") + 1); //delete some chars at beginning of base64 which are not necessery
     await esclient.index({
       index: index,
       id: thesis.id,
@@ -88,7 +89,7 @@ export async function indexPDF(thesis) {
         abstract: thesis.abstract,
         university: thesis.university,
         fileName: thesis.fileName,
-        examiner: thesis.examiner,
+        examiner: thesis.examiner.name,
         pdf: base64pdf
 
       }
