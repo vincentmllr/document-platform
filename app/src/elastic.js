@@ -4,7 +4,7 @@ Interface to communicate with elasticsearch
 @function addPipeline() Adding requiered pipeline for indexing PDFs
 @function indexPDF(thesis) indexing Thesis/PDF
 @function simpleSearchPDF(keyword) Search PDF by keyword
-@function advancedSearchPDF(keyword, title, author, date, language, country, university) Search PDF by multiple optinal params
+@function advancedSearchPDF(keyword, title, author, year, language, country, university) Search PDF by multiple optinal params
 @function resultsToTheses(results) Convert search results to thesis-object array
 
 */
@@ -52,7 +52,7 @@ async function addPipeline() {
       "processors": [
         {
           "attachment": {
-            "field": "pdf"
+            "field": "fileBase64"
           }
         }]
     }
@@ -81,16 +81,36 @@ export async function indexPDF(thesis) {
       id: thesis.id,
       pipeline: "attachment",
       body: {
+
         title: thesis.title,
-        author: thesis.author.name,
-        date: thesis.date,     
+        
+        authorName: thesis.author.name,
+        authorMail: thesis.author.email,
+        authorUniversity: thesis.author.university,
+        authorFieldOfStudy: thesis.author.fieldOfStudy,
+        authorStudyInterests: thesis.author.studyInterests,
+        authorMetaMaskAddress: thesis.author.metaMaskAddress,
+
+        examinerName: thesis.examiner.name,
+        examinerMail: thesis.examiner.email,
+        examinerUniversity: thesis.examiner.university,
+        examinerInstitute: thesis.examiner.institute,
+        examinerWebsite: thesis.examiner.website,
+        examinerMetaMaskAddress: thesis.examiner.metaMaskAddress,
+
+        year: thesis.year,     
         language: thesis.language,
         country: thesis.country,
         abstract: thesis.abstract,
         university: thesis.university,
+        grade: thesis.grade,
+     
+        file: thesis.file, //maybe not able to index => if error, change also in resultsToThesis
         fileName: thesis.fileName,
-        examiner: thesis.examiner.name,
-        pdf: base64pdf
+        fileBase64: base64pdf,
+        filePath: thesis.filePath,
+
+        reviews: thesis.reviews
 
       }
 
@@ -140,10 +160,10 @@ export async function simpleSearchPDF(keyword) {
 /**
 * Search PDF by multiple optinal params
 * Not filled textfields should hand over an empty string ("")
-* @param {string} keyword, title, author, date, language, country, university
+* @param {string} keyword, title, author, year, language, country, university
 * @returns {Thesis[]} array of matching Theses
 */
-export async function advancedSearchPDF(keyword, title, author, date, language, country, university) {
+export async function advancedSearchPDF(keyword, title, author, year, university, examiner) {
 
   try {
     const query = {
@@ -153,10 +173,9 @@ export async function advancedSearchPDF(keyword, title, author, date, language, 
           "should": [
             { "match": { "attachment.content": { query: keyword, boost: 3.5, fuzziness: "auto" } } },    //boost content, title and author for make these more relevant
             { "match": { "title": { query: title, boost: 2.5, fuzziness: "auto" } } },                   //fuzziness for get results even if searchparameter is not 100% matching
-            { "match": { "author": { query: author, boost: 1.5 } } },
-            { "match": { date: date } },
-            { "match": { language: language } },
-            { "match": { country: country } },
+            { "match": { "authorName": { query: author, boost: 1.5 } } },
+            { "match": { year: year } },
+            { "match": { examinerName: examiner } },
             { "match": { university: university } }
           ]
 
@@ -193,8 +212,41 @@ export async function resultsToTheses(results) {
   var gotResults = (resultsObject.hits.total.value !== 0);      //check if there are results
   if (gotResults) {                                               
     for (let hit of resultsObject.hits.hits) {
-      theses.push(new model.Thesis(hit._id, hit._source.title, hit._source.author, hit._source.examiner, hit._source.date, hit._source.language, hit._source.country, hit._source.university, hit._source.abstract, undefined, undefined, undefined, hit._source.fileName, undefined));
+      theses.push(
+        new model.Thesis(
+          hit._id, 
+          hit._source.title, 
+          new model.Author(
+            hit._source.authorName,
+            hit._source.authorMail,
+            hit._source.authorUniversity,
+            hit._source.authorFieldOfStudy,
+            hit._source.authorStudyInterests,
+            hit._source.authorMetaMaskAddress 
+          ),
+          new model.examiner(
+            hit._source.examinerName,
+            hit._source.examinerMail, 
+            hit._source.examinerUniversity, 
+            hit._source.examinerInstitute, 
+            hit._source.examinerWebsite, 
+            hit._source.examinerMetaMaskAddress  
+          ),
+          hit._source.year, 
+          hit._source.language, 
+          hit._source.country, 
+          hit._source.university, 
+          hit._source.abstract, 
+          hit._source.grade, 
+          hit._source.file,
+          hit._source.fileBase64,
+          hit._source.filePath,
+          hit._source.fileName,
+          hit._source.reviews, 
+          ));
     }
   }
   return theses;
 }
+
+
