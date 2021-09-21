@@ -18,6 +18,14 @@ class ThesisPage extends Component {
         </header>
         <body>
           <div>
+            <p>{console.log(this.props.chosenThesis)}</p>
+            <p>{this.props.chosenThesis.title}</p>
+            <p>{this.props.chosenThesis.author.name}</p>
+            <p>{this.props.chosenThesis.university}</p>
+            <p>{this.props.chosenThesis.examiner.name}</p>
+            <p>{this.props.chosenThesis.abstract}</p>
+            <p>{this.props.chosenThesis.author.studyInterests}</p>
+            <p>{this.props.chosenThesis.author.mail}</p>
             <input type="button" className="btn btn-danger" value="Download" onClick={
                 ()=> {
                   console.log("Download Button pressed!")

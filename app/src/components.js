@@ -238,29 +238,12 @@ class Search extends Component {
     
     handleChange = async (event) => {
       this.setState({searchTerm: event.target.value});
-      const resultsJSON = await elastic.simpleSearchPDF(event.target.searchTerm);
-      var gotResults = resultsJSON !== undefined;
-      if(gotResults) {
-        var resultsObject = JSON.parse(resultsJSON);
-        var resultsArray = [];
-        gotResults = (resultsObject.hits.total.value !== 0);
-        if (gotResults) {
-          for(let hit of resultsObject.hits.hits) {
-            let hitID = hit._id;
-            let hitTitle = hit._source.title;
-            let hitAuthor = hit._source.author;
-            let hitYear = hit._source.year;
-             // TODO: auf neue Parameter anpassen: resultsArray.push(new Thesis(hitID, hitTitle, hitAuthor, hitYear, "Example Filename"));
-          }
-        }
-        this.setState({searchResults: resultsArray});
-      };
+      const searchResults = await elastic.simpleSearchPDF(this.state.searchTerm);
+      this.setState({searchResults: searchResults});
       this.props.handleSearch(this.state.searchTerm, this.state.searchResults);
     };
     
     render() {     
-      // TODO Es könnte sein, dass die Ergebnisse nicht aktualisiert werden wenn man schon auf der Search Seite ist und den Searhc Button drückt
-      // TODO Link/Button könnte abhängig von Parent andere Funktion aufrufen oder vielleicht unterschiedliche Componenten returnen
       // TODO Hinzufügen der "Enter"-Funktion; Testweise entfernt von input: onKeyPress={this.onKeyUp}
       return (
         <div id="searchbar">
@@ -271,17 +254,21 @@ class Search extends Component {
     };
 }
 
-export class List extends React.Component {
+export class List extends Component {
 
   constructor(props) {
     super(props);
   }
 
+  handleView = (thesis) => {
+    this.props.handleView(thesis);
+  };
+
   render() {
     return (
       <ul class="list-group">
         {this.props.thesisList.length === 0 ? <button class="list-group-item list-group-item-action disabled list-group-item-primary" >Nothing Found. Try a different term.</button> : null}
-        {this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" key={thesis.title}>{thesis.title}, {thesis.author}, {thesis.year}</button>)}
+        {this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.title} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author}, {thesis.date.toString()}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)}
       </ul>
     );
   }

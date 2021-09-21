@@ -112,11 +112,14 @@ class App extends Component {
 
   handleSearch = (searchTerm, searchResults) => {
     console.log("Search Term arrived at App:" + searchTerm + ", " + searchResults);
-    this.setState({searchTerm: searchTerm,
-                   searchResults: searchResults});
+    this.setState({
+      searchTerm: searchTerm,
+      searchResults: searchResults
+    });
+    console.log(searchResults);
   };
 
-  handleShow = (chosenThesis) => {
+  handleView = (chosenThesis) => {
     this.setState({chosenThesis: chosenThesis});
   };
 
@@ -139,20 +142,22 @@ class App extends Component {
         <HashRouter>
           <Switch>
             <Route exact path="/" render={() => <IndexPage 
-              loggedIn={this.loggedIn}
+              loggedIn={this.state.loggedIn}
               handleLogIn={this.handleLogIn}
               handleSearch={this.handleSearch} />} />
             <Route exact path="/submit" render={() => <SubmitPage
-              loggedIn={this.loggedIn}
+              loggedIn={this.state.loggedIn}
               handleLogIn={this.handleLogIn}
               handleSearch={this.handleSearch} />} />
             <Route exact path="/search" render={() => <SearchPage
-              loggedIn={this.loggedIn}
+              loggedIn={this.state.loggedIn}
               handleLogIn={this.handleLogIn}
               searchTerm={this.state.searchTerm}
-              handleSearch={this.handleSearch} />} />
+              handleSearch={this.handleSearch}
+              searchResults={this.state.searchResults}
+              handleView={this.handleView} />} />
             <Route exact path="/thesis" render={() => <ThesisPage
-              loggedIn={this.loggedIn}
+              loggedIn={this.state.loggedIn}
               handleLogIn={this.handleLogIn}
               chosenThesis={this.state.chosenThesis} />} />
           </Switch>

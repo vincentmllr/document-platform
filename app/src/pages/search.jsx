@@ -19,7 +19,7 @@ class SearchPage extends Component {
           </div>
           <div className="row">
             <Search searchTerm={this.props.searchTerm} handleSearch={this.props.handleSearch}/>
-            <List searchTerm={"Test"} thesisList={[]}/>
+            <List searchTerm={this.props.searchTerm} thesisList={this.props.searchResults} handleView={this.props.handleView}/>
           </div>
         </div>
       );
