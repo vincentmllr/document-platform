@@ -48,11 +48,11 @@ class App extends Component {
       searchTerm: "",
       searchResults: [],
       chosenThesis: new Thesis(),
-      uniqueAuthorValues: new Set(),
-      uniqueYearValues: new Set(),
-      uniqueLanguageValues: new Set(),
-      uniqueFieldOfStudyValues: new Set(),
-      uniqueStudyInterestsValues: new Set(), 
+      uniqueAuthorValues: [],
+      uniqueYearValues: [],
+      uniqueLanguageValues: [],
+      uniqueFieldOfStudyValues: [],
+      uniqueStudyInterestsValues: [], 
     };
 
     // Create a list of test example theses
@@ -108,11 +108,13 @@ class App extends Component {
 
     // Eigene HandleFilter Funktion?
     try {
-      this.state.uniqueAuthorValues = new Set(this.state.searchResults.map(thesis => thesis.author.name));
-      this.state.uniqueYearValues = new Set(this.state.searchResults.map(thesis => thesis.year));
-      this.state.uniqueLanguageValues = new Set(this.state.searchResults.map(thesis => thesis.language));
-      this.state.uniqueFieldOfStudyValues = new Set(this.state.searchResults.map(thesis => thesis.author.fieldOfStudy));
-      this.state.uniqueStudyInterestsValues = new Set(this.state.searchResults.map(thesis => thesis.author.studyInterests));
+      this.setState({
+        uniqueAuthorValues : Array.from(new Set(this.state.searchResults.map(thesis => thesis.author.name))),
+        uniqueYearValues : Array.from(new Set(this.state.searchResults.map(thesis => thesis.year))),
+        uniqueLanguageValues : Array.from(new Set(this.state.searchResults.map(thesis => thesis.language))),
+        uniqueFieldOfStudyValues : Array.from(new Set(this.state.searchResults.map(thesis => thesis.author.fieldOfStudy))),
+        uniqueStudyInterestsValues : Array.from(new Set(this.state.searchResults.map(thesis => thesis.author.studyInterests)))
+      });
     } catch (error) {
       console.log("No Search Result!");
     }

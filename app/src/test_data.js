@@ -1,8 +1,16 @@
 
-
+// Vielleicht daher https://www.qmss.columbia.edu/thesis-titles/
 export const testTitles = [
-    "Reputationsmanagement bei VW – Eine qualitative Analyse der Krisenkommunikation des Autoherstellers",
-    "So nutzen wir soziale Medien – Eine Analyse des Nutzungsverhaltens von Facebook-Usern"
+    "The American Dream—Deferred (2013)",
+    "Job Satisfaction and Employee Turnover Intention: What does Organizational Culture Have To Do With It?",
+    "What Factors Are Associated With Poor Households Engaging in Entrepreneurship?",
+    "Uncertainty in measuring Sustainable Development: An application for the Sustainability-adjusted HDI",
+    "Homeownership and Child Welfare in Unstable Times",
+    "On the Evaluation of Conditional Cash Transfer Programs",
+    "Financial Crisis and Bank Failure Prediction: Learning Lessons from the Great Recession",
+    "Starbucks and its Peers: Corporate Social Responsibility and Corporate Financial Performance",
+    "Statistical Arbitrage Strategies and Profit Potential in Commodity Futures Markets ",
+    "An Approach to Lending with Heterogeneous Borrowers"
 ];
 
 export const testAuthorNames = [

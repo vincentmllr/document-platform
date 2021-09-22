@@ -321,6 +321,9 @@ export class List extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      filtered: false,
+    }
     
   }
 
@@ -328,7 +331,84 @@ export class List extends Component {
     this.props.handleView(thesis);
   };
 
-  handleFilter = () => {
+  handleFilter = (authorFilterValues, languageFilterValues, fieldOfStudyFilterValues, studyInterestsFilterValues, yearFilterValues) => {
+    const filters = [authorFilterValues, languageFilterValues, fieldOfStudyFilterValues, studyInterestsFilterValues, yearFilterValues];
+    const taggedFilters = { 
+      author: authorFilterValues,
+      language: authorFilterValues, 
+      fieldOfStudy: fieldOfStudyFilterValues,
+      studyInterests: studyInterestsFilterValues,
+      year: yearFilterValues
+    };
+    const activeFilters = filters.filter((filter) => {return filter.length > 0});
+    console.log(taggedFilters)
+    let numberOfFilters = 0;
+    for(let filter of filters) {
+      if(filter.length > 0) {
+        numberOfFilters ++;
+      }
+    }
+    console.log(numberOfFilters)
+    if (numberOfFilters > 0) {
+      this.setState({filtered: true})
+      let unfilteredResults = this.props.thesisList;
+
+      console.log(taggedFilters.author)
+      const checkFilter = (thesis) => {
+        if (true) {
+          for(let filter in taggedFilters) {
+            for(let filterValue of taggedFilters[filter]) {
+              console.log(filter)
+              switch (filter) {
+                case "author":
+                  if (thesis.author.name === filterValue) {
+                    return true;
+                  }
+                  break;
+                case "language":
+                  if (thesis.language === filterValue) {
+                    return true;
+                  }
+                  break;
+                case "fieldOfStudy":
+                  if (thesis.author.fieldOfStudy === filterValue) {
+                    return true;
+                  }
+                  break;
+                case "studyInterests":
+                  if (thesis.author.studyInterests === filterValue) {
+                    return true;
+                  }
+                  break;
+                case "year":
+                  if (thesis.year === filterValue) {
+                    return true;
+                  }
+                  break;
+              } 
+              
+            }
+          }
+        }
+        // return thesis.author.name === authorFilterValues[0];
+        // for (let filterValue in filters[0]) {
+        //   if (thesis.author.name === filterValue) {
+        //     return true;
+        //   }
+        // }
+      }
+      const filteredResults = unfilteredResults.filter(checkFilter);
+      console.log(filteredResults);
+      console.log(unfilteredResults);
+      for (let thesis of unfilteredResults) {
+        if(true) {
+          
+        }
+      }
+
+    } else {
+      this.setState({filtered: false})
+    }
 
   };
 
@@ -345,7 +425,11 @@ export class List extends Component {
           uniqueYearValues={this.props.uniqueYearValues}
         />
         {this.props.thesisList.length === 0 ? <button class="list-group-item list-group-item-action disabled list-group-item-primary" >Nothing Found. Try a different term.</button> : null}
-        {this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.title} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)}
+        {this.state.filtered ?
+          <p>Test</p>
+        : 
+          this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.title} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)
+        }
       </ul>
     );
   }
@@ -356,45 +440,73 @@ class Filterbar extends Component {
  
   constructor (props) {
     super(props);
-    // For each Filter Kategory
-    //Get all different values of the category
-    if (Array.isArray(this.props.results) ) {
-      //this.uniqueAuthorValues = Array.from(this.props.uniqueAuthorValues);
-      this.uniqueAuthorValues = [];
-      for(let author of this.props.uniqueAuthorValues) {
-        this.uniqueAuthorValues.push({ label: author, value: 0 });
-      }
-      this.uniqueLanguageValues = [];
-      for(let language of this.props.uniqueLanguageValues) {
-        this.uniqueLanguageValues.push({ label: language, value: 0 });
-      }
-      this.uniqueFieldOfStudyValues = [];
-      for(let fieldOfStudy of this.props.uniqueFieldOfStudyValues) {
-        this.uniqueFieldOfStudyValues.push({ label: fieldOfStudy, value: 0 });
-      }
-      this.uniqueYearValues = [];
-      for(let year of this.props.uniqueYearValues) {
-        this.uniqueYearValues.push({ label: year, value: 0 });
-      }
-      this.uniqueStudyInterestsValues = [];
-      for(let studyInterest of this.props.uniqueStudyInterestsValues) {
-        this.uniqueStudyInterestsValues.push({ label: studyInterest, value: 0 });
-      }
-
-      // this.Countries = [
-      //   { label: "Albania", value: 355 },
-      //   { label: "Argentina", value: 54 },
-      //   { label: "Austria", value: 43 },
-      //   { label: "Cocos Islands", value: 61 },
-      //   { label: "Kuwait", value: 965 },
-      //   { label: "Sweden", value: 46 },
-      //   { label: "Venezuela", value: 58 }
-      // ];
-      const filterResults = [];
-
-    }
-    
+    this.state = {
+      authorFilterValues: [],
+      fieldOfStudyFilterValues: [],
+      languageFilterValues: [],
+      yearFilterValues: [],
+      studyInterestsFilterValues: [],
+    };
   }
+
+  handleAuthorChange = (authorFilterValues) => {
+    this.setState({ authorFilterValues: authorFilterValues.map(option => option.label) });
+    this.props.handleFilter(
+      authorFilterValues.map(option => option.label),
+      this.state.languageFilterValues,
+      this.state.fieldOfStudyFilterValues,
+      this.state.studyInterestsFilterValues,
+      this.state.yearFilterValues);
+  }
+
+  handleLanguageChange = (languageFilterValues) => {
+    this.setState({ languageFilterValues: languageFilterValues.map(option => option.label) });
+    this.props.handleFilter(
+      this.state.authorFilterValues,
+      languageFilterValues.map(option => option.label),
+      this.state.fieldOfStudyFilterValues,
+      this.state.studyInterestsFilterValues,
+      this.state.yearFilterValues);
+  }
+
+  handleFieldOfStudyChange = (fieldOfStudyFilterValues) => {
+    this.setState({ fieldOfStudyFilterValues: fieldOfStudyFilterValues.map(option => option.label) });
+    this.props.handleFilter(
+      this.state.authorFilterValues,
+      this.state.languageFilterValues,
+      fieldOfStudyFilterValues.map(option => option.label),
+      this.state.studyInterestsFilterValues,
+      this.state.yearFilterValues);
+  }
+
+  handleStudyInterestsChange = (studyInterestsFilterValues) => {
+    this.setState({ studyInterestsFilterValues: studyInterestsFilterValues.map(option => option.label) });
+    this.props.handleFilter(
+      this.state.authorFilterValues,
+      this.state.languageFilterValues,
+      this.state.fieldOfStudyFilterValues,
+      studyInterestsFilterValues.map(option => option.label),
+      this.state.yearFilterValues);
+  }
+
+  handleYearChange = (yearFilterValues) => {
+    this.setState({ yearFilterValues: yearFilterValues.map(option => option.label) });
+    this.props.handleFilter(
+      this.state.authorFilterValues,
+      this.state.languageFilterValues,
+      this.state.fieldOfStudyFilterValues,
+      this.state.studyInterestsFilterValues,
+      yearFilterValues.map(option => option.label));
+  }
+
+
+  arrayToDropdownOptions = (array) => {
+      const dropdownOptions = [];
+      for(let i=0; i < array.length; i++) {
+        dropdownOptions.push({ label: array[i], value: i });
+      }
+      return dropdownOptions;
+  };
  
   render() {
     return (
@@ -402,24 +514,59 @@ class Filterbar extends Component {
         <div className="row">
           <div className="col-md-3"></div>
           <div className="col-md-6">
-            {(this.props.uniqueAuthorValues.size > 0) ? 
-              <Select placeholder="Filter Author..." options={this.uniqueAuthorValues} multi clearable closeOnScroll/>
+            {(this.props.uniqueAuthorValues.length > 0) ? 
+              <Select
+                placeholder="Filter Author..."
+                options={this.arrayToDropdownOptions(this.props.uniqueAuthorValues)}
+                onChange={this.handleAuthorChange}
+                multi
+                clearable
+                closeOnScroll
+              />
+              : "No Filter available" 
+            }
+            {(this.props.uniqueFieldOfStudyValues.length > 0) ? 
+              <Select
+                placeholder="Filter Field of Study..."
+                options={this.arrayToDropdownOptions(this.props.uniqueFieldOfStudyValues)}
+                onChange={this.handleFieldOfStudyChange}
+                multi
+                clearable
+                closeOnScroll
+              />
               : null 
             }
-            {(this.props.uniqueFieldOfStudyValues.size > 0) ? 
-              <Select placeholder="Filter Field of Study..." options={this.uniqueFieldOfStudyValues} multi clearable closeOnScroll/>
+            {(this.props.uniqueLanguageValues.length > 0) ? 
+              <Select
+                placeholder="Filter Language..."
+                options={this.arrayToDropdownOptions(this.props.uniqueLanguageValues)}
+                onChange={this.handleLanguageChange}
+                multi
+                clearable
+                closeOnScroll
+              />
               : null 
             }
-            {(this.props.uniqueLanguageValues.size > 0) ? 
-              <Select placeholder="Filter Language..." options={this.uniqueLanguageValues} multi clearable closeOnScroll/>
+            {(this.props.uniqueStudyInterestsValues.length > 0) ? 
+              <Select 
+                placeholder="Filter Study Interest..."
+                options={this.arrayToDropdownOptions(this.props.uniqueStudyInterestsValues)}
+                onChange={this.handleStudyInterestsChange}
+                multi
+                clearable
+                closeOnScroll
+              />
               : null 
             }
-            {(this.props.uniqueStudyInterestsValues.size > 0) ? 
-              <Select placeholder="Filter Study Interest..." options={this.uniqueStudyInterestsValues} multi clearable closeOnScroll/>
-              : null 
-            }
-            {(this.props.uniqueYearValues.size > 0) ? 
-              <Select placeholder="Filter Year..." options={this.uniqueYearValues} multi clearable closeOnScroll/>
+            {(this.props.uniqueYearValues.length > 0) ? 
+              <Select 
+                placeholder="Filter Year..."
+                options={this.arrayToDropdownOptions(this.props.uniqueYearValues)}
+                onChange={this.handleYearChange}
+                multi
+                clearable
+                closeOnScroll
+              />
               : null 
             }
           </div>
