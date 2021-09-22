@@ -27,8 +27,8 @@ import { testTitles,
   testFileNames} from './test_data/test_data';
 const elastic = require("./elastic");
 const ganache = require("./ganache");
+const PDFhandler = requier("./PDFhandler");
 var accounts = []; // Meta Mask Accounts
-var incrementer; //Variable für Conract
 
 
 
@@ -180,12 +180,12 @@ class LogIn extends React.Component {
 
 class TestContract extends React.Component {
   handleClick = async () => {
-    console.log("Test Contract...");
-    await incrementer.methods.increment(3).send({
-      from: accounts[0]
-      });
-    const data_after = await incrementer.methods.number().call();
-    console.log(`The current number stored is: ${data_after}`);
+    var addresses = await ganache.getAddressOfContracts();
+    var pathList = await ganache.getPathOfContracts(addresses);
+    var filesAsUint8 = await ifps.downloadFiles(pathList);
+    for (var i = 0; i < filesAsUint8.length; i++) {
+      elastic.indexPDF(await PDFhandler.getMetadata(filesAsUint8[i], pathList[i]));
+    }
   };
 
   render() {
@@ -197,13 +197,7 @@ class TestContract extends React.Component {
 class DeployContract extends Component {
 
   handleClick = async () => {
-    //Deploy smart Contract
-    console.log("Deploying Contract...");
-    // var bc = "608060405234801561001057600080fd5b506040516102a13803806102a183398181016040528101906100329190610054565b806000819055505061009e565b60008151905061004e81610087565b92915050565b60006020828403121561006657600080fd5b60006100748482850161003f565b91505092915050565b6000819050919050565b6100908161007d565b811461009b57600080fd5b50565b6101f4806100ad6000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80637cf5dab0146100465780638381f58a14610062578063d826f88f14610080575b600080fd5b610060600480360381019061005b91906100c5565b61008a565b005b61006a6100a1565b60405161007791906100fd565b60405180910390f35b6100886100a7565b005b806000546100989190610118565b60008190555050565b60005481565b60008081905550565b6000813590506100bf816101a7565b92915050565b6000602082840312156100d757600080fd5b60006100e5848285016100b0565b91505092915050565b6100f78161016e565b82525050565b600060208201905061011260008301846100ee565b92915050565b60006101238261016e565b915061012e8361016e565b9250827fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0382111561016357610162610178565b5b828201905092915050565b6000819050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b6101b08161016e565b81146101bb57600080fd5b5056fea264697066735822122077d751ed3ca51b624fd85569a7af23ce75ee7851b9b4482f1c76260807d61e4164736f6c63430008000033";
-    // var abi = [{"inputs":[{"internalType":"uint256","name":"_initialNumber","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"increment","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"number","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"reset","outputs":[],"stateMutability":"nonpayable","type":"function"}];
-    // incrementer = await ganache.deploy(bc, abi, [19], accounts[0]);
-    incrementer = await ganache.deploy([19], accounts[0]);
-    //incrementer.options.address sollte adresse liefern
+
   };
 
   render() {
@@ -599,7 +593,7 @@ class SubmitForm extends React.Component {
 
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     if (accounts.length === 0) {
       alert("Please Log in to submit!");
@@ -638,11 +632,16 @@ class SubmitForm extends React.Component {
       )
       this.state.thesisCounter += 1;
       console.log(thesisToSubmit);
-      const success = elastic.indexPDF(thesisToSubmit);
-      if(success === true) {
-        console.log("Thesis submited successful!");
-      }
+
+      
+      var base64 = await PDFhandler.addMetaPage(thesisToSubmit);
+      var file = await PDFhandler.urltoFile('data:application/pdf;base64,' + base64, thesisToSubmit.fileName, 'application/pdf');
+      var hash = await PDFhandler.generateSHA256(file);
+      var path = await ifps.uploadFile(file);
+      await ganache.deploy([thesisToSubmit.title, thesisToSubmit.author.name, path , hash, thesisToSubmit.examiner.metaMaskAddress], accounts[0]);
+
     }
+
   };
 
   handleFileChange = (event) => {

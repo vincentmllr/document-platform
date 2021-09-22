@@ -52,7 +52,7 @@ export class Author {
         this.university = university;
         this.fieldOfStudy = fieldOfStudy;
         this.studyInterests = studyInterests;
-        this.metaMaskAdress = metaMaskAddress;
+        this.metaMaskAddress = metaMaskAddress;
     }
 
 }
@@ -72,7 +72,7 @@ export class Examiner {
         this.university = university;
         this.institute = institute;
         this.website = website;
-        this.metaMaskAdress = metaMaskAddress;
+        this.metaMaskAddress = metaMaskAddress;
     }
 }
 
