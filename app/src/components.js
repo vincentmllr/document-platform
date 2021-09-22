@@ -24,7 +24,7 @@ import { testTitles,
   testMetaMaskAddresses,
   testFilesBase64,
   testFilePaths,
-  testFileNames} from './test_data';
+  testFileNames} from './test_data/test_data';
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 var accounts = []; // Meta Mask Accounts
@@ -352,13 +352,10 @@ export class List extends Component {
     if (numberOfFilters > 0) {
       this.setState({filtered: true})
       let unfilteredResults = this.props.thesisList;
-
-      console.log(taggedFilters.author)
       const checkFilter = (thesis) => {
         if (true) {
           for(let filter in taggedFilters) {
             for(let filterValue of taggedFilters[filter]) {
-              console.log(filter)
               switch (filter) {
                 case "author":
                   if (thesis.author.name === filterValue) {
@@ -390,12 +387,6 @@ export class List extends Component {
             }
           }
         }
-        // return thesis.author.name === authorFilterValues[0];
-        // for (let filterValue in filters[0]) {
-        //   if (thesis.author.name === filterValue) {
-        //     return true;
-        //   }
-        // }
       }
       const filteredResults = unfilteredResults.filter(checkFilter);
       console.log(filteredResults);

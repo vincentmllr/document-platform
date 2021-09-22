@@ -31,7 +31,7 @@ import { testTitles,
   testMetaMaskAddresses,
   testFilesBase64,
   testFilePaths,
-  testFileNames} from './test_data';
+  testFileNames} from './test_data/test_data';
 
 
 const elastic = require("./elastic");
