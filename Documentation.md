@@ -45,8 +45,11 @@ Open Source Student Theses
 - MetaMask Account zurücksetzen
 - Long connecting with Ganache in MetaMask
 - Elastic Search doesnt index pdfs
+- "No living Connection" with Elastic Search
 
 #### Elastic Search doesnt index pdfs
 1. Delete Index with powershell command: Invoke-WebRequest -method DELETE http://localhost:9200/_all
 2. Reload page: You should see "created Index" in Console
 3. Reload again: You should see "indexing pdf was successful" in Console 
+#### "No living Connection" with Elastic Search
+1. Restart Docker Containers

@@ -13,6 +13,26 @@ import IndexPage from './pages';
 import SubmitPage from './pages/submit';
 import SearchPage from './pages/search';
 import ThesisPage from './pages/thesis';
+import { testTitles,
+  testAuthorNames,
+  testAbstracts,
+  testCountries,
+  testEmails,
+  testExaminerNames,
+  testFieldOfStudies,
+  testGrades, 
+  testInstitutes,
+  testLanguages,
+  testStudyInterests,
+  testUniversities,
+  testWebsites,
+  testYears,
+  randomElement, 
+  testMetaMaskAddresses,
+  testFilesBase64,
+  testFilePaths,
+  testFileNames} from './test_data';
+
 
 const elastic = require("./elastic");
 const ganache = require("./ganache");
@@ -28,95 +48,74 @@ class App extends Component {
       searchTerm: "",
       searchResults: [],
       chosenThesis: new Thesis(),
+      uniqueAuthorValues: new Set(),
+      uniqueYearValues: new Set(),
+      uniqueLanguageValues: new Set(),
+      uniqueFieldOfStudyValues: new Set(),
+      uniqueStudyInterestsValues: new Set(), 
     };
-    
-    // Create a list of random example theses
+
+    // Create a list of test example theses
     const exampleTheses = [];
     for(let i = 0; i < 10; i++) {
       exampleTheses.push(new Thesis(
         i,
-        `Thesis ${i}`,
+        randomElement(testTitles),
         new Author(
-          "Max Mustermann",
-          "john.doe@kit.edu",
-          "Karlsruhe Institute for Technology",
-          "Informatik",
-          "Artificial Intelligence",
-          "nd"),
+          randomElement(testAuthorNames),
+          randomElement(testEmails),
+          randomElement(testUniversities),
+          randomElement(testFieldOfStudies),
+          randomElement(testStudyInterests),
+          randomElement(testMetaMaskAddresses)),
         new Examiner(
-          "Benjamin Sturm",
-          "benjamin.sturm@kit.edu",
-          "Karlsruhe Institute for Technology",
-          "Institute of Applied Informatics and Formal Description Methods",
-          "aifb.kit.edu",
-          "nd"),
-        "2021",
-        "German",
-        "Germany",
-        "Karlsruhe Institute for Technology",
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        1.0,
-        0,
-        "data:application/pdf;base64,TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNldGV0dXIgc2FkaXBzY2luZyBlbGl0ciwgc2VkIGRpYW0gbm9udW15IGVpcm1vZCB0ZW1wb3IgaW52aWR1bnQgdXQgbGFib3JlIGV0IGRvbG9yZSBtYWduYSBhbGlxdXlhbSBlcmF0LCBzZWQgZGlhbSB2b2x1cHR1YS4gQXQgdmVybyBlb3MgZXQgYWNjdXNhbSBldCBqdXN0byBkdW8gZG9sb3JlcyBldCBlYSByZWJ1bS4gU3RldCBjbGl0YSBrYXNkIGd1YmVyZ3Jlbiwgbm8gc2VhIHRha2ltYXRhIHNhbmN0dXMgZXN0IExvcmVtIGlwc3VtIGRvbG9yIHNpdCBhbWV0LiBMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29uc2V0ZXR1ciBzYWRpcHNjaW5nIGVsaXRyLCBzZWQgZGlhbSBub251bXkgZWlybW9kIHRlbXBvciBpbnZpZHVudCB1dCBsYWJvcmUgZXQgZG9sb3JlIG1hZ25hIGFsaXF1eWFtIGVyYXQsIHNlZCBkaWFtIHZvbHVwdHVhLiBBdCB2ZXJvIGVvcyBldCBhY2N1c2FtIGV0IGp1c3RvIGR1byBkb2xvcmVzIGV0IGVhIHJlYnVtLiBTdGV0IGNsaXRhIGthc2QgZ3ViZXJncmVuLCBubyBzZWEgdGFraW1hdGEgc2FuY3R1cyBlc3QgTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQu",
-        "./data/testpdf.pdf", 
-        "testpdf.pdf",
+          randomElement(testExaminerNames),
+          randomElement(testEmails),
+          randomElement(testUniversities),
+          randomElement(testInstitutes),
+          randomElement(testWebsites),
+          randomElement(testMetaMaskAddresses)),
+        randomElement(testYears),
+        randomElement(testLanguages),
+        randomElement(testCountries),
+        randomElement(testUniversities),
+        randomElement(testAbstracts),
+        randomElement(testGrades),
+        "",
+        randomElement(testFilesBase64),
+        randomElement(testFilePaths), 
+        randomElement(testFileNames),
         [new Review(4, 5, 3)]
       ));
     }
-    // Fill Elastic with random theses
+    // Fill Elastic with test theses
     elastic.createIndex();
     for(let thesis of exampleTheses) {
       elastic.indexPDF(thesis);
     }
-    // elastic.indexPDF(
-    //   "data:application/pdf;base64,TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNldGV0dXIgc2FkaXBzY2luZyBlbGl0ciwgc2VkIGRpYW0gbm9udW15IGVpcm1vZCB0ZW1wb3IgaW52aWR1bnQgdXQgbGFib3JlIGV0IGRvbG9yZSBtYWduYSBhbGlxdXlhbSBlcmF0LCBzZWQgZGlhbSB2b2x1cHR1YS4gQXQgdmVybyBlb3MgZXQgYWNjdXNhbSBldCBqdXN0byBkdW8gZG9sb3JlcyBldCBlYSByZWJ1bS4gU3RldCBjbGl0YSBrYXNkIGd1YmVyZ3Jlbiwgbm8gc2VhIHRha2ltYXRhIHNhbmN0dXMgZXN0IExvcmVtIGlwc3VtIGRvbG9yIHNpdCBhbWV0LiBMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29uc2V0ZXR1ciBzYWRpcHNjaW5nIGVsaXRyLCBzZWQgZGlhbSBub251bXkgZWlybW9kIHRlbXBvciBpbnZpZHVudCB1dCBsYWJvcmUgZXQgZG9sb3JlIG1hZ25hIGFsaXF1eWFtIGVyYXQsIHNlZCBkaWFtIHZvbHVwdHVhLiBBdCB2ZXJvIGVvcyBldCBhY2N1c2FtIGV0IGp1c3RvIGR1byBkb2xvcmVzIGV0IGVhIHJlYnVtLiBTdGV0IGNsaXRhIGthc2QgZ3ViZXJncmVuLCBubyBzZWEgdGFraW1hdGEgc2FuY3R1cyBlc3QgTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQu",
-    //   10,
-    //   "Wie man Kabel verlegt",
-    //   new Author(
-    //     "Max Mustermann",
-    //     "john.doe@kit.edu",
-    //     "Karlsruhe Institute for Technology",
-    //     "Informatik",
-    //     "Artificial Intelligence"
-    //   ),
-    //   "2015"
-    // );
-    // elastic.indexPDF(
-    //   "data:application/pdf;base64,TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNldGV0dXIgc2FkaXBzY2luZyBlbGl0ciwgc2VkIGRpYW0gbm9udW15IGVpcm1vZCB0ZW1wb3IgaW52aWR1bnQgdXQgbGFib3JlIGV0IGRvbG9yZSBtYWduYSBhbGlxdXlhbSBlcmF0LCBzZWQgZGlhbSB2b2x1cHR1YS4gQXQgdmVybyBlb3MgZXQgYWNjdXNhbSBldCBqdXN0byBkdW8gZG9sb3JlcyBldCBlYSByZWJ1bS4gU3RldCBjbGl0YSBrYXNkIGd1YmVyZ3Jlbiwgbm8gc2VhIHRha2ltYXRhIHNhbmN0dXMgZXN0IExvcmVtIGlwc3VtIGRvbG9yIHNpdCBhbWV0LiBMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29uc2V0ZXR1ciBzYWRpcHNjaW5nIGVsaXRyLCBzZWQgZGlhbSBub251bXkgZWlybW9kIHRlbXBvciBpbnZpZHVudCB1dCBsYWJvcmUgZXQgZG9sb3JlIG1hZ25hIGFsaXF1eWFtIGVyYXQsIHNlZCBkaWFtIHZvbHVwdHVhLiBBdCB2ZXJvIGVvcyBldCBhY2N1c2FtIGV0IGp1c3RvIGR1byBkb2xvcmVzIGV0IGVhIHJlYnVtLiBTdGV0IGNsaXRhIGthc2QgZ3ViZXJncmVuLCBubyBzZWEgdGFraW1hdGEgc2FuY3R1cyBlc3QgTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQu",
-    //   11,
-    //   "Abschlussarbeit RWE",
-    //   new Author(
-    //     "Max Mustermann",
-    //     "john.doe@kit.edu",
-    //     "Karlsruhe Institute for Technology",
-    //     "Informatik",
-    //     "Artificial Intelligence"
-    //   ),
-    //   "2020"
-    // );
-    // elastic.indexPDF(
-    //   "data:application/pdf;base64,TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNldGV0dXIgc2FkaXBzY2luZyBlbGl0ciwgc2VkIGRpYW0gbm9udW15IGVpcm1vZCB0ZW1wb3IgaW52aWR1bnQgdXQgbGFib3JlIGV0IGRvbG9yZSBtYWduYSBhbGlxdXlhbSBlcmF0LCBzZWQgZGlhbSB2b2x1cHR1YS4gQXQgdmVybyBlb3MgZXQgYWNjdXNhbSBldCBqdXN0byBkdW8gZG9sb3JlcyBldCBlYSByZWJ1bS4gU3RldCBjbGl0YSBrYXNkIGd1YmVyZ3Jlbiwgbm8gc2VhIHRha2ltYXRhIHNhbmN0dXMgZXN0IExvcmVtIGlwc3VtIGRvbG9yIHNpdCBhbWV0LiBMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29uc2V0ZXR1ciBzYWRpcHNjaW5nIGVsaXRyLCBzZWQgZGlhbSBub251bXkgZWlybW9kIHRlbXBvciBpbnZpZHVudCB1dCBsYWJvcmUgZXQgZG9sb3JlIG1hZ25hIGFsaXF1eWFtIGVyYXQsIHNlZCBkaWFtIHZvbHVwdHVhLiBBdCB2ZXJvIGVvcyBldCBhY2N1c2FtIGV0IGp1c3RvIGR1byBkb2xvcmVzIGV0IGVhIHJlYnVtLiBTdGV0IGNsaXRhIGthc2QgZ3ViZXJncmVuLCBubyBzZWEgdGFraW1hdGEgc2FuY3R1cyBlc3QgTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQu",
-    //   12,
-    //   "TestPDF",
-    //   new Author(
-    //     "Max Mustermann",
-    //     "john.doe@kit.edu",
-    //     "Karlsruhe Institute for Technology",
-    //     "Informatik",
-    //     "Artificial Intelligence"
-    //   ),
-    //   "2021"
-    // );
-  
+
   }
 
+  
   handleSearch = (searchTerm, searchResults) => {
-    console.log("Search Term arrived at App:" + searchTerm + ", " + searchResults);
+
+    console.log("Search Term arrived at App:" + searchTerm + ", " + searchResults)
+
     this.setState({
       searchTerm: searchTerm,
       searchResults: searchResults
     });
-    console.log(searchResults);
+
+    // Eigene HandleFilter Funktion?
+    try {
+      this.state.uniqueAuthorValues = new Set(this.state.searchResults.map(thesis => thesis.author.name));
+      this.state.uniqueYearValues = new Set(this.state.searchResults.map(thesis => thesis.year));
+      this.state.uniqueLanguageValues = new Set(this.state.searchResults.map(thesis => thesis.language));
+      this.state.uniqueFieldOfStudyValues = new Set(this.state.searchResults.map(thesis => thesis.author.fieldOfStudy));
+      this.state.uniqueStudyInterestsValues = new Set(this.state.searchResults.map(thesis => thesis.author.studyInterests));
+    } catch (error) {
+      console.log("No Search Result!");
+    }
   };
 
   handleView = (chosenThesis) => {
@@ -155,7 +154,12 @@ class App extends Component {
               searchTerm={this.state.searchTerm}
               handleSearch={this.handleSearch}
               searchResults={this.state.searchResults}
-              handleView={this.handleView} />} />
+              handleView={this.handleView}
+              uniqueAuthorValues={this.state.uniqueAuthorValues}
+              uniqueLanguageValues={this.state.uniqueLanguageValues}
+              uniqueFieldOfStudyValues={this.state.uniqueFieldOfStudyValues}
+              uniqueStudyInterestsValues={this.state.uniqueStudyInterestsValues}
+              uniqueYearValues={this.state.uniqueYearValues} />} />
             <Route exact path="/thesis" render={() => <ThesisPage
               loggedIn={this.state.loggedIn}
               handleLogIn={this.handleLogIn}

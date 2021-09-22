@@ -4,7 +4,27 @@ import { Thesis, Author, Examiner, Review } from './model';
 import { PropTypes } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { Select } from "react-dropdown-select";
 import logo from "./assets/logo_cap_512.png";
+import { testTitles,
+  testAuthorNames,
+  testAbstracts,
+  testCountries,
+  testEmails,
+  testExaminerNames,
+  testFieldOfStudies,
+  testGrades, 
+  testInstitutes,
+  testLanguages,
+  testStudyInterests,
+  testUniversities,
+  testWebsites,
+  testYears,
+  randomElement, 
+  testMetaMaskAddresses,
+  testFilesBase64,
+  testFilePaths,
+  testFileNames} from './test_data';
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 var accounts = []; // Meta Mask Accounts
@@ -208,7 +228,6 @@ function Back(handleClick) {
   );
 }
 
-
 class Search extends Component {
   
     constructor(props) {
@@ -302,23 +321,115 @@ export class List extends Component {
 
   constructor(props) {
     super(props);
+    
   }
 
   handleView = (thesis) => {
     this.props.handleView(thesis);
   };
 
+  handleFilter = () => {
+
+  };
+
   render() {
     return (
       <ul class="list-group">
+        <Filterbar
+          results={this.props.thesisList}
+          handleFilter={this.handleFilter}
+          uniqueAuthorValues={this.props.uniqueAuthorValues}
+          uniqueLanguageValues={this.props.uniqueLanguageValues}
+          uniqueFieldOfStudyValues={this.props.uniqueFieldOfStudyValues}
+          uniqueStudyInterestsValues={this.props.uniqueStudyInterestsValues}
+          uniqueYearValues={this.props.uniqueYearValues}
+        />
         {this.props.thesisList.length === 0 ? <button class="list-group-item list-group-item-action disabled list-group-item-primary" >Nothing Found. Try a different term.</button> : null}
-        {this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.title} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)}
+        {this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.title} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)}
       </ul>
     );
   }
 
 }
 
+class Filterbar extends Component {
+ 
+  constructor (props) {
+    super(props);
+    // For each Filter Kategory
+    //Get all different values of the category
+    if (Array.isArray(this.props.results) ) {
+      //this.uniqueAuthorValues = Array.from(this.props.uniqueAuthorValues);
+      this.uniqueAuthorValues = [];
+      for(let author of this.props.uniqueAuthorValues) {
+        this.uniqueAuthorValues.push({ label: author, value: 0 });
+      }
+      this.uniqueLanguageValues = [];
+      for(let language of this.props.uniqueLanguageValues) {
+        this.uniqueLanguageValues.push({ label: language, value: 0 });
+      }
+      this.uniqueFieldOfStudyValues = [];
+      for(let fieldOfStudy of this.props.uniqueFieldOfStudyValues) {
+        this.uniqueFieldOfStudyValues.push({ label: fieldOfStudy, value: 0 });
+      }
+      this.uniqueYearValues = [];
+      for(let year of this.props.uniqueYearValues) {
+        this.uniqueYearValues.push({ label: year, value: 0 });
+      }
+      this.uniqueStudyInterestsValues = [];
+      for(let studyInterest of this.props.uniqueStudyInterestsValues) {
+        this.uniqueStudyInterestsValues.push({ label: studyInterest, value: 0 });
+      }
+
+      // this.Countries = [
+      //   { label: "Albania", value: 355 },
+      //   { label: "Argentina", value: 54 },
+      //   { label: "Austria", value: 43 },
+      //   { label: "Cocos Islands", value: 61 },
+      //   { label: "Kuwait", value: 965 },
+      //   { label: "Sweden", value: 46 },
+      //   { label: "Venezuela", value: 58 }
+      // ];
+      const filterResults = [];
+
+    }
+    
+  }
+ 
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-6">
+            {(this.props.uniqueAuthorValues.size > 0) ? 
+              <Select placeholder="Filter Author..." options={this.uniqueAuthorValues} multi clearable closeOnScroll/>
+              : null 
+            }
+            {(this.props.uniqueFieldOfStudyValues.size > 0) ? 
+              <Select placeholder="Filter Field of Study..." options={this.uniqueFieldOfStudyValues} multi clearable closeOnScroll/>
+              : null 
+            }
+            {(this.props.uniqueLanguageValues.size > 0) ? 
+              <Select placeholder="Filter Language..." options={this.uniqueLanguageValues} multi clearable closeOnScroll/>
+              : null 
+            }
+            {(this.props.uniqueStudyInterestsValues.size > 0) ? 
+              <Select placeholder="Filter Study Interest..." options={this.uniqueStudyInterestsValues} multi clearable closeOnScroll/>
+              : null 
+            }
+            {(this.props.uniqueYearValues.size > 0) ? 
+              <Select placeholder="Filter Year..." options={this.uniqueYearValues} multi clearable closeOnScroll/>
+              : null 
+            }
+          </div>
+          <div className="col-md-4"></div>
+        </div>
+      </div>
+    );
+  }
+
+}
 
 class SubmitForm extends React.Component {
 
@@ -332,38 +443,21 @@ class SubmitForm extends React.Component {
       filePath: ""
     };
 
-    this.randomTitles = [
-      "Reputationsmanagement bei VW – Eine qualitative Analyse der Krisenkommunikation des Autoherstellers",
-      "So nutzen wir soziale Medien – Eine Analyse des Nutzungsverhaltens von Facebook-Usern"
-    ];
-    this.randomAuthorNames = [
-      "Max Mustermann",
-      "Frederik Schmidt",
-      "Andreas Green",
-      "Trinity Bean",
-      "Meredith Vance",
-      "Demarion Goodwin",
-      "Emery Obrien",
-      "Abagail Simon",
-      "Aubree Glenn",
-      "Brynlee Simpson",
-      "Aidyn Blankenship",
-      "Landen Hamilton",
-      "Jair Wolfe",
-      "Andy Cantrell"
-    ];
-    this.randomExaminerNames = ["Benjamin Sturm"];
-    this.randomCountries = ["Germany"];
-    this.randomUniversities = ["Karlsruhe Institute for Technology"];
-    this.randomEmails = ["@kit.edu"];
-    this.randomFieldOfStudies = ["Computer Science", "Physics", "Engineering"];
-    this.randomInstitutes = ["Institute of Applied Informatics and Formal Description Methods"];
-    this.randomWebsites = ["aifb.kit.edu"];
-    this.randomLanguages = ["German"];
-    this.randomStudyInterests = ["Artificial Intelligence"];
-    this.randomGrades = [1.3,2.7,3.1,1.0,2.3,2.0,1.7];
-    this.randomAbstracts = ["Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."];
-    this.randomYears = ["2011", "2007", "1998", "2016", "2020", "2021", "2019", "2018"];
+    this.randomTitles = testTitles;
+    this.randomAuthorNames = testAuthorNames;
+    this.randomExaminerNames = testExaminerNames;
+    this.randomCountries = testCountries;
+    this.randomUniversities = testUniversities;
+    this.randomEmails = testEmails;
+    this.randomFieldOfStudies = testFieldOfStudies;
+    this.randomInstitutes = testInstitutes;
+    this.randomWebsites = testWebsites;
+    this.randomLanguages = testLanguages;
+    this.randomStudyInterests = testStudyInterests;
+    this.randomGrades = testGrades;
+    this.randomAbstracts = testAbstracts;
+    this.randomYears = testYears;
+    this.randomMetaMaskAddresses = testMetaMaskAddresses;
 
   };
 
@@ -435,25 +529,25 @@ class SubmitForm extends React.Component {
   };
 
   handleFill = () => {
-    document.getElementById("title").value = this.randomElement(this.randomTitles);
-    document.getElementById("authorName").value = this.randomElement(this.randomAuthorNames);
-    document.getElementById("authorEmail").value = "info" + this.randomElement(this.randomEmails);
-    document.getElementById("authorUniversity").value = this.randomElement(this.randomUniversities);
-    document.getElementById("authorFieldOfStudy").value = this.randomElement(this.randomFieldOfStudies);
-    document.getElementById("authorStudyInterests").value = this.randomElement(this.randomStudyInterests);
-    document.getElementById("authorMetaMaskAddress").value = "nd";
-    document.getElementById("examinerName").value = this.randomElement(this.randomExaminerNames);
-    document.getElementById("examinerEmail").value = "info" + this.randomElement(this.randomEmails);
-    document.getElementById("examinerUniversity").value = this.randomElement(this.randomUniversities);
-    document.getElementById("examinerInstitute").value = this.randomElement(this.randomInstitutes);
-    document.getElementById("examinerWebsite").value = this.randomElement(this.randomWebsites);
-    document.getElementById("examinerMetaMaskAddress").value = "nd";
-    document.getElementById("year").value = this.randomElement(this.randomYears);
-    document.getElementById("language").value = this.randomElement(this.randomLanguages);
-    document.getElementById("country").value = this.randomElement(this.randomCountries);
-    document.getElementById("university").value = this.randomElement(this.randomUniversities);
-    document.getElementById("abstract").value = this.randomElement(this.randomAbstracts);
-    document.getElementById("grade").value = this.randomElement(this.randomGrades);
+    document.getElementById("title").value = randomElement(this.randomTitles);
+    document.getElementById("authorName").value = randomElement(this.randomAuthorNames);
+    document.getElementById("authorEmail").value = "info" + randomElement(this.randomEmails);
+    document.getElementById("authorUniversity").value = randomElement(this.randomUniversities);
+    document.getElementById("authorFieldOfStudy").value = randomElement(this.randomFieldOfStudies);
+    document.getElementById("authorStudyInterests").value = randomElement(this.randomStudyInterests);
+    document.getElementById("authorMetaMaskAddress").value = randomElement(this.randomMetaMaskAddresses);
+    document.getElementById("examinerName").value = randomElement(this.randomExaminerNames);
+    document.getElementById("examinerEmail").value = "info" + randomElement(this.randomEmails);
+    document.getElementById("examinerUniversity").value = randomElement(this.randomUniversities);
+    document.getElementById("examinerInstitute").value = randomElement(this.randomInstitutes);
+    document.getElementById("examinerWebsite").value = randomElement(this.randomWebsites);
+    document.getElementById("examinerMetaMaskAddress").value = randomElement(this.randomMetaMaskAddresses);
+    document.getElementById("year").value = randomElement(this.randomYears);
+    document.getElementById("language").value = randomElement(this.randomLanguages);
+    document.getElementById("country").value = randomElement(this.randomCountries);
+    document.getElementById("university").value = randomElement(this.randomUniversities);
+    document.getElementById("abstract").value = randomElement(this.randomAbstracts);
+    document.getElementById("grade").value = randomElement(this.randomGrades);
   };
 
   randomElement = (items) => {
@@ -473,7 +567,7 @@ class SubmitForm extends React.Component {
               id="title"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomTitles)}
+              placeholder={randomElement(this.randomTitles)}
               required
             />
           </div>
@@ -483,7 +577,7 @@ class SubmitForm extends React.Component {
               id="abstract"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomAbstracts)}
+              placeholder={randomElement(this.randomAbstracts)}
               required
             />
           </div>
@@ -493,7 +587,7 @@ class SubmitForm extends React.Component {
               id="university"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomUniversities)}
+              placeholder={randomElement(this.randomUniversities)}
               required
             />
           </div>
@@ -503,7 +597,7 @@ class SubmitForm extends React.Component {
               id="language"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomLanguages)}
+              placeholder={randomElement(this.randomLanguages)}
               required
             />
           </div>
@@ -513,7 +607,7 @@ class SubmitForm extends React.Component {
               id="country"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomCountries)}
+              placeholder={randomElement(this.randomCountries)}
               required
             />
           </div>
@@ -523,7 +617,7 @@ class SubmitForm extends React.Component {
               id="year"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomYears)}
+              placeholder={randomElement(this.randomYears)}
               required
             />
           </div>
@@ -534,7 +628,7 @@ class SubmitForm extends React.Component {
               className="form-control"
               type="number"
               step="0.1"
-              placeholder={this.randomElement(this.randomGrades)}
+              placeholder={randomElement(this.randomGrades)}
               required
             />
           </div>
@@ -556,7 +650,7 @@ class SubmitForm extends React.Component {
               id="authorName"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomAuthorNames)}
+              placeholder={randomElement(this.randomAuthorNames)}
               required
             />
           </div>
@@ -566,7 +660,7 @@ class SubmitForm extends React.Component {
               id="authorEmail"
               className="form-control"
               type="email"
-              placeholder={this.randomElement(this.randomEmails)}
+              placeholder={randomElement(this.randomEmails)}
               required
             />
           </div>
@@ -576,7 +670,7 @@ class SubmitForm extends React.Component {
               id="authorUniversity"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomUniversities)}
+              placeholder={randomElement(this.randomUniversities)}
               required
             />
           </div>
@@ -586,7 +680,7 @@ class SubmitForm extends React.Component {
               id="authorFieldOfStudy"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomFieldOfStudies)}
+              placeholder={randomElement(this.randomFieldOfStudies)}
               required
             />
           </div>
@@ -596,7 +690,7 @@ class SubmitForm extends React.Component {
               id="authorStudyInterests"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomStudyInterests)}
+              placeholder={randomElement(this.randomStudyInterests)}
               required
             />
           </div>
@@ -606,7 +700,7 @@ class SubmitForm extends React.Component {
               id="authorMetaMaskAddress"
               className="form-control"
               type="text"
-              placeholder=""
+              placeholder={randomElement(this.randomMetaMaskAddresses)}
               required
             />
           </div>
@@ -617,7 +711,7 @@ class SubmitForm extends React.Component {
               id="examinerName"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomExaminerNames)}
+              placeholder={randomElement(this.randomExaminerNames)}
               required
             />
           </div>
@@ -627,7 +721,7 @@ class SubmitForm extends React.Component {
               id="examinerEmail"
               className="form-control"
               type="email"
-              placeholder={this.randomElement(this.randomEmails)}
+              placeholder={randomElement(this.randomEmails)}
               required
             />
           </div>
@@ -637,7 +731,7 @@ class SubmitForm extends React.Component {
               id="examinerUniversity"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomUniversities)}
+              placeholder={randomElement(this.randomUniversities)}
               required
             />
           </div>
@@ -647,7 +741,7 @@ class SubmitForm extends React.Component {
               id="examinerInstitute"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomInstitutes)}
+              placeholder={randomElement(this.randomInstitutes)}
               required
             />
           </div>
@@ -657,7 +751,7 @@ class SubmitForm extends React.Component {
               id="examinerWebsite"
               className="form-control"
               type="text"
-              placeholder={this.randomElement(this.randomWebsites)}
+              placeholder={randomElement(this.randomWebsites)}
               required
             />
           </div>
@@ -667,7 +761,7 @@ class SubmitForm extends React.Component {
               id="examinerMetaMaskAddress"
               className="form-control"
               type="text"
-              placeholder=""
+              placeholder={randomElement(this.randomMetaMaskAddresses)}
               required
             />
           </div>

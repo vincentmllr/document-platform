@@ -224,7 +224,7 @@ export async function resultsToTheses(results) {
             hit._source.authorStudyInterests,
             hit._source.authorMetaMaskAddress 
           ),
-          new model.examiner(
+          new model.Examiner(
             hit._source.examinerName,
             hit._source.examinerMail, 
             hit._source.examinerUniversity, 
