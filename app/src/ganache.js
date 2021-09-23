@@ -175,6 +175,7 @@ var abi = [
 		"type": "function"
 	}
 ];
+var account;
 
 
 export async function connectMetaMask(){
@@ -182,6 +183,8 @@ export async function connectMetaMask(){
       web3 = new Web3(window.ethereum);
       try {
          await window.ethereum.request({method: 'eth_requestAccounts'});
+		 var accounts = await web3.eth.getAccounts();
+		 account = accounts[0];
          return true;
       } catch(err) {
           
@@ -190,8 +193,7 @@ export async function connectMetaMask(){
 }
 
 export async function getAccount(){
-	var accounts = await web3.eth.getAccounts();
-	return accounts[0];
+	return account;
 }
 
 /*Compile Contract
