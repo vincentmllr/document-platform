@@ -6,6 +6,8 @@ Interface to communicate with elasticsearch
 @function simpleSearchPDF(keyword) Search PDF by keyword
 @function advancedSearchPDF(keyword, title, author, year, language, country, university) Search PDF by multiple optinal params
 @function resultsToTheses(results) Convert search results to thesis-object array
+@function deleteByID(ID) Deletes indexed object by ID
+@function newID() Returns a not used ID between 0 and 99999 for indexing new object 
 
 */
 //Imports and global variables
@@ -249,4 +251,72 @@ export async function resultsToTheses(results) {
   return theses;
 }
 
+/**
+* delete indexed object by ID
+* @param {int} ID The ID of the object to be deleted
+* @returns true if successful
+*/
+export async function deleteByID(ID) {
+  try {
+    await esclient.delete({
+      index: index,
+      id: ID,
+    });
+    return true;
+  }
+  catch (err) {
+    console.error(`An error occurred deleting object by ID`);
+    console.error(err);
+  }
 
+}
+
+/**
+* Returns a not used ID between 0 and 99999 for indexing new object 
+* @returns freeID Or 0 if no object is indexed
+*/
+export async function newID() {
+
+  var results = await esclient.search({
+    index: index,
+    body: {
+      "query": {
+        "match_all": {}
+      },
+      "stored_fields": []
+    }
+  });
+
+  results= JSON.stringify(results);
+  var resultsObject;
+  if (results !== undefined) {              //check if results != undefinded
+    resultsObject = JSON.parse(results);
+  }
+
+  var IDs = new Array();
+  var gotResults = (resultsObject.hits.total.value !== 0);      //check if there are results
+  if (gotResults) {
+
+    for await (let hit of resultsObject.hits.hits) {
+      IDs.push(hit._id);
+    }
+
+    IDs = IDs.map(function (x) {
+      return parseInt(x, 10);
+    });
+
+    var freeID;
+    do {
+
+      freeID = Math.floor(Math.random() * 100000);
+
+    } while (IDs.includes(freeID))
+
+    
+    return freeID;
+  }
+  else {
+    
+    return 0;
+  }
+}

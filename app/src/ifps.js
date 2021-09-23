@@ -38,3 +38,28 @@ export async function downloadFiles(pathList){
 
     return filesAsUint8;
 }
+
+export async function downloadFile(path){
+
+    var chunks =[];
+        for await (const chunk of client.get(path)) {
+            chunks.push(chunk)
+          }
+          
+        // Get the total length of all arrays.
+        let length = 0;
+        chunks.forEach(item => {
+            length += item.length;
+        });
+
+        // Create a new array with total length and merge all source arrays.
+        let fileAsUint8 = new Uint8Array(length);
+        let offset = 0;
+        chunks.forEach(item => {
+            fileAsUint8.set(item, offset);
+            offset += item.length;
+        });
+
+    
+    return fileAsUint8;
+}

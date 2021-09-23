@@ -1,5 +1,4 @@
 //review anpassen
-//file anpassen
 
 import fetch from "node-fetch";
 const { PDFDocument } = require('pdf-lib');
@@ -214,9 +213,9 @@ const model = require("./model");
         return await doc.saveAsBase64();
       }
 
-      export async function getMetadata(u8int, path) {
+      export async function getMetadata(uint8, path) {
 
-        const doc = await PDFDocument.load(u8int);
+        const doc = await PDFDocument.load(uint8);
         const dummyBase64 = await doc.saveAsBase64();
         const form = doc.getForm();
       
@@ -245,7 +244,7 @@ const model = require("./model");
           form.getTextField('university').getText(),
           form.getTextField('abstract').getText(),
           form.getTextField('grade').getText(),
-          "",//await urltoFile('data:application/pdf;base64,'+dummyBase64, form.getTextField('fileName').getText(),'application/pdf'),
+          "",//await urltoFile('data:application/pdf;base64,'+dummyBase64, form.getTextField('fileName').getText(),'application/pdf'),  Not Used till now
           dummyBase64,
           path,
           form.getTextField('fileName').getText(),
@@ -254,15 +253,19 @@ const model = require("./model");
       
         return thesis;
       }
-      
+
       export async function generateSHA256(file) {
       
         const hash = CryptoJS.SHA256(file).toString(CryptoJS.enc.Hex);
         return hash;
       }
       
-      export async function checkHash(hashToCheck, file) {
-      
+
+      export async function checkHash(hashToCheck, uint8) {
+
+        const doc = await PDFDocument.load(uint8);
+        var base64 = await doc.saveAsBase64();
+        var file = urltoFile('data:application/pdf;base64,'+base64, 'FileToCheck.pdf','application/pdf');
         const newHash = CryptoJS.SHA256(file).toString(CryptoJS.enc.Hex);
         if (hashToCheck == newHash) {
       
@@ -273,5 +276,4 @@ const model = require("./model");
           return false;
         }
       }
-
 
