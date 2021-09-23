@@ -1,4 +1,4 @@
-const pdfHandler = require("./pdfHandler");
+const pdfHandler = require("./PDFhandler");
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 const ifps = require("./ifps");

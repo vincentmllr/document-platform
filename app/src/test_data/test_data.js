@@ -1,7 +1,10 @@
 import { Thesis, Author, Examiner, Review } from "../model"; 
+const elastic = require("../elastic");
 
 
 var idIncrementer = 0;
+const testAuthorAddress = "0x5fe9dD4c80ab7742B62Fb40CE1fBE37D226645A1";
+const testExaminerAddress = "0x388Ef493FaD03e3C73844Be82317017dEfdf6899";
 
 // Vielleicht daher https://www.qmss.columbia.edu/thesis-titles/
 export const testTitles = [
@@ -139,3 +142,71 @@ export const getRandomThesis = (file, fileBase64) => {
         )
     );
 };
+
+export const testTheses = [
+    // This list will be used in combination with the test files to fill the blockchain
+    // This is a template how to add test thesis data to this list
+    // new Thesis (
+    //     0, // Use first x ids starting from 0
+    //     "Title",
+    //     new Author(
+    //         "Author Name",
+    //         "Author Email", // Look for university url and add firstname and lastname of author
+    //         "Author University",
+    //         "Author Field of Study",
+    //         "Author Study Interest", //Use main topics of thesis instead
+    //         testAuthorAddress
+    //     ),
+    //     new Examiner(
+    //         "Examiner Name",
+    //         "Examiner Email", // Look for university url and add firstname and lastname of exmainer
+    //         "Examiner University",
+    //         "Examiner Institute",
+    //         "Examiner/Institute Website",
+    //         testExaminerAddress
+    //     ),
+    //     "Year",
+    //     "Language",
+    //     "Country",
+    //     "University",
+    //     "Abstract", // If there is no abstract, use the first paragraph of the thesis; watch out for special letters when copying from the pdf (marked with a question mark, delete them)
+    //     "Grade", // Use random grade as string
+    //     undefined, // File object goes here, will be added at test file upload
+    //     "", // Leave fileBase64 empty, will be added at test file upload
+    //     "", // Leave filepath empty
+    //     "", // filename is used to identify the file at test file upload
+    //     []
+    // ),
+    new Thesis (
+        0,
+        "Die Erweiterung des Asia-Europe Meeting – diminished multilateralism oder Erfolg des Interregionalismus?",
+        new Author(
+            "Sophie Veauthier",
+            "sophie.veauthier@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism", //Use main topics of thesis instead
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "Examiner/Institute Website",
+            testExaminerAddress
+        ),
+        "2012",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "Ungeachtet der bestehenden Konflikte und Probleme stellt Asien die Region mit der größten Dynamik in der Welt dar. Zu ihr gehören drei Giganten: Japan, China und Indien, die international immer mehr an Gewicht gewinnen. Aus diesem Grund muss das Verhältnis der Europäischen Union zu dieser Region besonders durchdacht und positiv sein […]. (Europäisches Parlament 2001) Dieses Zitat des Abgeordneten Marset Campos des europäischen Parteienbündnisses „Vereinte Europäische Linke/Nordische Grüne Linke“ (GUE/NGL) aus einer Plenardebatte des Europäischen Parlaments 2001 ist auch heute – ungeachtet von Parteizugehörigkeiten – aktuell. Insbesondere China ist für die Europäische Union (EU) ein wichtiger Handelspartner, nach Importen der wichtigste, nach Exporten der zweitwichtigste weltweit (Eurostat 2012). Mit allen drei Ländern, Japan, China und Indien, steht die EU über das Asia-Europe Meeting (ASEM) im Dialog. Das ASEM ist ein interregionales Forum, das 1996 gegründet wurde und einen Kooperationsprozess zwischen zwei Regionen initiiert hat, die als Akteure bis dato weder auf europäischer noch auf asiatischer Seite in dieser Konstellation existierten (Bersick 2004a: 19). Während China und Japan bereits seit der Gründung des ASEM 1996 Mitglieder sind, ist Indien erst 2008 beigetreten. Weder der Beitritt Indiens, noch der Beitritt Neuseelands und Australiens 2010 waren 2001 bereits absehbar.",
+        "1.7", // Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Veauthier_BA-Arbeit.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+];

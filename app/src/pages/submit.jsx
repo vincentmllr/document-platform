@@ -1,13 +1,19 @@
 import { Component } from "react";
-import {Header, SubmitForm} from "../components";
+import {Navigation, SubmitForm} from "../components";
 
 class SubmitPage extends Component {
 
   render() {
     return (
       <div>
-        <Header loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
-        <SubmitForm />
+        <Navigation
+          loggedIn={this.props.loggedIn}
+          account={this.props.account}
+          handleLogIn={this.props.handleLogIn}/>
+        <SubmitForm
+          loggedIn={this.props.loggedIn}
+          account={this.props.account}
+          />
       </div>
     );
   };

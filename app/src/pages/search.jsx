@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Header, Navigation, Search, List } from "../components";
+import { Navigation, Search, List } from "../components";
 
 class SearchPage extends Component {
 
@@ -15,10 +15,16 @@ class SearchPage extends Component {
       return (
         <div>
           <div className="row">
-            <Header loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
+            <Navigation
+              loggedIn={this.props.loggedIn}
+              account={this.props.account}
+              handleLogIn={this.props.handleLogIn}/>
           </div>
           <div className="row">
-            <Search searchTerm={this.props.searchTerm} handleSearch={this.props.handleSearch} onIndexPage={false}/>
+            <Search
+              searchTerm={this.props.searchTerm}
+              handleSearch={this.props.handleSearch}
+              onIndexPage={false}/>
             <List
               searchTerm={this.props.searchTerm}
               thesisList={this.props.searchResults}

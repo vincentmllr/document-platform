@@ -29,42 +29,24 @@ import { testTitles,
   testFilesBase64,
   testFilePaths,
   testFileNames,
-  getRandomThesis} from './test_data/test_data';
+  getRandomThesis,
+  testTheses} from './test_data/test_data';
 const elastic = require("./elastic");
 const ganache = require("./ganache");
+const actionHandler = require("./actionHandler");
 const PDFhandler = require("./PDFhandler");
 const ifps = require("./ifps");
-var accounts = []; // Meta Mask Accounts
+// var accounts = []; // Meta Mask Accounts
 
 
-
-export class Header extends React.Component {
-
-    constructor(props) {
-      super(props)
-    }
-
-    render () {
-        return (
-            <Navigation loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
-        );
-    }
-}
-
-
-class Navigation extends React.Component {
+export class Navigation extends Component {
 
     constructor(props) {
       super(props);
+      this.state = {
+        loggedIn: this.props.loggedIn,
+      }
     }
-
-    handleLogIn = async () => {
-      await ganache.connectMetaMask().then(res => accounts = res);
-      if (accounts.length > 0) {
-        let accountAdress = accounts[0]
-        this.props.handleLogIn(true, accountAdress);
-      };
-    };
 
     render() { // fixed-top navbar-toggleable-md navbar-inverse bg-primary
       return (
@@ -82,14 +64,14 @@ class Navigation extends React.Component {
               </li>
               <li className="nav-item outframe"><Link className="btn btn-success" to="/submit">Submit</Link></li>
               <li>
-                {accounts.length > 0 ?
-                      <button className="btn btn-dark disabled">Logged In</button>
+                {this.props.loggedIn ?
+                  <button className="btn btn-dark disabled" onClick={this.props.handleLogIn}>Logged In</button>
                 :
-                    <button className="btn btn-success" onClick={this.handleLogIn}>Log In</button>
+                  <button className="btn btn-success" onClick={this.props.handleLogIn}>Log In</button>
                 }
               </li>
               <li>
-                {accounts.length > 0 ? <p>as {accounts[0]}</p> : null}
+                {this.props.loggedIn ? <p>as {this.props.account}</p> : null}
               </li>
             </ul>
           </div>
@@ -159,42 +141,10 @@ export class CardDeck extends React.Component {
 }
 
 
-class LogIn extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      help: "",
-    }
-  }
-
-  handleClick = async (event) => {
-    console.log("Logging in...");
-    await ganache.connectMetaMask().then(res => accounts = res);
-    this.setState({help: "help"});
-  };
-
-  render() {
-    return (
-      <div>
-        {accounts.length === 0 ?
-          <button className="btn btn-success" onClick={this.handleClick}>Log In</button>
-        :
-          <button className="btn btn-dark disabled">Logged In</button>
-        }
-      </div>
-    );
-  }
-}
 
 class TestListener extends React.Component {
   handleClick = async () => {
-    var addresses = await ganache.getAddressOfContracts();
-    var pathList = await ganache.getPathOfContracts(addresses);
-    var filesAsUint8 = await ifps.downloadFiles(pathList);
-    for (var i = 0; i < filesAsUint8.length; i++) {
-      elastic.indexPDF(await PDFhandler.getMetadata(filesAsUint8[i], pathList[i]));
-    }
+    actionHandler.actionOfListener(); // await?
   };
 
   render() {
@@ -566,7 +516,6 @@ class SubmitForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      thesisCounter: 15,
       file: "",
       fileName: "",
       fileBase64: "",
@@ -593,12 +542,12 @@ class SubmitForm extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    if (accounts.length === 0) {
+    if (!this.props.loggedIn) {
       alert("Please Log in to submit!");
     } else {
-      const form = event.target; // TODO delete or add to instantiation of object
+      let id = elastic.newID();
       const thesisToSubmit = new Thesis(
-        this.state.thesisCounter,
+        id,
         event.target.title.value,
         new Author(
           event.target.authorName.value,
@@ -628,15 +577,14 @@ class SubmitForm extends React.Component {
         this.state.fileName,
         []
       )
-      this.state.thesisCounter += 1;
       console.log(thesisToSubmit);
-
-      
-      var base64 = await PDFhandler.addMetaPage(thesisToSubmit);
-      var file = await PDFhandler.urltoFile('data:application/pdf;base64,' + base64, thesisToSubmit.fileName, 'application/pdf');
-      var hash = await PDFhandler.generateSHA256(file);
-      var path = await ifps.uploadFile(file);
-      await ganache.deploy([thesisToSubmit.title, thesisToSubmit.author.name, path , hash, thesisToSubmit.examiner.metaMaskAddress], accounts[0]);
+      var change = false;
+      var oldId = 0;
+      if(change) {
+        actionHandler.changeThesis(thesisToSubmit, oldId);
+      } else {
+        actionHandler.submit(thesisToSubmit);
+      }
 
     }
 
@@ -664,6 +612,7 @@ class SubmitForm extends React.Component {
   };
 
   handleFill = () => {
+    // TODO Instead fill in a specific thesis
     document.getElementById("title").value = randomElement(this.randomTitles);
     document.getElementById("authorName").value = randomElement(this.randomAuthorNames);
     document.getElementById("authorEmail").value = "info" + randomElement(this.randomEmails);
@@ -684,14 +633,9 @@ class SubmitForm extends React.Component {
     document.getElementById("grade").value = randomElement(this.randomGrades);
   };
 
-  randomElement = (items) => {
-		return items[Math.floor(Math.random()*items.length)];
-	};
-
   render() {
     return (
       <div>
-        {accounts.length > 0 ? null : <p>"Please log in to submit a thesis!"</p>}
         <button class="btn btn-secondary" onClick={this.handleFill}>Fill Form for Testing</button>
         <form onSubmit={this.handleSubmit}>
           <h6>About the Thesis</h6>
@@ -835,7 +779,7 @@ class SubmitForm extends React.Component {
               className="form-control"
               type="text"
               disabled
-              value={accounts.slice().pop()}
+              value={this.props.account}
               required
             />
           </div>
@@ -934,19 +878,34 @@ export class TestDataForm extends Component {
     this.state = {
       fileList: [],
       filesBase64: [],
+      testData: [],
     };
   }
 
-  sendFile = async (file, fileBase64) => {
+  matchThesesToFiles = (theses, files, filesBase64) => {
+    let filesWithBase64 = [];
+    for(let i=0; i<files.length; i++) {
+      filesWithBase64.push([files[i], filesBase64[i]]);
+    }
+    console.log(filesWithBase64);
+    console.log(theses);
+    for(let file of filesWithBase64) {
+      for(let thesis of theses) {
+        if(file[0].name === thesis.fileName) {
+          thesis.file = file[0];
+          thesis.fileBase64 = file[1];
+        }
+      }
+    }
+    console.log(theses);
+    this.setState({testData: theses});
+    return theses;
+  };
+
+  submitTestThesis = async (file, fileBase64) => {
     const thesisToSubmit = getRandomThesis(file, fileBase64);
     console.log(thesisToSubmit)
-    // elastic.indexPDF(thesisToSubmit);
-    var base64 = await PDFhandler.addMetaPage(thesisToSubmit);
-    var file = await PDFhandler.urltoFile('data:application/pdf;base64,' + base64, thesisToSubmit.fileName, 'application/pdf');
-    var hash = await PDFhandler.generateSHA256(file);
-    var path = await ifps.uploadFile(file);
-    await ganache.deploy([thesisToSubmit.title, thesisToSubmit.author.name, path , hash, thesisToSubmit.examiner.metaMaskAddress], accounts[0]);
-
+    actionHandler.submit(thesisToSubmit);
   };
 
   handleChange = async (event) => {
@@ -977,18 +936,16 @@ export class TestDataForm extends Component {
 
   };
 
-  // timeout = (delay) => {
-  //   return new Promise( res => setTimeout(res, delay) );
-  // };
-
   handleSubmit = async (event) => {
 
     event.preventDefault();
 
     if (this.props.loggedIn) {
 
-      for(let i=0; i < this.state.fileList.length; i++) {
-        this.sendFile(this.state.fileList[i], this.state.filesBase64[i]);
+      let testData = this.matchThesesToFiles(testTheses, this.state.fileList, this.state.filesBase64);
+      console.log(testData);
+      for (let testThesis of testData) {
+        actionHandler.submit(testThesis);
       }
 
     } else {
@@ -1053,6 +1010,11 @@ export class ItemView extends Component {
 
   }
 
+  handleVerification = () => {
+    var path = "";
+    actionHandler.verificate(path);
+  };
+
   changeRating = ( newRating, name ) => {
     console.log(this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews.length)
     this.props.item.reviews[0].push(newRating);
@@ -1081,12 +1043,12 @@ export class ItemView extends Component {
           id="generalRatings"
         />
         <br/>
-        <input type="button" className="btn btn-primary" value="Verification" onClick={console.log("Verfification!")} />
-        <input type="button" className="btn btn-primary" value="Change Thesis" onClick={console.log("Change Thesis!" /*Nur wenn Author anschaut*/)} />
+        <input type="button" className="btn btn-primary" value="Verification" onClick={console.log("Verfification!")/*Im Action Handler Out:Pfad, In:Bool*/} />
+        <input type="button" className="btn btn-primary" value="Change Thesis" onClick={console.log("Change Thesis!" /*Nur wenn Author anschaut, Out: Neue Thesis, Alte ID*/)} />
         <input type="button" className="btn btn-danger" value="Download" onClick={
           ()=> {
             console.log("Download Button pressed!")
-            FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf");
+            FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf"); // In: File, Out: Thesis
           }
         }/>
 
@@ -1105,4 +1067,4 @@ export class ItemView extends Component {
 
 
 
-export { Navigation, Search, SubmitForm}; // TODO löschen und abändern
+export { Search, SubmitForm}; // TODO löschen und abändern

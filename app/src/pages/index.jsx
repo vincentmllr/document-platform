@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Header, Navigation, HeroHeader, Footer, CardDeck, TestDataForm } from "../components";
+import { Navigation, HeroHeader, Footer, CardDeck, TestDataForm } from "../components";
 
 
 const elastic = require("../elastic");
@@ -15,17 +15,25 @@ class IndexPage extends Component {
     return (
         <div className="App">
         <header>
-          <Header loggedIn={this.props.loggedIn} handleLogIn={this.props.handleLogIn}/>
+          <Navigation
+            loggedIn={this.props.loggedIn}
+            account={this.props.account}
+            handleLogIn={this.props.handleLogIn}/>
         </header>
         <body>
           <div>
-            <HeroHeader handleSearch={this.props.handleSearch} />
+            <HeroHeader
+              handleSearch={this.props.handleSearch}
+            />
           </div>
           <div>
             <CardDeck />
           </div>
           <div className="TestArea">
-            <TestDataForm loggedIn={this.props.loggedIn}/>
+            <TestDataForm 
+              loggedIn={this.props.loggedIn}
+              account={this.props.account}
+            />
           </div>
         </body>
         <footer>

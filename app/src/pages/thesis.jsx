@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Header, Navigation, HeroHeader, Footer, CardDeck, ItemView } from "../components";
+import { Navigation, HeroHeader, Footer, CardDeck, ItemView } from "../components";
 
 
 
@@ -13,10 +13,17 @@ class ThesisPage extends Component {
     return (
         <div className="App">
         <header>
-          <Navigation />
+          <Navigation
+            loggedIn={this.props.loggedIn}
+            handleLogIn={this.props.handleLogIn}
+          />
         </header>
         <body>
-          <ItemView item={this.props.chosenThesis} /> 
+          <ItemView
+            loggedIn={this.props.loggedIn}
+            account={this.props.account}
+            item={this.props.chosenThesis}
+            /> 
         </body>
         <footer>
           <Footer />

@@ -44,7 +44,7 @@ class App extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      accountAdress: "",
+      account: "",
       searchTerm: "",
       searchResults: [],
       chosenThesis: new Thesis(),
@@ -54,49 +54,9 @@ class App extends Component {
       uniqueFieldOfStudyValues: [],
       uniqueStudyInterestsValues: [], 
     };
-
-    // Create a list of test example theses
-    const exampleTheses = [];
-    // for(let i = 0; i < 10; i++) {
-    //   exampleTheses.push(new Thesis(
-    //     i,
-    //     randomElement(testTitles),
-    //     new Author(
-    //       randomElement(testAuthorNames),
-    //       randomElement(testEmails),
-    //       randomElement(testUniversities),
-    //       randomElement(testFieldOfStudies),
-    //       randomElement(testStudyInterests),
-    //       randomElement(testMetaMaskAddresses)),
-    //     new Examiner(
-    //       randomElement(testExaminerNames),
-    //       randomElement(testEmails),
-    //       randomElement(testUniversities),
-    //       randomElement(testInstitutes),
-    //       randomElement(testWebsites),
-    //       randomElement(testMetaMaskAddresses)),
-    //     randomElement(testYears),
-    //     randomElement(testLanguages),
-    //     randomElement(testCountries),
-    //     randomElement(testUniversities),
-    //     randomElement(testAbstracts),
-    //     randomElement(testGrades),
-    //     "",
-    //     randomElement(testFilesBase64),
-    //     randomElement(testFilePaths), 
-    //     randomElement(testFileNames),
-    //     [new Review(4, 5, 3)]
-    //   ));
-    // }
-    // Fill Elastic with test theses
-    // elastic.createIndex();
-    // for(let thesis of exampleTheses) {
-    //   elastic.indexPDF(thesis);
-    // }
-
+    
   }
 
-  
   handleSearch = (searchTerm, searchResults) => {
 
     this.setState({
@@ -129,15 +89,46 @@ class App extends Component {
     this.setState({chosenThesis: chosenThesis});
   };
 
-  handleLogIn = async (loggedIn, accountAdress) => {
-    if (loggedIn === true) {
-      console.log("Logging in...");
-      await ganache.connectMetaMask().then(res => accounts = res);
-      this.setState({
-        loggedIn: loggedIn,
-        accountAdress: accountAdress
-      });
+  handleLogIn = async () => {
+    // Alte Parameter: loggedIn, accountAdress
+    // if (loggedIn === true) {
+    //   console.log("Logging in...");
+    //   await ganache.connectMetaMask().then(res => accounts = res);
+    //   this.setState({
+    //     loggedIn: loggedIn,
+    //     accountAdress: accountAdress
+    //   });
+    // }
+    console.log("Login?")
+    if(this.state.loggedIn) {
+
+      console.log("Was allready logged in.");
+      // this.setState({loggedIn: false});
+      return false;
+
+    } else {
+
+      console.log("Wasnt logged in. Logging in!");
+      var success = await ganache.connectMetaMask().then(res => accounts = res);
+
+      if (success) {
+
+        console.log("Logged in successful!");
+        let account = await ganache.getAccount();
+        this.setState({
+          loggedIn: true,
+          account: account
+        });
+        return true;
+
+      } else {
+
+        return false;
+
+      }
+
     }
+      
     
   }
 
@@ -149,14 +140,17 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <IndexPage 
               loggedIn={this.state.loggedIn}
+              account={this.state.account}
               handleLogIn={this.handleLogIn}
               handleSearch={this.handleSearch} />} />
             <Route exact path="/submit" render={() => <SubmitPage
               loggedIn={this.state.loggedIn}
+              account={this.state.account}
               handleLogIn={this.handleLogIn}
               handleSearch={this.handleSearch} />} />
             <Route exact path="/search" render={() => <SearchPage
               loggedIn={this.state.loggedIn}
+              account={this.state.account}
               handleLogIn={this.handleLogIn}
               searchTerm={this.state.searchTerm}
               handleSearch={this.handleSearch}
@@ -169,6 +163,7 @@ class App extends Component {
               uniqueYearValues={this.state.uniqueYearValues} />} />
             <Route exact path="/thesis" render={() => <ThesisPage
               loggedIn={this.state.loggedIn}
+              account={this.state.account}
               handleLogIn={this.handleLogIn}
               chosenThesis={this.state.chosenThesis} />} />
           </Switch>
