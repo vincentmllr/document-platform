@@ -5,7 +5,11 @@ import { PropTypes } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { Select } from "react-dropdown-select";
+import FileSaver from 'file-saver';
 import logo from "./assets/logo_cap_512.png";
+// import View from "react-native/React/Views/";
+// import {Stars} from "react-native-stars";
+import StarRatings from 'react-star-ratings';
 import { testTitles,
   testAuthorNames,
   testAbstracts,
@@ -24,10 +28,12 @@ import { testTitles,
   testMetaMaskAddresses,
   testFilesBase64,
   testFilePaths,
-  testFileNames} from './test_data/test_data';
+  testFileNames,
+  getRandomThesis} from './test_data/test_data';
 const elastic = require("./elastic");
 const ganache = require("./ganache");
-const PDFhandler = requier("./PDFhandler");
+const PDFhandler = require("./PDFhandler");
+const ifps = require("./ifps");
 var accounts = []; // Meta Mask Accounts
 
 
@@ -71,6 +77,9 @@ class Navigation extends React.Component {
           </a>
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="navbar-nav">
+              <li>
+                <TestListener/>
+              </li>
               <li className="nav-item outframe"><Link className="btn btn-success" to="/submit">Submit</Link></li>
               <li>
                 {accounts.length > 0 ?
@@ -178,7 +187,7 @@ class LogIn extends React.Component {
   }
 }
 
-class TestContract extends React.Component {
+class TestListener extends React.Component {
   handleClick = async () => {
     var addresses = await ganache.getAddressOfContracts();
     var pathList = await ganache.getPathOfContracts(addresses);
@@ -189,25 +198,7 @@ class TestContract extends React.Component {
   };
 
   render() {
-    return <button className="btn btn-primary" onClick={this.handleClick}>Test Contract</button>;
-  }
-}
-
-
-class DeployContract extends Component {
-
-  handleClick = async () => {
-
-  };
-
-  render() {
-    return (
-      <button
-              onClick={this.handleClick}
-              class="btn btn-primary">
-              Deploy Contract
-      </button>
-    );
+    return <button className="btn btn-primary" onClick={this.handleClick}>Test Listener</button>;
   }
 }
 
@@ -317,6 +308,7 @@ export class List extends Component {
     super(props);
     this.state = {
       filtered: false,
+      filteredResults: [],
     }
     
   }
@@ -326,26 +318,27 @@ export class List extends Component {
   };
 
   handleFilter = (authorFilterValues, languageFilterValues, fieldOfStudyFilterValues, studyInterestsFilterValues, yearFilterValues) => {
-    const filters = [authorFilterValues, languageFilterValues, fieldOfStudyFilterValues, studyInterestsFilterValues, yearFilterValues];
+
     const taggedFilters = { 
       author: authorFilterValues,
-      language: authorFilterValues, 
+      language: languageFilterValues, 
       fieldOfStudy: fieldOfStudyFilterValues,
       studyInterests: studyInterestsFilterValues,
       year: yearFilterValues
     };
-    const activeFilters = filters.filter((filter) => {return filter.length > 0});
-    console.log(taggedFilters)
+
     let numberOfFilters = 0;
-    for(let filter of filters) {
-      if(filter.length > 0) {
+    for(let filter in taggedFilters) {
+      if(taggedFilters[filter].length > 0) {
         numberOfFilters ++;
       }
     }
-    console.log(numberOfFilters)
+
     if (numberOfFilters > 0) {
+
       this.setState({filtered: true})
       let unfilteredResults = this.props.thesisList;
+
       const checkFilter = (thesis) => {
         if (true) {
           for(let filter in taggedFilters) {
@@ -382,17 +375,14 @@ export class List extends Component {
           }
         }
       }
+
       const filteredResults = unfilteredResults.filter(checkFilter);
-      console.log(filteredResults);
-      console.log(unfilteredResults);
-      for (let thesis of unfilteredResults) {
-        if(true) {
-          
-        }
-      }
+      this.setState({filteredResults: filteredResults});
 
     } else {
+
       this.setState({filtered: false})
+
     }
 
   };
@@ -411,9 +401,9 @@ export class List extends Component {
         />
         {this.props.thesisList.length === 0 ? <button class="list-group-item list-group-item-action disabled list-group-item-primary" >Nothing Found. Try a different term.</button> : null}
         {this.state.filtered ?
-          <p>Test</p>
+          this.state.filteredResults.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)
         : 
-          this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.title} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)
+          this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)
         }
       </ul>
     );
@@ -432,6 +422,7 @@ class Filterbar extends Component {
       yearFilterValues: [],
       studyInterestsFilterValues: [],
     };
+    
   }
 
   handleAuthorChange = (authorFilterValues) => {
@@ -499,6 +490,12 @@ class Filterbar extends Component {
         <div className="row">
           <div className="col-md-3"></div>
           <div className="col-md-6">
+            {(
+              this.props.uniqueAuthorValues !== undefined &&
+              this.props.uniqueFieldOfStudyValues !== undefined &&
+              this.props.uniqueLanguageValues !== undefined &&
+              this.props.uniqueStudyInterestsValues !== undefined &&
+              this.props.uniqueYearValues !== undefined ) ? <div>
             {(this.props.uniqueAuthorValues.length > 0) ? 
               <Select
                 placeholder="Filter Author..."
@@ -554,6 +551,7 @@ class Filterbar extends Component {
               />
               : null 
             }
+           </div> : "No Results yet" }
           </div>
           <div className="col-md-4"></div>
         </div>
@@ -572,7 +570,7 @@ class SubmitForm extends React.Component {
       file: "",
       fileName: "",
       fileBase64: "",
-      filePath: ""
+      filePath: "no filepath set"
     };
 
     this.randomTitles = testTitles;
@@ -646,7 +644,7 @@ class SubmitForm extends React.Component {
 
   handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file)
+
     const callBackFunction = (error, result) => {
       if (result) {
         this.setState({
@@ -657,7 +655,7 @@ class SubmitForm extends React.Component {
     };
 
     if(file !== undefined) {
-      //this.setState({file: file});    
+      this.setState({file: file});    
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => callBackFunction(null, reader.result);
@@ -672,7 +670,6 @@ class SubmitForm extends React.Component {
     document.getElementById("authorUniversity").value = randomElement(this.randomUniversities);
     document.getElementById("authorFieldOfStudy").value = randomElement(this.randomFieldOfStudies);
     document.getElementById("authorStudyInterests").value = randomElement(this.randomStudyInterests);
-    document.getElementById("authorMetaMaskAddress").value = randomElement(this.randomMetaMaskAddresses);
     document.getElementById("examinerName").value = randomElement(this.randomExaminerNames);
     document.getElementById("examinerEmail").value = "info" + randomElement(this.randomEmails);
     document.getElementById("examinerUniversity").value = randomElement(this.randomUniversities);
@@ -699,7 +696,7 @@ class SubmitForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <h6>About the Thesis</h6>
           <div className="form-group">
-            <label for="title">Title</label>
+            <label htmlFor="title">Title</label>
             <input 
               id="title"
               className="form-control"
@@ -709,7 +706,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="abstract">Abstract</label>
+            <label htmlFor="abstract">Abstract</label>
             <input 
               id="abstract"
               className="form-control"
@@ -719,7 +716,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="university">University</label>
+            <label htmlFor="university">University</label>
             <input 
               id="university"
               className="form-control"
@@ -729,7 +726,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="language">Language</label>
+            <label htmlFor="language">Language</label>
             <input 
               id="language"
               className="form-control"
@@ -739,7 +736,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="country">Country</label>
+            <label htmlFor="country">Country</label>
             <input 
               id="country"
               className="form-control"
@@ -749,7 +746,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="year">Date</label>
+            <label htmlFor="year">Date</label>
             <input
               id="year"
               className="form-control"
@@ -759,7 +756,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="grade">Grade</label>
+            <label htmlFor="grade">Grade</label>
             <input
               id="grade"
               className="form-control"
@@ -770,7 +767,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="file">File</label>
+            <label htmlFor="file">File</label>
             <input
               type="file"
               className="form-control"
@@ -782,7 +779,7 @@ class SubmitForm extends React.Component {
           </div>
           <h6>About the Author</h6>
           <div className="form-group">
-            <label for="authorName">Name</label>
+            <label htmlFor="authorName">Name</label>
             <input
               id="authorName"
               className="form-control"
@@ -792,7 +789,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="authorEmail">E-Mail</label>
+            <label htmlFor="authorEmail">E-Mail</label>
             <input
               id="authorEmail"
               className="form-control"
@@ -802,7 +799,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="authorUniversity">University</label>
+            <label htmlFor="authorUniversity">University</label>
             <input
               id="authorUniversity"
               className="form-control"
@@ -812,7 +809,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="authorFieldOfStudy">Field of Study</label>
+            <label htmlFor="authorFieldOfStudy">Field of Study</label>
             <input
               id="authorFieldOfStudy"
               className="form-control"
@@ -822,7 +819,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="authorStudyInterests">Study Interests</label>
+            <label htmlFor="authorStudyInterests">Study Interests</label>
             <input
               id="authorStudyInterests"
               className="form-control"
@@ -832,18 +829,19 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="authorMetaMaskAddress">MetaMask Adress</label>
+            <label htmlFor="authorMetaMaskAddress">MetaMask Adress</label>
             <input
               id="authorMetaMaskAddress"
               className="form-control"
               type="text"
-              placeholder={randomElement(this.randomMetaMaskAddresses)}
+              disabled
+              value={accounts.slice().pop()}
               required
             />
           </div>
           <h6>About the Examiner</h6>
           <div className="form-group">
-            <label for="examinerName">Name</label>
+            <label htmlFor="examinerName">Name</label>
             <input
               id="examinerName"
               className="form-control"
@@ -853,7 +851,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="examinerEmail">E-Mail</label>
+            <label htmlFor="examinerEmail">E-Mail</label>
             <input
               id="examinerEmail"
               className="form-control"
@@ -863,7 +861,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="examinerUniversity">University</label>
+            <label htmlFor="examinerUniversity">University</label>
             <input
               id="examinerUniversity"
               className="form-control"
@@ -873,7 +871,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="examinerInstitute">Institute</label>
+            <label htmlFor="examinerInstitute">Institute</label>
             <input
               id="examinerInstitute"
               className="form-control"
@@ -883,7 +881,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="examinerWebsite">Website</label>
+            <label htmlFor="examinerWebsite">Website</label>
             <input
               id="examinerWebsite"
               className="form-control"
@@ -893,7 +891,7 @@ class SubmitForm extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label for="examinerMetaMaskAddress">MetaMask Adress</label>
+            <label htmlFor="examinerMetaMaskAddress">MetaMask Adress</label>
             <input
               id="examinerMetaMaskAddress"
               className="form-control"
@@ -906,17 +904,9 @@ class SubmitForm extends React.Component {
             id="submit"
             type="submit"
             class="btn btn-success"
+            value="Submit"
           />
         </form>
-        {/* {this.state.file ?
-          <div>
-            <h6>File "{this.state.fileName}" as Base64:</h6>
-            <p>{this.state.file}.</p>
-          </div> : null
-        } */}
-        <DeployContract />
-        <br />
-        <TestContract />
       </div>
     );
   }
@@ -936,5 +926,183 @@ export class Footer extends React.Component {
     );
   }
 }
+
+export class TestDataForm extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      fileList: [],
+      filesBase64: [],
+    };
+  }
+
+  sendFile = async (file, fileBase64) => {
+    const thesisToSubmit = getRandomThesis(file, fileBase64);
+    console.log(thesisToSubmit)
+    // elastic.indexPDF(thesisToSubmit);
+    var base64 = await PDFhandler.addMetaPage(thesisToSubmit);
+    var file = await PDFhandler.urltoFile('data:application/pdf;base64,' + base64, thesisToSubmit.fileName, 'application/pdf');
+    var hash = await PDFhandler.generateSHA256(file);
+    var path = await ifps.uploadFile(file);
+    await ganache.deploy([thesisToSubmit.title, thesisToSubmit.author.name, path , hash, thesisToSubmit.examiner.metaMaskAddress], accounts[0]);
+
+  };
+
+  handleChange = async (event) => {
+    
+    this.setState({fileList: event.target.files})
+
+    // Base 64 Generation
+
+    for(let file of  event.target.files) {
+
+      const callBackFunction = async (error, result) => {
+        if (result) {
+          // console.log(result);
+          this.setState({
+            filesBase64: this.state.filesBase64.concat(result)
+          });
+        };
+      };
+
+      if(file !== undefined) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => callBackFunction(null, reader.result);
+        reader.onerror = (error) => callBackFunction(error, null);
+      }
+
+    }
+
+  };
+
+  // timeout = (delay) => {
+  //   return new Promise( res => setTimeout(res, delay) );
+  // };
+
+  handleSubmit = async (event) => {
+
+    event.preventDefault();
+
+    if (this.props.loggedIn) {
+
+      for(let i=0; i < this.state.fileList.length; i++) {
+        this.sendFile(this.state.fileList[i], this.state.filesBase64[i]);
+      }
+
+    } else {
+
+      alert("Please Log in before uploading test data!");
+
+    }
+
+  };
+  
+  render () {
+    return (
+      <div>
+        <form
+          id="file-catcher"
+          onSubmit={this.handleSubmit}
+        >
+          <div className="form-group">
+            <label htmlFor="fileInput">Here you can upload the test data from /peer/app/src/test_data:</label>
+            <input
+              id="fileInput"
+              type="file"
+              className="form-control"
+              onChange={this.handleChange}
+              multiple
+            />
+            {(this.state.fileList.length !== 0 && this.state.filesBase64.length === this.state.fileList.length) ? 
+              <button
+                type="submit"
+                className="btn btn-success"
+              >
+                Upload Test Data
+              </button>
+            :
+              <button
+                type="submit"
+                className="btn btn-success"
+                disabled
+              >
+                Upload Test Data
+              </button>
+            } 
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+
+export class ItemView extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      item: undefined,
+      testReviews: [[1,2,3],[4,5,3],[2,3,5]],
+    };
+
+    this.props.item.reviews = this.state.testReviews;
+    console.log(this.props.item.reviews);
+
+  }
+
+  changeRating = ( newRating, name ) => {
+    console.log(this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews.length)
+    this.props.item.reviews[0].push(newRating);
+    this.setState({
+      rating: newRating
+    });
+  }
+  
+  render () {
+    return (
+      <div>
+        <p>{console.log(this.props.item)}</p>
+        <p>{this.props.item.title}</p>
+        <p>{this.props.item.author.name}</p>
+        <p>{this.props.item.university}</p>
+        <p>{this.props.item.examiner.name}</p>
+        <p>{this.props.item.abstract}</p>
+        <p>{this.props.item.author.studyInterests}</p>
+        <p>{this.props.item.author.mail}</p>
+        <p>{this.props.item.reviews}</p>
+        <h4>General Rating</h4>
+        <StarRatings
+          rating={this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews[0].length}
+          starDimension="40px"
+          starSpacing="15px"
+          id="generalRatings"
+        />
+        <br/>
+        <input type="button" className="btn btn-primary" value="Verification" onClick={console.log("Verfification!")} />
+        <input type="button" className="btn btn-primary" value="Change Thesis" onClick={console.log("Change Thesis!" /*Nur wenn Author anschaut*/)} />
+        <input type="button" className="btn btn-danger" value="Download" onClick={
+          ()=> {
+            console.log("Download Button pressed!")
+            FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf");
+          }
+        }/>
+
+        <h4>Rate:</h4>
+        <StarRatings
+          rating={this.state.rating}
+          starRatedColor="blue"
+          changeRating={this.changeRating}
+          numberOfStars={5}
+          name='general'
+        />
+      </div>
+    );
+  }
+}
+
+
 
 export { Navigation, Search, SubmitForm}; // TODO löschen und abändern
