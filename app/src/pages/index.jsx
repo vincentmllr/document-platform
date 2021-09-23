@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Header, Navigation, HeroHeader, Footer, CardDeck } from "../components";
+import { Header, Navigation, HeroHeader, Footer, CardDeck, TestDataForm } from "../components";
 
 
 const elastic = require("../elastic");
@@ -23,6 +23,9 @@ class IndexPage extends Component {
           </div>
           <div>
             <CardDeck />
+          </div>
+          <div className="TestArea">
+            <TestDataForm loggedIn={this.props.loggedIn}/>
           </div>
         </body>
         <footer>

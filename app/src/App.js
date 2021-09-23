@@ -57,49 +57,47 @@ class App extends Component {
 
     // Create a list of test example theses
     const exampleTheses = [];
-    for(let i = 0; i < 10; i++) {
-      exampleTheses.push(new Thesis(
-        i,
-        randomElement(testTitles),
-        new Author(
-          randomElement(testAuthorNames),
-          randomElement(testEmails),
-          randomElement(testUniversities),
-          randomElement(testFieldOfStudies),
-          randomElement(testStudyInterests),
-          randomElement(testMetaMaskAddresses)),
-        new Examiner(
-          randomElement(testExaminerNames),
-          randomElement(testEmails),
-          randomElement(testUniversities),
-          randomElement(testInstitutes),
-          randomElement(testWebsites),
-          randomElement(testMetaMaskAddresses)),
-        randomElement(testYears),
-        randomElement(testLanguages),
-        randomElement(testCountries),
-        randomElement(testUniversities),
-        randomElement(testAbstracts),
-        randomElement(testGrades),
-        "",
-        randomElement(testFilesBase64),
-        randomElement(testFilePaths), 
-        randomElement(testFileNames),
-        [new Review(4, 5, 3)]
-      ));
-    }
+    // for(let i = 0; i < 10; i++) {
+    //   exampleTheses.push(new Thesis(
+    //     i,
+    //     randomElement(testTitles),
+    //     new Author(
+    //       randomElement(testAuthorNames),
+    //       randomElement(testEmails),
+    //       randomElement(testUniversities),
+    //       randomElement(testFieldOfStudies),
+    //       randomElement(testStudyInterests),
+    //       randomElement(testMetaMaskAddresses)),
+    //     new Examiner(
+    //       randomElement(testExaminerNames),
+    //       randomElement(testEmails),
+    //       randomElement(testUniversities),
+    //       randomElement(testInstitutes),
+    //       randomElement(testWebsites),
+    //       randomElement(testMetaMaskAddresses)),
+    //     randomElement(testYears),
+    //     randomElement(testLanguages),
+    //     randomElement(testCountries),
+    //     randomElement(testUniversities),
+    //     randomElement(testAbstracts),
+    //     randomElement(testGrades),
+    //     "",
+    //     randomElement(testFilesBase64),
+    //     randomElement(testFilePaths), 
+    //     randomElement(testFileNames),
+    //     [new Review(4, 5, 3)]
+    //   ));
+    // }
     // Fill Elastic with test theses
-    elastic.createIndex();
-    for(let thesis of exampleTheses) {
-      elastic.indexPDF(thesis);
-    }
+    // elastic.createIndex();
+    // for(let thesis of exampleTheses) {
+    //   elastic.indexPDF(thesis);
+    // }
 
   }
 
   
   handleSearch = (searchTerm, searchResults) => {
-
-    console.log("Search Term arrived at App:" + searchTerm + ", " + searchResults)
 
     this.setState({
       searchTerm: searchTerm,
@@ -117,6 +115,13 @@ class App extends Component {
       });
     } catch (error) {
       console.log("No Search Result!");
+      this.setState({
+        uniqueAuthorValues : [],
+        uniqueYearValues : [],
+        uniqueLanguageValues : [],
+        uniqueFieldOfStudyValues : [],
+        uniqueStudyInterestsValues : [],
+      });
     }
   };
 
