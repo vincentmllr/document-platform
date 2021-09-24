@@ -9,7 +9,7 @@ Interface to handle actions
 */
 
 //Imports and global variables
-const pdfHandler = require("./pdfHandler");
+const pdfHandler = require("./PDFhandler");
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 const ipfs = require("./ipfs");

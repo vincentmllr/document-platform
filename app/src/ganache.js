@@ -201,11 +201,11 @@ export async function connectMetaMask() {
 	if (window.ethereum) {
 		web3 = new Web3(window.ethereum);
 		try {
-			("Connecting to MetaMask...")
+			console.log("Connecting to MetaMask...")
 			await window.ethereum.request({ method: 'eth_requestAccounts' });
 			var accounts = await web3.eth.getAccounts();
 			account = accounts[0];
-			("Connection successful")
+			console.log("Connection successful")
 			return true;
 		} catch (err) {
 
@@ -268,7 +268,7 @@ export const deploy = async (args) => {
 			arguments: args,
 		}).send({ gas: 4712388, from: await getAccount() });
 
-		("Contract deployed");
+		console.log("Contract deployed");
 		return contract;
 	} catch (err) {
 		console.error(`An error occurred while deploying contract`);

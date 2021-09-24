@@ -7,6 +7,19 @@ Open Source Student Theses
 - Interfaces (important Functions)
 - Known Bugs
 
+## Structure
+The structure of the app with a short description and the author of the content.
++ app: Nginx container for app, misc
++ + - _container: config file for nginx, VM
++ + public: public data, VM
++ + src: source code, misc
++ + + assets: images for frontend, VM
++ + + 
++ blockchain: Ganche container for blockchain, JS
++ elastic: Elastic container for elastic search, JS
++ test: Test environment without frontend, misc
++ docker-compose.yml: 
+
 ### Interfaces
 #### elastic.js
 ##### createIndex()

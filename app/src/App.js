@@ -91,8 +91,11 @@ class App extends Component {
   };
 
   handleChangeThesis = () => {
-    console.log("Handle Change thesis!");
     this.setState({changeThesis: true});
+  };
+
+  handleThesisChanged = () => {
+    this.setState({changeThesis: false});
   };
 
   handleLogIn = async () => {
@@ -154,6 +157,7 @@ class App extends Component {
               account={this.state.account}
               chosenThesis={this.state.chosenThesis}
               changeThesis={this.state.changeThesis}
+              handleThesisChanged={this.state.handleThesisChanged}
               handleLogIn={this.handleLogIn}
               handleSearch={this.handleSearch} />} />
             <Route exact path="/search" render={() => <SearchPage

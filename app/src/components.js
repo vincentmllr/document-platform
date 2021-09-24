@@ -36,7 +36,7 @@ const elastic = require("./elastic");
 const ganache = require("./ganache");
 const actionHandler = require("./actionHandler");
 const PDFhandler = require("./PDFhandler");
-const ifps = require("./ifps");
+const ifps = require("./ipfs");
 
 
 export class Navigation extends Component {
@@ -141,7 +141,6 @@ export class CardDeck extends Component {
 }
 
 
-
 class TestListener extends Component {
   handleClick = async () => {
     actionHandler.actionOfListener(); // await?
@@ -151,7 +150,6 @@ class TestListener extends Component {
     return <button className="btn btn-primary" onClick={this.handleClick}>Test Listener</button>;
   }
 }
-
 
 function Back(handleClick) {
   return (
@@ -163,7 +161,7 @@ function Back(handleClick) {
   );
 }
 
-class Search extends Component {
+export class Search extends Component {
   
     constructor(props) {
       super(props);
@@ -511,7 +509,7 @@ class Filterbar extends Component {
 
 }
 
-class SubmitForm extends Component {
+export class SubmitForm extends Component {
 
   constructor(props) {
     super(props);
@@ -541,50 +539,96 @@ class SubmitForm extends Component {
   };
 
   handleSubmit = async (event) => {
+
     event.preventDefault();
-    if (!this.props.loggedIn) {
-      alert("Please Log in to submit!");
-    } else {
-      let id = elastic.newID();
-      const thesisToSubmit = new Thesis(
-        id,
-        event.target.title.value,
-        new Author(
-          event.target.authorName.value,
-          event.target.authorEmail.value,
-          event.target.authorUniversity.value,
-          event.target.authorFieldOfStudy.value,
-          event.target.authorStudyInterests.value,
-          event.target.authorMetaMaskAddress.value
-        ),
-        new Examiner(
-          event.target.examinerName.value,
-          event.target.examinerEmail.value,
-          event.target.examinerUniversity.value,
-          event.target.examinerInstitute.value,
-          event.target.examinerWebsite.value,
-          event.target.examinerMetaMaskAddress.value
-        ),
-        event.target.year.value,
-        event.target.language.value,
-        event.target.country.value,
-        event.target.university.value,
-        event.target.abstract.value,
-        event.target.grade.value,
-        this.state.file,
-        this.state.fileBase64,
-        this.state.filePath,
-        this.state.fileName,
-        []
-      )
-      console.log(thesisToSubmit);
-      var change = false;
-      var oldId = 0;
-      if(change) {
+
+    if (this.props.loggedIn) {
+      
+      if (this.props.changeThesis) {
+
+        let oldId = this.props.chosenThesis.id;
+        let id = elastic.newID(); // await?
+
+        const thesisToSubmit = new Thesis(
+          id,
+          event.target.title.value,
+          new Author(
+            event.target.authorName.value,
+            event.target.authorEmail.value,
+            event.target.authorUniversity.value,
+            event.target.authorFieldOfStudy.value,
+            event.target.authorStudyInterests.value,
+            event.target.authorMetaMaskAddress.value
+          ),
+          new Examiner(
+            event.target.examinerName.value,
+            event.target.examinerEmail.value,
+            event.target.examinerUniversity.value,
+            event.target.examinerInstitute.value,
+            event.target.examinerWebsite.value,
+            event.target.examinerMetaMaskAddress.value
+          ),
+          event.target.year.value,
+          event.target.language.value,
+          event.target.country.value,
+          event.target.university.value,
+          event.target.abstract.value,
+          event.target.grade.value,
+          this.state.file,
+          this.state.fileBase64,
+          this.state.filePath,
+          this.state.fileName,
+          []
+        );
+
+        console.log(thesisToSubmit);
         actionHandler.changeThesis(thesisToSubmit, oldId);
+        this.props.handleThesisChanged();
+
       } else {
+
+        let id = elastic.newID(); // await?
+        
+        const thesisToSubmit = new Thesis(
+          id,
+          event.target.title.value,
+          new Author(
+            event.target.authorName.value,
+            event.target.authorEmail.value,
+            event.target.authorUniversity.value,
+            event.target.authorFieldOfStudy.value,
+            event.target.authorStudyInterests.value,
+            event.target.authorMetaMaskAddress.value
+          ),
+          new Examiner(
+            event.target.examinerName.value,
+            event.target.examinerEmail.value,
+            event.target.examinerUniversity.value,
+            event.target.examinerInstitute.value,
+            event.target.examinerWebsite.value,
+            event.target.examinerMetaMaskAddress.value
+          ),
+          event.target.year.value,
+          event.target.language.value,
+          event.target.country.value,
+          event.target.university.value,
+          event.target.abstract.value,
+          event.target.grade.value,
+          this.state.file,
+          this.state.fileBase64,
+          this.state.filePath,
+          this.state.fileName,
+          []
+        );
+
+        console.log(thesisToSubmit);
         actionHandler.submit(thesisToSubmit);
+
       }
+
+    } else {
+
+      alert("Please Log in to submit!");
 
     }
 
@@ -1016,7 +1060,6 @@ export class TestDataForm extends Component {
   }
 }
 
-
 export class ItemView extends Component {
 
   constructor (props) {
@@ -1092,6 +1135,3 @@ export class ItemView extends Component {
     );
   }
 }
-
-
-export { Search, SubmitForm}; // TODO löschen und abändern

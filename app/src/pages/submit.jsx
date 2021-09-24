@@ -15,6 +15,7 @@ class SubmitPage extends Component {
           account={this.props.account}
           changeThesis={this.props.changeThesis}
           chosenThesis={this.props.chosenThesis}
+          handleThesisChanged={this.props.handleThesisChanged}
           />
       </div>
     );
