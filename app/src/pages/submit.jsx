@@ -13,6 +13,8 @@ class SubmitPage extends Component {
         <SubmitForm
           loggedIn={this.props.loggedIn}
           account={this.props.account}
+          changeThesis={this.props.changeThesis}
+          chosenThesis={this.props.chosenThesis}
           />
       </div>
     );

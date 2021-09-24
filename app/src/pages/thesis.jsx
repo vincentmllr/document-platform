@@ -23,6 +23,7 @@ class ThesisPage extends Component {
             loggedIn={this.props.loggedIn}
             account={this.props.account}
             item={this.props.chosenThesis}
+            handleChangeThesis={this.props.handleChangeThesis}
             /> 
         </body>
         <footer>

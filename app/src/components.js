@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import {React,  Component } from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { Thesis, Author, Examiner, Review } from './model';
 import { PropTypes } from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -36,7 +37,6 @@ const ganache = require("./ganache");
 const actionHandler = require("./actionHandler");
 const PDFhandler = require("./PDFhandler");
 const ifps = require("./ifps");
-// var accounts = []; // Meta Mask Accounts
 
 
 export class Navigation extends Component {
@@ -81,7 +81,7 @@ export class Navigation extends Component {
 }
 
 
-export class HeroHeader extends React.Component {
+export class HeroHeader extends Component {
 
   constructor (props) {
     super(props);
@@ -98,7 +98,7 @@ export class HeroHeader extends React.Component {
   }
 }
 
-export class CardDeck extends React.Component {
+export class CardDeck extends Component {
   render () {
     return (
       <div class="card-deck row">
@@ -142,7 +142,7 @@ export class CardDeck extends React.Component {
 
 
 
-class TestListener extends React.Component {
+class TestListener extends Component {
   handleClick = async () => {
     actionHandler.actionOfListener(); // await?
   };
@@ -351,9 +351,9 @@ export class List extends Component {
         />
         {this.props.thesisList.length === 0 ? <button class="list-group-item list-group-item-action disabled list-group-item-primary" >Nothing Found. Try a different term.</button> : null}
         {this.state.filtered ?
-          this.state.filteredResults.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)
+          this.state.filteredResults.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name} <Link to="/thesis">View</Link></button>)
         : 
-          this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name}, {thesis.abstract}<Link to="/thesis">View</Link></button>)
+          this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name} <Link to="/thesis">View</Link></button>)
         }
       </ul>
     );
@@ -511,7 +511,7 @@ class Filterbar extends Component {
 
 }
 
-class SubmitForm extends React.Component {
+class SubmitForm extends Component {
 
   constructor(props) {
     super(props);
@@ -636,6 +636,7 @@ class SubmitForm extends React.Component {
   render() {
     return (
       <div>
+        <p>{console.log(this.props.changeThesis)}{ console.log(this.props.chosenThesis)}</p>
         <button class="btn btn-secondary" onClick={this.handleFill}>Fill Form for Testing</button>
         <form onSubmit={this.handleSubmit}>
           <h6>About the Thesis</h6>
@@ -647,6 +648,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomTitles)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.title : ""}
             />
           </div>
           <div className="form-group">
@@ -657,6 +659,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomAbstracts)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.abstract : ""}
             />
           </div>
           <div className="form-group">
@@ -667,6 +670,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomUniversities)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.university : ""}
             />
           </div>
           <div className="form-group">
@@ -677,6 +681,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomLanguages)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.language : ""}
             />
           </div>
           <div className="form-group">
@@ -687,16 +692,18 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomCountries)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.country : ""}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="year">Date</label>
+            <label htmlFor="year">Year</label>
             <input
               id="year"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomYears)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.year : ""}
             />
           </div>
           <div className="form-group">
@@ -708,6 +715,7 @@ class SubmitForm extends React.Component {
               step="0.1"
               placeholder={randomElement(this.randomGrades)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.grade : ""}
             />
           </div>
           <div className="form-group">
@@ -719,6 +727,8 @@ class SubmitForm extends React.Component {
               name="filetobase64"
               onChange={this.handleFileChange}
               accept="application/pdf"
+              required
+              files={this.props.changeThesis ? [this.props.chosenThesis.file] : ""}
             />
           </div>
           <h6>About the Author</h6>
@@ -730,6 +740,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomAuthorNames)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.author.name : ""}
             />
           </div>
           <div className="form-group">
@@ -740,6 +751,7 @@ class SubmitForm extends React.Component {
               type="email"
               placeholder={randomElement(this.randomEmails)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.author.email : ""}
             />
           </div>
           <div className="form-group">
@@ -750,6 +762,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomUniversities)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.author.university : ""}
             />
           </div>
           <div className="form-group">
@@ -760,6 +773,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomFieldOfStudies)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.author.fieldOfStudy : ""}
             />
           </div>
           <div className="form-group">
@@ -770,6 +784,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomStudyInterests)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.author.studyInterests : ""}
             />
           </div>
           <div className="form-group">
@@ -792,6 +807,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomExaminerNames)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.email : ""}
             />
           </div>
           <div className="form-group">
@@ -802,6 +818,7 @@ class SubmitForm extends React.Component {
               type="email"
               placeholder={randomElement(this.randomEmails)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.email : ""}
             />
           </div>
           <div className="form-group">
@@ -812,6 +829,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomUniversities)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.university : ""}
             />
           </div>
           <div className="form-group">
@@ -822,6 +840,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomInstitutes)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.institute : ""}
             />
           </div>
           <div className="form-group">
@@ -832,6 +851,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomWebsites)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.website : ""}
             />
           </div>
           <div className="form-group">
@@ -842,6 +862,7 @@ class SubmitForm extends React.Component {
               type="text"
               placeholder={randomElement(this.randomMetaMaskAddresses)}
               required
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.metaMaskAddress : ""}
             />
           </div>
           <input
@@ -857,7 +878,7 @@ class SubmitForm extends React.Component {
 
 }
 
-export class Footer extends React.Component {
+export class Footer extends Component {
   render () {
     return (
     <div class="jumbotron-fluid">
@@ -1022,7 +1043,12 @@ export class ItemView extends Component {
       rating: newRating
     });
   }
-  
+
+  handleChangeThesis = () => {
+      /*Nur wenn Author anschaut, Out: Neue Thesis, Alte ID*/
+      this.props.handleChangeThesis();
+  };
+
   render () {
     return (
       <div>
@@ -1044,7 +1070,9 @@ export class ItemView extends Component {
         />
         <br/>
         <input type="button" className="btn btn-primary" value="Verification" onClick={console.log("Verfification!")/*Im Action Handler Out:Pfad, In:Bool*/} />
-        <input type="button" className="btn btn-primary" value="Change Thesis" onClick={console.log("Change Thesis!" /*Nur wenn Author anschaut, Out: Neue Thesis, Alte ID*/)} />
+        <button onClick={() => this.handleChangeThesis()} >
+          <Link className="btn btn-success" to="/submit">Submit</Link>
+        </button>
         <input type="button" className="btn btn-danger" value="Download" onClick={
           ()=> {
             console.log("Download Button pressed!")
@@ -1064,7 +1092,6 @@ export class ItemView extends Component {
     );
   }
 }
-
 
 
 export { Search, SubmitForm}; // TODO löschen und abändern

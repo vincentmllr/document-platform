@@ -48,6 +48,7 @@ class App extends Component {
       searchTerm: "",
       searchResults: [],
       chosenThesis: new Thesis(),
+      changeThesis: false,
       uniqueAuthorValues: [],
       uniqueYearValues: [],
       uniqueLanguageValues: [],
@@ -87,6 +88,11 @@ class App extends Component {
 
   handleView = (chosenThesis) => {
     this.setState({chosenThesis: chosenThesis});
+  };
+
+  handleChangeThesis = () => {
+    console.log("Handle Change thesis!");
+    this.setState({changeThesis: true});
   };
 
   handleLogIn = async () => {
@@ -146,6 +152,8 @@ class App extends Component {
             <Route exact path="/submit" render={() => <SubmitPage
               loggedIn={this.state.loggedIn}
               account={this.state.account}
+              chosenThesis={this.state.chosenThesis}
+              changeThesis={this.state.changeThesis}
               handleLogIn={this.handleLogIn}
               handleSearch={this.handleSearch} />} />
             <Route exact path="/search" render={() => <SearchPage
@@ -165,7 +173,8 @@ class App extends Component {
               loggedIn={this.state.loggedIn}
               account={this.state.account}
               handleLogIn={this.handleLogIn}
-              chosenThesis={this.state.chosenThesis} />} />
+              chosenThesis={this.state.chosenThesis}
+              handleChangeThesis={this.handleChangeThesis} />} />
           </Switch>
         </HashRouter>
       </div>
