@@ -1067,6 +1067,7 @@ export class ItemView extends Component {
     this.state = {
       item: undefined,
       testReviews: [[1,2,3],[4,5,3],[2,3,5]],
+      verified: false,
     };
 
     this.props.item.reviews = this.state.testReviews;
@@ -1074,9 +1075,12 @@ export class ItemView extends Component {
 
   }
 
-  handleVerification = () => {
-    var path = "";
-    actionHandler.verificate(path);
+  handleVerification = async () => {
+
+    var path = this.props.chosenThesis.filePath;
+    var verified = await actionHandler.verificate(path); // TODO Rename to verify(path)
+    this.setState({verified: verified});
+
   };
 
   changeRating = ( newRating, name ) => {
@@ -1112,11 +1116,11 @@ export class ItemView extends Component {
           id="generalRatings"
         />
         <br/>
-        <input type="button" className="btn btn-primary" value="Verification" onClick={console.log("Verfification!")/*Im Action Handler Out:Pfad, In:Bool*/} />
-        <button onClick={() => this.handleChangeThesis()} >
-          <Link className="btn btn-success" to="/submit">Submit</Link>
+        <input type="button" className="btn btn-primary" value="Verify" onClick={this.handleVerification} />
+        <button className="btn btn-light" onClick={() => this.handleChangeThesis()} >
+          <Link className="btn btn-warning" to="/submit">Edit</Link>
         </button>
-        <input type="button" className="btn btn-danger" value="Download" onClick={
+        <input type="button" className="btn btn-secondary" value="Download" onClick={
           ()=> {
             console.log("Download Button pressed!")
             FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf"); // In: File, Out: Thesis

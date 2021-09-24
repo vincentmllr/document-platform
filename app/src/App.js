@@ -31,7 +31,9 @@ import { testTitles,
   testMetaMaskAddresses,
   testFilesBase64,
   testFilePaths,
-  testFileNames} from './test_data/test_data';
+  testFileNames,
+  testTheses,
+} from './test_data/test_data';
 
 
 const elastic = require("./elastic");
@@ -46,8 +48,8 @@ class App extends Component {
       loggedIn: false,
       account: "",
       searchTerm: "",
-      searchResults: [],
-      chosenThesis: new Thesis(),
+      searchResults: [], // For testing: [testTheses[0]],
+      chosenThesis: new Thesis(), // For testing: testTheses[0],
       changeThesis: false,
       uniqueAuthorValues: [],
       uniqueYearValues: [],
