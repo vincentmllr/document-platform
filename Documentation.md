@@ -8,17 +8,32 @@ Open Source Student Theses
 - Known Bugs
 
 ## Structure
-The structure of the app with a short description and the author of the content.
-+ app: Nginx container for app, misc
-+ + - _container: config file for nginx, VM
-+ + public: public data, VM
-+ + src: source code, misc
-+ + + assets: images for frontend, VM
-+ + + 
-+ blockchain: Ganche container for blockchain, JS
-+ elastic: Elastic container for elastic search, JS
-+ test: Test environment without frontend, misc
-+ docker-compose.yml: 
+The structure of the app with a short description and the author of the content. Some files are left out to get a better overview.
+peer
+ |
+ +-app: Nginx container for app, misc
+ |  |
+ |  +-container: config file for nginx, VM
+ |  +-public: public data, VM
+ |  +-src: source code, misc
+ |     |
+ |     +-assets: images for frontend, VM
+ |     +-pages: jsx.file for each view, VM
+ |     +-smart_contracts:  solidity contract, AW
+ |     +-test_data: test pdfs and array with test theses, AW
+ |     +-actionHandler.js: combines interfaces, JS
+ |     +-App.js: main logic, VM
+ |     +-components.js: react components, VM
+ |     +-elastic.js: elastic search interfaces, JS
+ |     +-ganache.js: blockchain interfaces, JS
+ |     +-index.js: calls App.js, VM
+ |     +-ipfs.js: ipfs interfaces, JS
+ |     +-model.js: class definitions, misc
+ |     +-PDFhandler.js: interfaces for pdf handling, JS
+ |
+ +-blockchain: Ganche container for blockchain, JS
+ +-elastic: Elastic container for elastic search, JS
+ +-test: Test environment without frontend, misc
 
 ### Interfaces
 #### elastic.js
