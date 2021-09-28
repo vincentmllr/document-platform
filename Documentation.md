@@ -5,6 +5,7 @@ Open Source Student Theses
 - Structure
 - Getting Started
 - Interfaces (important Functions)
+- Possible improvements
 - Known Bugs
 
 ## Structure
@@ -68,6 +69,8 @@ peer\
 - Input: Thesis:thesis
 - Outputs: None
 - Use: From Frontend
+
+### Possible improvements
 
 ### Known Bugs
 - MetaMask Account zurücksetzen
