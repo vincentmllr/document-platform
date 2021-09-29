@@ -5,7 +5,6 @@ Open Source Student Theses
 - Structure
 - Getting Started
 - Interfaces (important Functions)
-- Possible improvements
 - Known Bugs
 
 ## Structure
@@ -229,48 +228,16 @@ peer\
 - Outputs: boolean:hashIsCorrect
 - Use: verificate() in actionHandler.js
 
-### Possible Improvements
-#### Using smart contract for getting all contract addresses
-Instead of execute a for-loop for getting contracts (how it is done in getAddressOfContracts(), getPathOfContracts(), getHashOfPath() and getContractOfPath(filePath)), there could be a smart contract which contains all contract addresses and there will be added new addresses after deploying a new contract-
-
-#### More than one author
-Currently its only possible to name one author per Thesis-
-
-#### Listener should not indexing all objects again after detected transaktion
-Instead of indexing all objects again after a detected transaktion, the listener should just index the objects which are new
-
-#### Reviews
-Its a big problem to integrate reviews. If they are located in a smart contract, every change needs a transaction which could be expensive with high amounts of reviews. A database speaks against the advantages of the blockchain concept.
-
-#### Compile contract in app
-The used smart contract is compiled in the Remix IDE (https://remix.ethereum.org) and ABI and bytecode are hard-coded in the ganache.js.
-After research, WebWorker could be a solution.
-
-#### No CORS-Unblock plugin
-No further need of the CORS-Unblock browser plugin
 
 ### Known Bugs
+- MetaMask Account zurücksetzen
+- Long connecting with Ganache in MetaMask
 - Elastic Search doesnt index pdfs
 - "No living Connection" with Elastic Search
-- Error: "the tx doesn’t have the correct nonce. account has nonce of: x tx has nonce of: y"
-- "execution of scripts is disabled on this system" during yarn install
-- "Can't resolve ipfs-http-client"
 
 #### Elastic Search doesnt index pdfs
 1. Delete Index with powershell command: Invoke-WebRequest -method DELETE http://localhost:9200/_all
 2. Reload page: You should see "created Index" in Console
 3. Reload again: You should see "indexing pdf was successful" in Console 
-
 #### "No living Connection" with Elastic Search
 1. Restart Docker Containers
-
-#### Error: "the tx doesn’t have the correct nonce. account has nonce of: x tx has nonce of: y"
-This usually happens, if a transaction failed because of a failure in the backend-code.
-If this happens, got to MetaMask->Settings->Advanced Settings and reset your account.
-This should fix the error.
-
-#### "execution of scripts is disabled on this system" during yarn install
-Run "Set-ExecutionPolicy RemoteSigned"
-
-#### "Can't resolve ipfs-http-client"
-Run "yarn add ipfs-http-client"

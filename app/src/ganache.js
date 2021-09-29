@@ -3,6 +3,8 @@
 Interface to communicate with ganache
 @function connectMetaMask() Connecting to MetaMask
 @function getAccount() Get with MetaMask connected account
+@function getWeb3() Get web3 object to communicate with blockchain
+@function setWeb3() Set web3 object to communicate with blockchain
 @function compileContract(filename, contractname) Compile contract (Not Working on Client-Side)
 @function deploy(args) Deploy Hard-Coded smart contract with var abi and bytecode and connected account
 @function getAddressOfContracts() Get contract-address of all deployed contracts
@@ -219,6 +221,22 @@ export async function connectMetaMask() {
 */
 export async function getAccount() {
 	return account;
+}
+
+/**
+* Get web3 object to communicate with blockchain
+* @returns {object} web3 Connection to blockchain
+*/
+export async function getWeb3() {
+	return web3;
+}
+
+/**
+* Set web3 object to communicate with blockchain
+* @parm {object} web3 Connection to blockchain
+*/
+export async function setWeb3(web3obj) {
+	web3 = web3obj;
 }
 
 /**
