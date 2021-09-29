@@ -53,6 +53,7 @@ export const testExaminerNames = [
     "Landen Hamilton",
     "Jair Wolfe",
     "Andy Cantrell"
+
 ];
 
 export const testCountries = ["Germany"];
@@ -179,13 +180,15 @@ export const testTheses = [
     // ),
     new Thesis (
         0,
-        "Die Erweiterung des Asia-Europe Meeting – diminished multilateralism oder Erfolg des Interregionalismus?",
+        "Die Erweiterung des Asia-Europe Meeting – diminished multilateralism oder Erfolg des Interregionalismus?", " Ann Analysis of the Three-Step Test in Internationall and EC Copyright Law",
         new Author(
             "Sophie Veauthier",
             "sophie.veauthier@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism", //Use main topics of thesis instead
+            "Interregionalism Multilateralism Neorealism",
+            "Martinn Senftlebe", 
+             //Use main topics of thesis instead
             testAuthorAddress
         ),
         new Examiner(
@@ -194,18 +197,19 @@ export const testTheses = [
             "University of Tübingen",
             "Institute of Political Science",
             "Examiner/Institute Website",
+            "P.F. van der Heijden",
             testExaminerAddress
         ),
-        "2012",
-        "German",
-        "Germany",
-        "University of Tübingen",
-        "Ungeachtet der bestehenden Konflikte und Probleme stellt Asien die Region mit der größten Dynamik in der Welt dar. Zu ihr gehören drei Giganten: Japan, China und Indien, die international immer mehr an Gewicht gewinnen. Aus diesem Grund muss das Verhältnis der Europäischen Union zu dieser Region besonders durchdacht und positiv sein […]. (Europäisches Parlament 2001) Dieses Zitat des Abgeordneten Marset Campos des europäischen Parteienbündnisses „Vereinte Europäische Linke/Nordische Grüne Linke“ (GUE/NGL) aus einer Plenardebatte des Europäischen Parlaments 2001 ist auch heute – ungeachtet von Parteizugehörigkeiten – aktuell. Insbesondere China ist für die Europäische Union (EU) ein wichtiger Handelspartner, nach Importen der wichtigste, nach Exporten der zweitwichtigste weltweit (Eurostat 2012). Mit allen drei Ländern, Japan, China und Indien, steht die EU über das Asia-Europe Meeting (ASEM) im Dialog. Das ASEM ist ein interregionales Forum, das 1996 gegründet wurde und einen Kooperationsprozess zwischen zwei Regionen initiiert hat, die als Akteure bis dato weder auf europäischer noch auf asiatischer Seite in dieser Konstellation existierten (Bersick 2004a: 19). Während China und Japan bereits seit der Gründung des ASEM 1996 Mitglieder sind, ist Indien erst 2008 beigetreten. Weder der Beitritt Indiens, noch der Beitritt Neuseelands und Australiens 2010 waren 2001 bereits absehbar.",
-        "1.7", // Use random grade as string
+        "2012", "2004",
+        "German", "English",
+        "Germany", "Netherlands",
+        "University of Tübingen", " University of Amsterdam",
+        "Ungeachtet der bestehenden Konflikte und Probleme stellt Asien die Region mit der größten Dynamik in der Welt dar. Zu ihr gehören drei Giganten: Japan, China und Indien, die international immer mehr an Gewicht gewinnen. Aus diesem Grund muss das Verhältnis der Europäischen Union zu dieser Region besonders durchdacht und positiv sein […]. (Europäisches Parlament 2001) Dieses Zitat des Abgeordneten Marset Campos des europäischen Parteienbündnisses „Vereinte Europäische Linke/Nordische Grüne Linke“ (GUE/NGL) aus einer Plenardebatte des Europäischen Parlaments 2001 ist auch heute – ungeachtet von Parteizugehörigkeiten – aktuell. Insbesondere China ist für die Europäische Union (EU) ein wichtiger Handelspartner, nach Importen der wichtigste, nach Exporten der zweitwichtigste weltweit (Eurostat 2012). Mit allen drei Ländern, Japan, China und Indien, steht die EU über das Asia-Europe Meeting (ASEM) im Dialog. Das ASEM ist ein interregionales Forum, das 1996 gegründet wurde und einen Kooperationsprozess zwischen zwei Regionen initiiert hat, die als Akteure bis dato weder auf europäischer noch auf asiatischer Seite in dieser Konstellation existierten (Bersick 2004a: 19). Während China und Japan bereits seit der Gründung des ASEM 1996 Mitglieder sind, ist Indien erst 2008 beigetreten. Weder der Beitritt Indiens, noch der Beitritt Neuseelands und Australiens 2010 waren 2001 bereits absehbar.", "Thee three-step test by which limitations on exclusive copyrights are confined to 'certain speciall cases' which do not conflict with a 'normal exploitation of the work' and do not 'unreasonablyy prejudice the legitimate interests of the author' is among the most enduring off standards affecting limitations on intellectual properly rights. Its field of application is the delicatee balance between exclusive rights and sufficient breathing space for the free Row off ideas and information. However, the emerging information society has thrown numerous unforeseenn obstacles in the once-clear path of its implementation. Can the traditional balancee between grants and reservations of copyright law be recalibrated along the lines off the three-step test in order to meet current and future needs? Controversies over this cruciall question in Europe, the U.S., Australia, and elsewhere, as well as in two significant WTOO panels in 2000 have brought the three-step test into focus, the essential principle governingg copyright limitations in the information society. Investigatingg the development, structure, and function of the three-step test in international copyrightt law with thoroughness and precision. Copyright, Limitations and the Three-Step TestTest offers a close and insightful analysis of its continuing utility for the twenty-first century. Thee book includes: viablee restatements of the rationales of copyright protection for the emerging IP environment; ; neww insights into the relationship between copyright protection and copyright limitations; in-depthh explanation of the structure and functioning of the three-step test; detailedd interpretations of each criterion of the test; discussionn of the two WTO panel reports dealing with the test; aa proposal for the further improvement of the copyright system and the international rules governingg copyright law; detailedd information about international conference material concerning the test; and discussionn of potential future trends in copyright law. Thee author provides many examples that demonstrate the test's impact on different types of limitations,, such as private use privileges and the U.S. fair use doctrine. He explains the test'ss role in the European Copyright Directive. The detailed examination and explanation off the three-step test will be of extraordinary value to policymakers, judges, and lawyers in thee field of intellectual property law seeking to react adequately to the challenges of the digitall environment.",
+        "1.7", "2.0",// Use random grade as string
         undefined, // File object goes here, will be added at test file upload
         "", // Leave fileBase64 empty, will be added at test file upload
         "", // Leave filepath empty
-        "Veauthier_BA-Arbeit.pdf", // filename is used to identify the file at test file upload
+        "Veauthier_BA-Arbeit.pdf", "37378_Thesis.pdf", // filename is used to identify the file at test file upload
         []
     ),
 
