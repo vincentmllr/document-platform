@@ -40,7 +40,7 @@ export async function urltoFile(url, filename, mimeType) {
 export async function addMetaPage(thesis) {
   try {
     console.log("adding metapage");
-    const content = await PDFDocument.load(thesis.fileBase64);
+    const content = await PDFDocument.load(thesis.fileBase64, { ignoreEncryption: true });
     const doc = await PDFDocument.create();
 
     const pages = content.getPages()
@@ -245,7 +245,7 @@ export async function addMetaPage(thesis) {
 export async function getMetadata(uint8, path) {
   try {
     console.log("getting metadata");
-    const doc = await PDFDocument.load(uint8);
+    const doc = await PDFDocument.load(uint8, { ignoreEncryption: true });
     const dummyBase64 = await doc.saveAsBase64();
     const form = doc.getForm();
 
@@ -313,7 +313,7 @@ export async function generateSHA256(file) {
 export async function checkHash(hashToCheck, uint8) {
   try {
     console.log("checking hash");
-    const doc = await PDFDocument.load(uint8);
+    const doc = await PDFDocument.load(uint8, { ignoreEncryption: true });
     var base64 = await doc.saveAsBase64();
     var file = urltoFile('data:application/pdf;base64,' + base64, 'FileToCheck.pdf', 'application/pdf');
     const newHash = CryptoJS.SHA256(file).toString(CryptoJS.enc.Hex);

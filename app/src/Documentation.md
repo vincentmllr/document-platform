@@ -5,7 +5,6 @@ Open Source Student Theses
 - Structure
 - Getting Started
 - Interfaces (important Functions)
-- Possible improvements
 - Known Bugs
 
 ## Structure
@@ -136,7 +135,6 @@ peer\
 - Outputs: String:account
 - Use: From Frontend
 
-<<<<<<< HEAD
 ##### getWeb3()
 - Description: Get web3 object to communicate with blockchain
 - Inputs: None
@@ -230,9 +228,6 @@ peer\
 - Outputs: boolean:hashIsCorrect
 - Use: verificate() in actionHandler.js
 
-=======
-### Possible improvements
->>>>>>> d38028511baf14b59f74806600f62d6d7ce3a4d6
 
 ### Known Bugs
 - MetaMask Account zurücksetzen
