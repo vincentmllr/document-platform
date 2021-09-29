@@ -136,7 +136,6 @@ peer\
 - Outputs: String:account
 - Use: From Frontend
 
-<<<<<<< HEAD
 ##### getWeb3()
 - Description: Get web3 object to communicate with blockchain
 - Inputs: None
@@ -230,9 +229,22 @@ peer\
 - Outputs: boolean:hashIsCorrect
 - Use: verificate() in actionHandler.js
 
-=======
-### Possible improvements
->>>>>>> d38028511baf14b59f74806600f62d6d7ce3a4d6
+### Possible Improvements
+#### Using smart contract for getting all contract addresses
+Instead of execute a for-loop for getting contracts (how it is done in getAddressOfContracts(), getPathOfContracts(), getHashOfPath() and getContractOfPath(filePath)), there could be a smart contract which contains all contract addresses and there will be added new addresses after deploying a new contract-
+
+#### More than one author
+Currently its only possible to name one author per Thesis-
+
+#### Listener should not indexing all objects again after detected transaktion
+Instead of indexing all objects again after a detected transaktion, the listener should just index the objects which are new
+
+#### Reviews
+Its a big problem to integrate reviews. If they are located in a smart contract, every change needs a transaction which could be expensive with high amounts of reviews. A database speaks against the advantages of the blockchain concept.
+
+#### Compile contract in app
+The used smart contract is compiled in the Remix IDE (https://remix.ethereum.org) and ABI and bytecode are hard-coded in the ganache.js.
+After research, WebWorker could be a solution.
 
 ### Known Bugs
 - MetaMask Account zurücksetzen
