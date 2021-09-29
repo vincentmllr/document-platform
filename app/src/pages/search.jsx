@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Navigation, Search, List } from "../components";
+import { Navigation, Search, List, Footer } from "../components";
 
 class SearchPage extends Component {
 
@@ -13,14 +13,14 @@ class SearchPage extends Component {
 
     render () {
       return (
-        <div>
-          <div className="row">
+        <div className="container-fluid">
+          <header className="row">
             <Navigation
               loggedIn={this.props.loggedIn}
               account={this.props.account}
               handleLogIn={this.props.handleLogIn}/>
-          </div>
-          <div className="row">
+          </header>
+          <main className="row px-5">
             <Search
               searchTerm={this.props.searchTerm}
               handleSearch={this.props.handleSearch}
@@ -35,7 +35,10 @@ class SearchPage extends Component {
               uniqueStudyInterestsValues={this.props.uniqueStudyInterestsValues}
               uniqueYearValues={this.props.uniqueYearValues}
             />
-          </div>
+          </main>
+          <footer  className="row">
+            <Footer />
+          </footer>
         </div>
       );
       }

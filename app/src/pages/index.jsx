@@ -13,32 +13,32 @@ class IndexPage extends Component {
 
   render () {
     return (
-        <div className="App">
-        <header>
-          <Navigation
-            loggedIn={this.props.loggedIn}
-            account={this.props.account}
-            handleLogIn={this.props.handleLogIn}/>
-        </header>
-        <body>
-          <div>
-            <HeroHeader
-              handleSearch={this.props.handleSearch}
-            />
-          </div>
-          <div>
-            <CardDeck />
-          </div>
-          <div className="TestArea">
-            <TestDataForm 
+        <div className="container-fluid">
+          <header className="row">
+            <Navigation
               loggedIn={this.props.loggedIn}
               account={this.props.account}
-            />
-          </div>
-        </body>
-        <footer>
-          <Footer />
-        </footer>
+              handleLogIn={this.props.handleLogIn}/>
+          </header>
+          <main className="row px-5 py-2">
+              <div>
+                <HeroHeader
+                  handleSearch={this.props.handleSearch}
+                />
+              </div>
+              <div>
+                <CardDeck />
+              </div>
+              <div>
+                <TestDataForm 
+                  loggedIn={this.props.loggedIn}
+                  account={this.props.account}
+                />
+              </div>
+          </main>
+          <footer className="row">
+              <Footer />
+          </footer>
       </div>
     );
   }

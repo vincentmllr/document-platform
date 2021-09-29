@@ -1,6 +1,7 @@
 /* Hide Overflow */
-body {
+main {
   overflow-x: hidden;
+  border: 2px solid red;
 }
 
 /* Card Alignment */

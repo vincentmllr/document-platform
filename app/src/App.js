@@ -48,8 +48,8 @@ class App extends Component {
       loggedIn: false,
       account: "",
       searchTerm: "",
-      searchResults: [], // For testing: [testTheses[0]],
-      chosenThesis: new Thesis(), // For testing: testTheses[0],
+      searchResults: [testTheses[0], testTheses[0]], // For testing: testTheses[0] instead of [],
+      chosenThesis: testTheses[0], // For testing: testTheses[0] instead of new Thesis(),
       changeThesis: false,
       uniqueAuthorValues: [],
       uniqueYearValues: [],
@@ -146,7 +146,7 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div id="app">
         <HashRouter>
           <Switch>
             <Route exact path="/" render={() => <IndexPage 

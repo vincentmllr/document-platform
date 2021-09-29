@@ -8,6 +8,7 @@ import { withRouter } from 'react-router';
 import { Select } from "react-dropdown-select";
 import FileSaver from 'file-saver';
 import logo from "./assets/logo_cap_512.png";
+import document_symbol from "./assets/document_symbol_512.png";
 // import View from "react-native/React/Views/";
 // import {Stars} from "react-native-stars";
 import StarRatings from 'react-star-ratings';
@@ -101,40 +102,61 @@ export class HeroHeader extends Component {
 export class CardDeck extends Component {
   render () {
     return (
-      <div class="card-deck row">
-        <div class="card btn-spl col">
-          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="document symbol"/>
-          <div class="card-block">
-            <h4 class="card-title">Thesis 1</h4>
-            <p class="card-text">Abstract Teaser...</p>
-            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
+      <div>
+        <h6>Latest</h6>
+          <div className="card-group">
+              <button
+                className="card"
+                value=""
+                key={testTheses[0].id}
+                onClick={() => this.handleView(testTheses[0])}
+              >
+                <img src={document_symbol} class="card-img-top" alt="Thesis Preview" width="120" height="120"/>
+                <div class="card-body">
+                  <h5 class="card-title">{testTheses[0].title}</h5>
+                  <h6 class="card-title">{testTheses[0].author.name}</h6>
+                  <em class="card-text">{testTheses[0].university}</em>
+                  <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Uploaded {testTheses[0].year}</small>
+                </div>
+              </button>
+              <button
+                className="card"
+                value=""
+                key={testTheses[0].id}
+                onClick={() => this.handleView(testTheses[0])}
+              >
+                <img src={document_symbol} class="card-img-top" alt="Thesis Preview" width="120" height="120"/>
+                <div class="card-body">
+                  <h5 class="card-title">{testTheses[0].title}</h5>
+                  <h6 class="card-title">{testTheses[0].author.name}</h6>
+                  <em class="card-text">{testTheses[0].university}</em>
+                  <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Uploaded {testTheses[0].year}</small>
+                </div>
+              </button>
+              <button
+                className="card"
+                value=""
+                key={testTheses[0].id}
+                onClick={() => this.handleView(testTheses[0])}
+              >
+                <img src={document_symbol} class="card-img-top" alt="Thesis Preview" width="120" height="120"/>
+                <div class="card-body">
+                  <h5 class="card-title">{testTheses[0].title}</h5>
+                  <h6 class="card-title">{testTheses[0].author.name}</h6>
+                  <em class="card-text">{testTheses[0].university}</em>
+                  <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Uploaded {testTheses[0].year}</small>
+                </div>
+              </button>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Uploaded: Yesterday</small>
-          </div>
-        </div>
-        <div class="card btn-spl col">
-          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="Card image cap"/>
-          <div class="card-block">
-            <h4 class="card-title">Thesis 2</h4>
-            <p class="card-text">Abstract Teaser...</p>
-            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Uploaded: Yesterday</small>
-          </div>
-        </div>
-        <div class="card btn-spl col">
-          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="Card image cap"/>
-          <div class="card-block">
-            <h4 class="card-title">Thesis 3</h4>
-            <p class="card-text">Abstract Teaser...</p>
-            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Uploaded: Yesterday</small>
-          </div>
-        </div>
       </div>
     );
   }
@@ -351,7 +373,31 @@ export class List extends Component {
         {this.state.filtered ?
           this.state.filteredResults.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name} <Link to="/thesis">View</Link></button>)
         : 
-          this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name} <Link to="/thesis">View</Link></button>)
+          this.props.thesisList.map((thesis) =>
+            <button className="card"
+              class="list-group-item list-group-item-action list-group-item-primary bg-light"
+              value=""
+              key={thesis.id}
+              onClick={() => this.handleView(thesis)}>
+                  <div className="row">
+                    <div className="col-2 d-flex align-items-center justify-content-center">
+                      <img src={document_symbol} class="img-fluid rounded-start" alt="Thesis Preview" width="120" height="120"/>
+                    </div>
+                    <div className="col-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{thesis.title}</h5>
+                        <h6 class="card-title">{thesis.author.name}</h6>
+                        <em class="card-text">{thesis.university}</em>
+                        <p class="card-text">{thesis.abstract.slice(0,200)}...</p>
+                        <p class="card-text"><small class="text-muted">Uploaded {thesis.year}</small></p>
+                      </div>
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                    </div>
+                  </div>
+            </button>
+          )
         }
       </ul>
     );
@@ -927,10 +973,8 @@ export class Footer extends Component {
     return (
     <div class="jumbotron-fluid">
       <div class="container">
-        <h2>footer section</h2>
-        <p class="lead">&copy; All Rights Reserved </p>
+        <p class="lead">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
       </div>
-      <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
     );
   }
