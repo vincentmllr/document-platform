@@ -36,7 +36,7 @@ import { testTitles,
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 const actionHandler = require("./actionHandler");
-const PDFhandler = require("./PDFhandler");
+const PDFhandler = require("./pdfHandler");
 const ifps = require("./ipfs");
 
 
@@ -1142,43 +1142,55 @@ export class ItemView extends Component {
 
   render () {
     return (
-      <div>
-        <p>{console.log(this.props.item)}</p>
-        <p>{this.props.item.title}</p>
-        <p>{this.props.item.author.name}</p>
-        <p>{this.props.item.university}</p>
-        <p>{this.props.item.examiner.name}</p>
-        <p>{this.props.item.abstract}</p>
-        <p>{this.props.item.author.studyInterests}</p>
-        <p>{this.props.item.author.mail}</p>
-        <p>{this.props.item.reviews}</p>
-        <h4>General Rating</h4>
-        <StarRatings
-          rating={this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews[0].length}
-          starDimension="40px"
-          starSpacing="15px"
-          id="generalRatings"
-        />
-        <br/>
-        <input type="button" className="btn btn-primary" value="Verify" onClick={this.handleVerification} />
-        <button className="btn btn-light" onClick={() => this.handleChangeThesis()} >
-          <Link className="btn btn-warning" to="/submit">Edit</Link>
-        </button>
-        <input type="button" className="btn btn-secondary" value="Download" onClick={
-          ()=> {
-            console.log("Download Button pressed!")
-            FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf"); // In: File, Out: Thesis
-          }
-        }/>
+      <div className="container-fluid">
+      <div className="row">
+        <div className="col-8">
+          <h5>{this.props.item.title}</h5>
+          <h6>{this.props.item.author.name} @{this.props.item.university}</h6>
+          <div>
+            {this.props.item.author.studyInterests.split(" ").map((topic) => <span className="badge badge-primary">{topic}</span>)}
+          </div>
+        </div>
+        <div className="col-4 d-flex align-items-center justify-content-center">
+          <img src={document_symbol} class="img-fluid rounded-start" alt="Thesis Preview" width="120" height="120"/>
+        </div>
+      </div>
+          <div className="row">
+            <div className="col-8">
+              <p>{this.props.item.abstract}</p>
+              <h6>About the author</h6>
+              <p>{this.props.item.author.mail}</p>
+              <h6>About the examiner</h6>
+              <p>{this.props.item.examiner.name}</p>
+            </div>
+            <div className="col-4">
+            <button className="btn btn-light" onClick={() => this.handleChangeThesis()} >
+                <Link className="btn btn-danger" to="/submit">Edit</Link>
+              </button>
+              <input type="button" className="btn btn-primary" value="Verify" onClick={this.handleVerification} />
+              <input type="button" className="btn btn-primary" value="Download" onClick={
+                ()=> {
+                  console.log("Download Button pressed!")
+                  FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf"); // In: File, Out: Thesis
+                }
+              }/>
+              <StarRatings
+                rating={this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews[0].length}
+                starDimension="40px"
+                starSpacing="15px"
+                id="generalRatings"
+              />
+              <StarRatings
+                rating={this.state.rating}
+                starRatedColor="blue"
+                changeRating={this.changeRating}
+                numberOfStars={5}
+                name='general'
+              />
+              <p>{this.props.item.reviews}</p>
+            </div>
 
-        <h4>Rate:</h4>
-        <StarRatings
-          rating={this.state.rating}
-          starRatedColor="blue"
-          changeRating={this.changeRating}
-          numberOfStars={5}
-          name='general'
-        />
+          </div>
       </div>
     );
   }

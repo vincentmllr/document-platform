@@ -18,7 +18,7 @@ class ThesisPage extends Component {
             handleLogIn={this.props.handleLogIn}
           />
         </header>
-        <main className="row">
+        <main className="row px-5 py-2">
           <ItemView
             loggedIn={this.props.loggedIn}
             account={this.props.account}
