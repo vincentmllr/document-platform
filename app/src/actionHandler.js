@@ -3,13 +3,14 @@
 Interface to handle actions
 @function submit(thesisToSubmit) Handles submitting Thesis by deploy to blockchain
 @function verificate(path) Handles verificate PDF
+@function startListener() Starts listener
 @function actionOfListener() Handles action for the listener
 @function changeThesis(newThesis, oldID) Handles to change existing thesis
 @function downloadThesis(thesis) Handles download PDF
 */
 
 //Imports and global variables
-const pdfHandler = require("./PDFhandler");
+const pdfHandler = require("./pdfHandler");
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 const ipfs = require("./ipfs");
@@ -26,8 +27,9 @@ export async function submit(thesisToSubmit) {
         var file = await pdfHandler.urltoFile('data:application/pdf;base64,' + base64, thesisToSubmit.fileName, 'application/pdf');
         var hash = await pdfHandler.generateSHA256(file);
         var path = await ipfs.uploadFile(file);
-        await ganache.deploy([thesisToSubmit.title, thesisToSubmit.author.name, path, hash, thesisToSubmit.author.metaMaskAddress, thesisToSubmit.examiner.metaMaskAddress]);
-        console.log("Submitting successful");
+        var success = await ganache.deploy([thesisToSubmit.title, thesisToSubmit.author.name, path, hash, thesisToSubmit.author.metaMaskAddress, thesisToSubmit.examiner.metaMaskAddress]);
+        if (success)
+            console.log("Submitting successful");
     } catch (err) {
         console.error(`An error occurred while submitting`);
         console.error(err);
@@ -40,15 +42,35 @@ export async function submit(thesisToSubmit) {
 */
 export async function verificate(path) {
     try {
-        console.log("Verificating...");
+        console.log("Verifying...");
         var u8int = await ipfs.downloadFile(path);
         var hashToCheck = await ganache.getHashOfPath(path);
         console.log("Verification completed");
         return await pdfHandler.checkHash(hashToCheck, u8int);
     } catch (err) {
-        console.error(`An error occurred while submitting`);
+        console.error(`An error occurred while verifying`);
         console.error(err);
     }
+}
+
+/**
+* Starts listener
+*/
+export async function startListener(){
+    var web3 = await ganache.getWeb3();
+    await web3.eth.subscribe('newBlockHeaders', function(error, result){
+        if (!error) {
+            return;
+        }
+        console.error(error);
+    })
+    .on("connected", function(){
+        console.log("Listener Started and ready");
+    })
+    .on("data", function(){
+        actionOfListener();
+    })
+    .on("error", console.error);
 }
 
 /**
@@ -61,11 +83,11 @@ export async function actionOfListener() {
         var addresses = await ganache.getAddressOfContracts();
         var pathList = await ganache.getPathOfContracts(addresses);
         var filesAsUint8 = await ipfs.downloadFiles(pathList);
-        console.log("Indexing files...");
-        for (var i = 0; i < filesAsUint8.length; i++) {
+        console.log("Indexing "+filesAsUint8.length+" files, please wait till get "+filesAsUint8.length+" indexing pdf was successful...");
+        for (let i = 0; i < filesAsUint8.length; i++) {
             elastic.indexPDF(await pdfHandler.getMetadata(filesAsUint8[i], pathList[i]));
         }
-        console.log("Action of listener completed");
+        console.log("Action of listener completed, please wait till indexing completed...");
     } catch (err) {
         console.error(`An error occurred doing action of listener`);
         console.error(err);

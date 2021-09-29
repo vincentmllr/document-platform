@@ -36,38 +36,198 @@ peer\
  +-test: Test environment without frontend, misc\
 
 ### Interfaces
+#### actionHandler.js
+##### submit(thesisToSubmit)
+- Desricption: Handles submitting Thesis by deploy to blockchain
+- Input: Thesis:thesisToSubmit
+- Outputs: None
+- Use: From Frontend
+
+##### verificate(path)
+- Desricption: Handles verificate PDF
+- Input: String:path
+- Outputs: boolean:hashIsCorrect
+- Use: From Frontend
+
+##### startListener()
+- Desricption: Starts listener
+- Input: None
+- Outputs: None
+- Use: From Frontend
+
+##### actionOfListener()
+- Desricption: Handles action for the listener
+- Input: None
+- Outputs: None
+- Use: startListener() after detecting transaction
+
+##### changeThesis(newThesis, oldID)
+- Desricption: Handles to change existing thesis
+- Input: Thesis:newThesis, integer:oldID
+- Outputs: None
+- Use: From Frontend
+
+##### downloadThesis(thesis)
+- Desricption: Handles download PDF
+- Input: Thesis:thesis
+- Outputs: File:file
+- Use: From Frontend
+
 #### elastic.js
 ##### createIndex()
-- Description:
+- Description: Create index named by constant "index"
 - Inputs: None
-- Outputs: None
-- Use: Single call in Frontend-Constructor, better option?
+- Outputs: boolean:success
+- Use: Single call in Frontend-Constructor
 
-##### indexPDF()
-- Description:
+##### addPipeline()
+- Description: Adding requiered pipeline for indexing PDFs
+- Inputs: None
+- Outputs: boolean:success
+- Use: Is used by createIndex()
+
+##### indexPDF(thesis)
+- Description: indexing Thesis/PDF
 - Inputs: Thesis:thesis
 - Outputs: boolean:success
-- Use: From Frontend or from ganache.js (later from ganache, for testing from frontend)
+- Use: actionOfListener() in actionHandler.js after listener detects new transaction
 
-##### simpleSearchPDF()
-- Description:
+##### simpleSearchPDF(keyword)
+- Description: Search PDF by keyword
 - Inputs: String:keyword
 - Outputs: [Thesis]:results
 - Use: From Frontend
 
-##### advancedSearchPDF()
-- Description:
+##### advancedSearchPDF(keyword, title, author, year, language, country, university)
+- Description: Search PDF by multiple optinal parameters: title and keyword have an additional boost for prioritizing these two parameters. No Parameter must match, they all give just a better ranking for a found object
 - Inputs: String:keyword, String:title, String:authorName, String:year, String:university, String:country, String:language
 - Outputs: [Thesis]:results
-- Use: From Frontend
+- Use: From Frontend 
+
+##### resultsToTheses(results)
+- Description: Convert search results to thesis-object array
+- Inputs: String:keyword
+- Outputs: [Thesis]:results
+- Use: From simpleSearchPDF() and advancedSerachPDF()
+
+##### deleteByID(ID)
+- Description: Deletes indexed object by ID
+- Inputs: integer:ID
+- Outputs: boolean:success
+- Use: changeThesis() in actionHandler.js for deleting old indexed object
+
+##### newID()
+- Description: Returns a not used ID between 0 and 99999 for indexing new object 
+- Inputs: String:keyword
+- Outputs: integer:ID
+- Use: From Frontend by creating new Thesis-object from submit-form
 
 #### ganache.js
-
-##### submitThesis()
-- Desricption: Uploads the data to the Blockchain
-- Input: Thesis:thesis
-- Outputs: None
+##### connectMetaMask()
+- Description: Connecting to MetaMask
+- Inputs: None
+- Outputs: boolean:success
 - Use: From Frontend
+
+##### getAccount()
+- Description: Get with MetaMask connected account
+- Inputs: None
+- Outputs: String:account
+- Use: From Frontend
+
+##### getWeb3()
+- Description: Get web3 object to communicate with blockchain
+- Inputs: None
+- Outputs: Object:web3
+- Use:  startListener() in actionHandler.js
+
+##### setWeb3()
+- Description: Set web3 object to communicate with blockchain
+- Inputs: Object:web3
+- Outputs: None
+- Use: Not used till now
+
+##### deploy(args)
+- Description: Deploy Hard-Coded smart contract with var abi and bytecode and connected account.
+- Inputs: [args]:args Arguments of the smart contract constructor
+- Outputs: boolean:success
+- Use: submitThesis() in actionHandler.js after pressing submit-button
+
+##### getAddressOfContracts()
+- Description: Get contract-address of all deployed contracts
+- Inputs: None
+- Outputs: [String]:addressList
+- Use: actionOfListener() in actionHandler.js
+
+##### getPathOfContracts(addressList)
+- Description: Get FilePath of all deployed contracts
+- Inputs: [String]:addressList
+- Outputs: [String]:pathList
+- Use: actionOfListener() in actionHandler.js
+
+##### getHashOfPath(filePath)
+- Description: Get hash-value of file in smart contract by FilePath
+- Inputs: String:filePath
+- Outputs: String:hash
+- Use: verificate() in actionHandler.js
+
+##### getContractOfPath(filePath)
+- Description: Get contract-object by FilePath
+- Inputs: String:filePath
+- Outputs: Object:contract
+- Use: changeThesis() in actionHandler.js
+
+
+#### ipfs.js
+##### uploadFile()
+- Description: Get contract-object by FilePath
+- Inputs: File:file
+- Outputs: String:path
+- Use: changeThesis() and submit() in actionHandler.js
+
+##### downloadFiles()
+- Description: Download files from IPFS with path-list
+- Inputs: [String]:pathList
+- Outputs: [File]:files
+- Use: actionOfListener() in actionHandler.js
+
+##### downloadFile()
+- Description: Download file from IPFS with one path
+- Inputs: String:path
+- Outputs: File:file
+- Use: verificate() and downloadThesis() in actionHandler.js
+
+#### pdfHandler.js
+##### urltoFile(url, filename, mimeType)
+- Description: Create file from url
+- Inputs: String:url, String:filename, String:mimeType  
+- Outputs: File:file
+- Use: changeThesis(), submit() and downloadThesis() in actionHandler.js
+
+##### addMetaPage(thesis)
+- Description: Attach metapage to file
+- Inputs: String:path
+- Outputs: String:base64OfFile
+- Use: submit() and changeThesis() in actionHandler.js
+
+##### getMetadata(uint8, path)
+- Description: Read metadata from metapage
+- Inputs: String:path
+- Outputs: Thesis:thesis
+- Use: actionOfListener() in actionHandler.js
+
+##### generateSHA256(file)
+- Description: Generate SHA256 hash of file
+- Inputs: File:file
+- Outputs: String:hash
+- Use: submit() and changeThesis() in actionHandler.js
+
+##### checkHash(hashToCheck, uint8)
+- Description: Compare if SHA256 hash is same as of file
+- Inputs: String:hash, UInteger8Array:uint8
+- Outputs: boolean:hashIsCorrect
+- Use: verificate() in actionHandler.js
+
 
 ### Known Bugs
 - MetaMask Account zurücksetzen
