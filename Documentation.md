@@ -246,15 +246,31 @@ Its a big problem to integrate reviews. If they are located in a smart contract,
 The used smart contract is compiled in the Remix IDE (https://remix.ethereum.org) and ABI and bytecode are hard-coded in the ganache.js.
 After research, WebWorker could be a solution.
 
+#### No CORS-Unblock plugin
+No further need of the CORS-Unblock browser plugin
+
 ### Known Bugs
-- MetaMask Account zurücksetzen
-- Long connecting with Ganache in MetaMask
 - Elastic Search doesnt index pdfs
 - "No living Connection" with Elastic Search
+- Error: "the tx doesn’t have the correct nonce. account has nonce of: x tx has nonce of: y"
+- "execution of scripts is disabled on this system" during yarn install
+- "Can't resolve ipfs-http-client"
 
 #### Elastic Search doesnt index pdfs
 1. Delete Index with powershell command: Invoke-WebRequest -method DELETE http://localhost:9200/_all
 2. Reload page: You should see "created Index" in Console
 3. Reload again: You should see "indexing pdf was successful" in Console 
+
 #### "No living Connection" with Elastic Search
 1. Restart Docker Containers
+
+#### Error: "the tx doesn’t have the correct nonce. account has nonce of: x tx has nonce of: y"
+This usually happens, if a transaction failed because of a failure in the backend-code.
+If this happens, got to MetaMask->Settings->Advanced Settings and reset your account.
+This should fix the error.
+
+#### "execution of scripts is disabled on this system" during yarn install
+Run "Set-ExecutionPolicy RemoteSigned"
+
+#### "Can't resolve ipfs-http-client"
+Run "yarn add ipfs-http-client"
