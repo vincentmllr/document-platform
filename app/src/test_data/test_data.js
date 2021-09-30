@@ -659,7 +659,7 @@ new Thesis (
             testExaminerAddress
         ),
         "2009",
-        "German",
+        "English",
         "Germany",
         "University of Tübingen",
         "Democracy promotion as a goal of foreign policy can be traced back to US President Woodrow Wilson‟s call for the League of Nations in order “to vindicate the principles of peace and justice in the life of the world as against selfish and autocratic power and to set up amongst the really free and self-governed peoples of the world such a concert of purpose and of action as will henceforth insure the observance of those principles” (Heckscher 1956: 277; Dalacoura 2005: 963). While this continued to be a reason (at least rhetorically) for especially the United States to intervene in the European theater in World War II, during the Cold War democracy promotion was put on hold in the “third world” according to the much-repeated witticism “He‟s a bastard, but at least he‟s our bastard” attributed to several US presidents about various notorious autocratic allies.1 Although democracies in Western Europe – particularly Germany – and Japan were erected and consolidated with the support of the United States, this push to democratize was not carried over into those parts of the world in which US influence was contested by the USSR (Southeast Asia, the Middle East, or Latin America, for example). The logic behind this reluctance to push for democracy was partially based on a purported dichotomy of democratization and stability, supported by a theory propagated by Samuel Huntington that authoritarian, and particularly military, regimes, were more stable during transition periods than if elected regimes tried to take power at the beginning of a transition toward democracy (Huntington: 1968). A statement made by Henry Kissinger before the US undermined the elected Allende regime in Chile in June of 1970 aptly summarizes the foreign policy priority of containment over democracy promotion during the Cold War: “I don‟t see why we need to stand by and watch a country go communist because of the irresponsibility of its own people” (Kissinger quoted in Smith 2000: 66). After the fall of the Berlin Wall and collapse of the Soviet Union, however, the dangers associated with political instability during the Cold War – namely, that a country aligned with the United States would realign with the Soviet Union – disappeared.",
@@ -771,6 +771,201 @@ new Thesis (
     ),
 
 
+ new Thesis (
+        18,
+        "Wie erfolgsversprechend sind die Kompetenz - Dimensionen des Sales Reports? Eine Korrelationsstudie über den Sales Report mit den Anstellungsempfehlungen der Assessoren in einem Assessment Center für potentielle Kundenberatende",
+        new Author(
+            "Helen Burri",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Arbeits- und Organisationspsychologie",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Jack Rietiker, dipl. Psych. FH ",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Applied Psychology Department",
+            "www.psychologie.zhaw.ch",
+            testExaminerAddress
+        ),
+        "2012",
+        "German",
+        "Austria",
+        "Zurich University of Applied Sciences",
+        "In der vorliegenden empirisch quantitativen Bachelorarbeit wird das Instrument Sales Report im Zu sammenhang mit der Anstellungsempfehlung der Assessoren untersucht. Der Sales Report ist eine Selbsteinschätzung, welcher auf einem Persönlichkeits- und Motivationsfragebogen basiert. In einem Assessment der PostFinance für Kundenberatende werden diese Fragebogen eingesetzt. Der Sales Re port unterstützt die Assessoren bei der Bewertung der Kandidaten bezüglich einer Anstellungsempfeh lung. Durch Korrelationsberechnungen musste festgestellt werden, dass die fünf Kompetenzen des Sales Reports, die bei der Herleitung der Hypothesen als erfolgsrelevant erachtet wurden, verworfen werden mussten. Dafür wurden drei weitere signifikant korrelierende Resultate eruiert: „Aufmerksam zuhören und Verhalten interpretieren“ korreliert negativ, „strategisch denken“ und „präsentieren“ korrelieren positiv mit den Empfehlungen der Assessoren. Die Kompetenz „Präsentieren“ scheint erfolgsverspre chend für die Tätigkeit als Kundenberatungspersonen. Die Forschungsergebnisse aus der Theorie un terstreichen diese Annahme teilweise. Sie postulieren, dass eine hohe Leistungsorientierung, Einfluss nehmen auf andere und eine hohe Selbstüberwachung wichtige Merkmale für den beruflichen Erfolg darstellen (Nerdinger, 2001).",
+        "1.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "ba0007.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+new Thesis (
+        19,
+        "Haben deine Eltern manchmal Angst vor dir? Wenn Kinder ihre Eltern bedrohen oder schlagen",
+        new Author(
+            "Helen Burri",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Arbeits- und Organisationspsychologie",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Jack Rietiker, dipl. Psych. FH ",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Applied Psychology Department",
+            "www.psychologie.zhaw.ch",
+            testExaminerAddress
+        ),
+        "2008",
+        "German",
+        "Austria",
+        "Zurich University of Applied Sciences",
+        "Die vorliegende Arbeit befasst sich mit dem Phänomen Elternmisshandlung. Um die Gefühle von betroffenen Eltern und Jugendlichen vor, während und nach einem Übergriff besser verstehen zu können, wurden betroffene Personen mittels Fragebogen und ergänzenden Interviews befragt. Die Erhebung wurde von den Fragestellungen geleitet, wie sich Eltern und Jugendliche in Eskalationssituationen fühlen, welche Faktoren die Entwicklung dieses Phänomens begünstigen und ob es Möglichkeiten gibt, die Übergriffe zu verhindern. Zu Beginn der Arbeit wurde die theoretische Grundlage für die nachfolgende Untersuchung gelegt. Dabei wurden die Gewaltentwicklung, die Gewalt von Minderjährigen gegenüber ihren Eltern und mögliche Präventions- und Interventionsmöglichkeiten vorgestellt. Die darauffolgende Untersuchung mit Eltern und Jugendlichen ergab, dass in Übergriffsituationen alle Betroffenen hilflos, traurig und überfordert sind. Zudem konnten gewaltbegünstigende Faktoren herausgearbeitet werden und entsprechende Präventionsansätze generiert werden. Aufgrund des Ergebnisses, dass Übergriffe verhindert werden können, wurden konkrete Interventionsmöglichkeiten diskutiert. Als weiteres Ergebnis der Untersuchung wurde deutlich, dass Elternmisshandlung in der Öffentlichkeit thematisiert werden muss. Nur so wird es möglich, dieses schambesetzte Thema zu enttabuisieren, die Gesellschaft dazu zu ermutigen, Betroffene zu unterstützen und Hilfsangebote erarbeiten und anbieten zu können.",
+        "2.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "ba0109.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+new Thesis (
+        20,
+        "Lebenszufriedenheit trotz Schädel-Hirn-Trauma Der Weg zurück in ein (zufriedenes) Leben? ",
+        new Author(
+            "Andrea Elisabeth Filliger",
+            "-",
+            "Zurich University of Applied Sciences",
+            " Laufbahn- und Rehabilitationsberatung",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Alexa Anthenien, lic phil ",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Applied Psychology Department",
+            "www.psychologie.zhaw.ch",
+            testExaminerAddress
+        ),
+        "2010",
+        "German",
+        "Austria",
+        "Zurich University of Applied Sciences",
+        "Die vorliegende Arbeit untersucht die Lebenszufriedenheit von Menschen, welche in der Vergangenheit ein Schädel-Hirn-Trauma erlitten haben. Die Daten wurden mittels persönlich an spezifischen Anlässen verteilten Fragebögen ermittelt. Von zwölf retournierten Fragebögen konnten deren elf für eine deskriptive Auswertung verwendet werden und somit reichen die ermittelten Werte nicht für eine repräsentative Studie. Folgender Hypothese wird in dieser Untersuchung nachgegangen: Menschen mit einem Schädel-Hirn-Trauma, die auch eine Psychotherapie gemacht haben, zeigen in den relevanten Aspekten der allgemeinen Lebenszufriedenheit (Gesundheit, Arbeit und Beruf, Finanzielle Lage, Freizeit, Ehe und Partnerschaft, Beziehung zu den eigenen Kindern, eigene Person, Sexualität, Freunde/Bekannte/Verwandte, Wohnung) höhere Werte/ Summen als Menschen mit Schädel-Hirn-Trauma, welche bis jetzt keine Psychotherapie gehabt haben. Die Ergebnisse stützen diese Hypothese nur zum Teil, so zeigt sich nicht in sämtlichen Lebensbereichen eine höhere Lebenszufriedenheit und da die Stichprobengrösse zu klein ist für eine repräsentative Aussage, kann nur von Tendenzen gesprochen werden. Es scheint jedoch tatsächlich eine Tendenz zu höherer Lebenszufriedenheit von Menschen, welche ein Schädel-Hirn-Trauma erlebt haben und eine Psychotherapie gemacht haben, gegenüber von Schädel-Hirn-Traumatisierten, welche keine Psychotherapie gemacht haben, zu geben.",
+        "1.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "ba0116.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+new Thesis (
+        21,
+        "Untersuchung der Methodentreue von Integrativen Körperpsychotherapeuten",
+        new Author(
+            "Anika Veigel",
+            "-",
+            "Zurich University of Applied Sciences",
+            " Laufbahn- und Rehabilitationsberatung",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Dr. phil. Agnes von Wyl",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Applied Psychology Department",
+            "www.psychologie.zhaw.ch",
+            testExaminerAddress
+        ),
+        "2010",
+        "German",
+        "Austria",
+        "Zurich University of Applied Sciences",
+        "Im Rahmen einer ambulanten Praxisstudie wurde die Methodentreue der einzelnen integrativen Körperpsychotherapeuten untersucht. Als Messinstrument wurde der QSort nach Jones (1998) verwendet. Es wurden 18 Klienten mit je drei Therapiesitzungen (54 Therapiegespräche) durch zwei unabhängige Beobachter mit dem Q-Sort, bestehend aus 100 verschiedenen Items, ausgewertet. Durch ein Expertenteam wurde eine prototypische Ideal-Therapiestunde mit dem Q-Sort bewertet. Die Mittelwerte der geschätzten Therapiegespräche wurden mit den Mittelwerten des Prototyps verglichen. Die Ergebnisse zeigen sehr deutlich, dass über 70% der Therapiegespräche Items signifikant von den Prototyp-Items abweichen. Dies bestätigt einen eklektischen und methodenpluralistischen Behandlungsansatz der Therapeuten. Es ist davon auszugehen, dass die Arbeitsweise unter den Therapeuten heterogen ist. Das vorliegende Forschungsergebnis ist insbesondere aufschlussreich für die „Integrative Körperpsychotherapie“ und den Ansatz der methodenpluralistischen Arbeitsweise der Therapeuten.",
+        "1.3",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "ba0117.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+
+new Thesis (
+        22,
+        "Compliance und Vertrauen von schizophrenen Patientinnen und Patienten Ein Vergleich von forensischer und allgemeiner Psychiatrie",
+        new Author(
+            "Stefanie Flühler",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Klinische Psychologie",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "lic. phil. Yves Wetli",
+            "-",
+            "Zurich University of Applied Sciences",
+            "Applied Psychology Department",
+            "www.psychologie.zhaw.ch",
+            testExaminerAddress
+        ),
+        "2011",
+        "German",
+        "Austria",
+        "Zurich University of Applied Sciences",
+        "Die vorliegende empirische Arbeit untersucht schizophrene Patientinnen und Patienten in Bezug auf die zwei Faktoren „Compliance“ und „Vertrauen“. Das soziale Vertrauen ist ein wichtiger Faktor für den Aufbau einer gewinnbringenden therapeutischen Beziehung, deren Bedeutsamkeit für das Therapieergebnis in der Forschung vielfach belegt wurde. Eine bekannte Problematik ist die Behandlungscompliance bei schizophrenen Personen. Aufbauend auf dem theoretischen Hintergrund zum Krankheitsbild Schizophrenie wurden Unterschiede zwischen Allgemeinpsychiatrie und dem spezifischen Fachgebiet der Forensik herausgearbeitet. Die Stichproben wurden anhand von zwei bestehenden Fragebogen miteinander verglichen. Mittels Experteneinschätzung wurden die Daten von drei verschiedenen Berufsgruppen erhoben. Die befragten Personen stehen in direkter therapeutischer oder pflegerischer Beziehung zu den untersuchten Patientinnen und Patienten. Die Ergebnisse zeigen, dass Compliance und Vertrauen in einem positiven Zusammenhang zueinander stehen. Weiter wurde ersichtlich, dass sich die forensische Stichprobe in Bezug auf das Vertrauen nicht von der Vergleichsgruppe unterscheidet, in Bezug auf die Compliance zeigte sich hingegen ein Unterschied. In der forensischen Stichprobe wurden zusätzlich die Unterschiede zwischen den einzelnen einschätzenden Fachgruppen herausgearbeitet. Das Vertrauen der untersuchten Personen wird von allen Gruppen ähnlich eingeschätzt, die Ergebnisse zeigen keine statistisch belegbaren Unterschiede. In der Einschätzung der Compliance unterscheiden sich die Gruppen. Da die Daten mittels Fremdeinschätzungen erhoben wurden, sind keine Aussagen zur Sichtweise der Patientinnen und Patienten bezüglich Vertrauen und Compliane möglich.",
+        "1.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "ba0141.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+new Thesis (
+        23,
+        "A SAMPLE RESEARCH PAPER/THESIS/DISSERTATION ON ASPECTS OF ELEMENTARY LINEARY ALGEBRA",
+        new Author(
+            "James Smith",
+            "-",
+            "Southern Illinois University Carbondale",
+            "Mathematics",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Dr. J. Jones",
+            "-",
+            "Southern Illinois University Carbondale",
+            "Department of Mathematics",
+            "https://siu.edu/",
+            testExaminerAddress
+        ),
+        "2010",
+        "English",
+        "US",
+        "Southern Illinois University Carbondale",
+        "NAME OF STUDENT, for the Doctor of Philosophy degree in MAJOR FIELD, presented on DATE OF DEFENSE, at Southern Illinois University Carbondale. (Do not use abbreviations.) TITLE: A SAMPLE RESEARCH PAPER ON ASPECTS OF ELEMENTARY LINEAR ALGEBRA MAJOR PROFESSOR: Dr. J. Jones (Begin the abstract here, typewritten and double-spaced. A thesis abstract should consist of 350 words or less including the heading. A page and one-half is approximately 350 words.)",
+        "2.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "thesis.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
 
 
 
