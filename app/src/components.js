@@ -52,30 +52,26 @@ export class Navigation extends Component {
     render() { // fixed-top navbar-toggleable-md navbar-inverse bg-primary
       return (
         <nav className="navbar navbar-expand-md" role="navigation">
-          <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
           <a className="navbar-brand" href="/">
             <img src={logo} width="60" height="60" class="d-inline-block align-top" alt=""/>
           </a>
-          <div className="collapse navbar-collapse" id="navbar">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse"  id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li>
                 <TestListener/>
               </li>
-              <li className="nav-item outframe"><Link className="btn btn-success" to="/submit">Submit</Link></li>
-              <li>
-                {this.props.loggedIn ?
-                  <button className="btn btn-dark disabled" onClick={this.props.handleLogIn}>Logged In</button>
-                :
-                  <button className="btn btn-success" onClick={this.props.handleLogIn}>Log In</button>
-                }
-              </li>
-              <li>
-                {this.props.loggedIn ? <p>as {this.props.account}</p> : null}
-              </li>
             </ul>
           </div>
+          <Link className="btn btn-success" to="/submit">Submit</Link>
+            {this.props.loggedIn ?
+              <button className="btn btn-dark disabled" onClick={this.props.handleLogIn}>Logged In</button>
+            :
+              <button className="btn btn-success" onClick={this.props.handleLogIn}>Log In</button>
+            }
+            {this.props.loggedIn ? <p>as {this.props.account}</p> : null}
         </nav>
       )
     };
@@ -248,26 +244,32 @@ export class Search extends Component {
     render() {     
       // TODO Hinzufügen der "Enter"-Funktion; Testweise entfernt von input: onKeyPress={this.onKeyUp}
       return (
-        <div id="searchbar">
-          <input type="text" id="keyword" placeholder="Enter Keyword" value={this.state.searchTerm} onChange={this.handleChange} ></input>
-          {this.state.advancedSearch ? <input type="text" id="title" placeholder="Enter Title"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="author"placeholder="Enter Author"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="year" placeholder="Enter Year"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="university" placeholder="Enter University"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="examiner" placeholder="Enter Examiner"></input> : null}
-          {this.props.onIndexPage ? 
-            <Link className="btn btn-primary" to="/search">Search</Link>
+        <div id="searchbar px-5" className="input-group">
+          <input type="text" id="keyword" className="form-control" placeholder="Enter Keyword" value={this.state.searchTerm} onChange={this.handleChange} ></input>
+          {this.state.advancedSearch ? <input type="text" id="title" className="form-control" placeholder="Enter Title"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="author" className="form-control"placeholder="Enter Author"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="year" className="form-control" placeholder="Enter Year"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="university" className="form-control" placeholder="Enter University"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="examiner" className="form-control" placeholder="Enter Examiner"></input> : null}
+          <div className="input-group-append">
+            {!this.props.onIndexPage ? 
+              <div>{this.state.advancedSearch ?
+                <Link className="btn btn-outline-secondary" type="button" to="/search" onClick={this.handleSimple}>Simple</Link>
+              :
+                <Link className="btn btn-outline-secondary" type="button" to="/search" onClick={this.handleAdvanced}>Advanced</Link>
+              }</div>
             :
-            <button className="btn btn-primary" to="/search" onClick={this.handleClick}>Search</button>
+              null
             }
-          {!this.props.onIndexPage ? 
-            <div>{this.state.advancedSearch ?
-              <Link className="btn btn-secondary" to="/search" onClick={this.handleSimple}>Simple</Link>
+            {this.props.onIndexPage ? 
+              <Link className="btn btn-outline-primary" type="button" to="/search">Search</Link>
             :
-              <Link className="btn btn-secondary" to="/search" onClick={this.handleAdvanced}>Advanced</Link>
-            }</div> : null
-          } 
+              <button className="btn btn-outline-primary" type="button" to="/search" onClick={this.handleClick}>Search</button>
+            }
+          </div>
         </div>
+
+        
       );
     };
 }

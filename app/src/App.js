@@ -48,7 +48,7 @@ class App extends Component {
       loggedIn: false,
       account: "",
       searchTerm: "",
-      searchResults: [], // For testing: [testTheses[0], testTheses[0]] instead of [],
+      searchResults: [], // For testing: [testTheses[0], testTheses[0], testTheses[0], testTheses[0]] instead of [],
       chosenThesis: new Thesis(), // For testing: testTheses[0] instead of new Thesis(),
       changeThesis: false,
       uniqueAuthorValues: [],
