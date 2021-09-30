@@ -58,6 +58,7 @@ export async function verificate(path) {
 */
 export async function startListener(){
     var web3 = await ganache.getWeb3();
+    await actionOfListener();
     await web3.eth.subscribe('newBlockHeaders', function(error, result){
         if (!error) {
             return;
