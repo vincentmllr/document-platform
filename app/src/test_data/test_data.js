@@ -194,7 +194,7 @@ export const testTheses = [
     // ),
     new Thesis (
         0,
-        "Die Erweiterung des Asia-Europe Meeting – diminished multilateralism oder Erfolg des Interregionalismus?",
+        "The expansion of the Asia-Europe Meeting - diminished multilateralism or success of interregionalism?",
         new Author(
             "Sophie Veauthier",
             "sophie.veauthier@uni-tuebingen.de",
@@ -232,15 +232,15 @@ new Thesis (
             "Martinn Senftlebe",
             "martin.senftlebe@uni-amsterdam.de",
             "University of Amsterdam",
-            "Rechtsgeleerdheid",
-            "Rechtsgeleerdheid",
+            "law",
+            "law society policymakers",
             testAuthorAddress
         ),
         new Examiner(
             "Prof. mr. P.B. Hugenholt",
             "p.m.hugenholt@uni-amsterdam.de",
             "University of Amsterdam",
-            "Rechtsgeleerdheid",
+            "law",
             "www.uni-amsterdam.de",
             testExaminerAddress
         ),
@@ -259,13 +259,13 @@ new Thesis (
 
        new Thesis (
         2,
-        "AMBIGUITÄT ALS CHANCE ODER PROBLEM? Zur Deutungsoffenheit von Menschenrechtsnormen und ihrer integrativen Wirkung am Beispiel des IStGH",
+        "AMBIGUITY AS AN OPPORTUNITY OR PROBLEM? On the openness of interpretation of human rights norms and their integrative effect using the example of the ICC",
         new Author(
             "Bettina Ahrens",
             "bettina.ahrens@student.uni-tuebingen.de",
             "University of Tübingen",
-            "Politikwissenschaft",
-            " Politikwissenschaft",
+            "Political science",
+            "Political science Human rights norms United Nations",
             testAuthorAddress
         ),
         new Examiner(
@@ -293,13 +293,13 @@ new Thesis (
 
   new Thesis (
         3,
-        "Orientalism light: Eine Analyse der Identitätskonstruktion durch Othering in der Europäischen Union",
+        "Orientalism light: An analysis of the identity construction through othering in the European Union",
         new Author(
             "Jonas Göcke",
             "jonas.goecke@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "European Commission European identity criminality",
             testAuthorAddress
         ),
         new Examiner(
@@ -326,27 +326,27 @@ new Thesis (
 
    new Thesis (
         4,
-        "Adipositas und Körperbild Unterschiede im Körperbild zwischen adipösen und normalgewichtigen Personen",
+        "Obesity and body image Differences in body image between obese and normal weight people",
         new Author(
             "Madlaina Bezzola",
             "-",
-            "Hochschule für Angewandte Wissenschaften ZHAW",
-            "klinische Psychologie",
-            "klinische Psychologie",
+            "University of Applied Sciences ZHAW",
+            "clinical psychology",
+            "clinical psychology obese people Discrimination",
             testAuthorAddress
         ),
         new Examiner(
             "Andrea Studer Burkhard",
             "-",
-            "Hochschule für Angewandte Wissenschaften ZHAW",
-            "Angewandte Psychologie",
+            "University of Applied Sciences ZHAW",
+            "clinical psychology",
             "www.psychologie.zhaw.ch",
             testExaminerAddress
         ),
         "2014",
         "German",
         "Austria",
-        "Hochschule für Angewandte Wissenschaften ZHAW",
+        "University of Applied Sciences ZHAW",
         "In der Schweiz hat sich der Anteil adipöser Personen in den letzten 20 Jahren beinahe verdoppelt. Experten sprechen von einer ‚pandemieartigen’ Verbreitung der Krankheit die einher geht mit erheblichen gesundheitlichen Risiken. Zudem sind Personen mit Adipositas einem grossen psychosozialen Druck ausgesetzt, denn in verschiedenen Medien wird das Schönheitsideal eines schlanken Körpers vermittelt. Sie leiden häufig unter Stigmatisierungen und Diskriminierungen. Die erlebten Diskriminierungen können negative Folgen auf den Selbstwert und auf das Körperbild haben. Die vorliegende empirische Arbeit untersucht die Unterschiede zwischen adipösen und normalgewichtigen erwachsenen Personen hinsichtlich ihres Körperbildes und der Big 5- Persönlichkeitsmerkmale. Zur empirischen Untersuchung der Fragestellung wurde eine quantitative Erhebung in Form eines Online-Fragebogens gewählt. Hierfür wurden die beiden Messinstrumente FKB-20 (Fragebogen zum Körperbild) und NEO-FFI (NEO Fünf-Faktoren Inventar) eingesetzt. Der Fragebogen wurde an adipöse und normalgewichtige Probanden verschickt. Insgesamt haben 32 adipöse und 93 normalgewichtige Personen an der Umfrage teilgenommen. Die Auswertung des Fragebogens zeigt, dass adipöse Personen über ein signifikant negativeres Körperbild verfügen als normalgewichtige Personen. Bei den Persönlichkeitsmerkmalen konnten keine eindeutigen Unterschiede zwischen den beiden Gruppen festgestellt werden. Hingegen zeigten sich folgende Zusammenhänge zwischen den Persönlichkeitsmerkmalen und dem Körperbild: Ein hoher Neurotizismus-Wert kann ein negatives Körperbild vorhersagen und die Dimensionen Offenheit für Veränderungen, Extraversion und Verträglichkeit korrelieren mit einem positiven Körperbild. Aus den Ergebnissen werden Schlussfolgerungen auf gesellschaftlicher und individueller Ebene gezogen.",
         "1.7",// Use random grade as string
         undefined, // File object goes here, will be added at test file upload
@@ -364,7 +364,7 @@ new Thesis (
             "nicolas.gaeckle@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "Frontex EU border Neorealism Middle East",
             testAuthorAddress
         ),
         new Examiner(
@@ -398,7 +398,7 @@ new Thesis (
             "elizaveta.gaufman@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "European North African refugees Russian citizens",
             testAuthorAddress
         ),
         new Examiner(
@@ -432,7 +432,7 @@ new Thesis (
             "julia.grauvogel@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "climate change United Kingdom",
             testAuthorAddress
         ),
         new Examiner(
@@ -465,7 +465,7 @@ new Thesis (
             "judith.kron@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "climate change global poverty society",
             testAuthorAddress
         ),
         new Examiner(
@@ -492,13 +492,13 @@ new Thesis (
 
     new Thesis (
         9,
-        "Die Erweiterung des Asia-Europe Meeting – diminished multilateralism oder Erfolg des Interregionalismus?",
+        "The expansion of the Asia-Europe Meeting - diminished multilateralism or success of interregionalism?",
         new Author(
             "Louiza Charalambous",
             "louiza.charalambous@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "society childhood",
             testAuthorAddress
         ),
         new Examiner(
@@ -530,7 +530,7 @@ new Thesis (
             "eva-marie.braendle@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "European Parliament Neorealism",
             testAuthorAddress
         ),
         new Examiner(
@@ -562,7 +562,7 @@ new Thesis (
             "o.langfeldt@googlemail.com",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "International Civil Aviation Organization diplomatic",
             testAuthorAddress
         ),
         new Examiner(
@@ -596,7 +596,7 @@ new Thesis (
             "juliaverena.klein@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "Africa International relations Solidarität",
             testAuthorAddress
         ),
         new Examiner(
@@ -622,13 +622,13 @@ new Thesis (
 
    new Thesis (
         13,
-        "Macht der Worte? Ein theoretischer Entwurf zur möglichen Wirkung verbaler Kritik auf menschenrechtsverletzende Großmächte am Beispiel der russischen „Anti-Terror-Operation“ in Tschetschenien",
+        "Power of words? A theoretical draft of the possible effects of verbal criticism on major powers violating human rights using the example of the Russian anti-terrorist operation in Chechnya",
         new Author(
             "Konstanze Jüngling",
             "camjuengling@t-online.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "war looted Army ",
             testAuthorAddress
         ),
         new Examiner(
@@ -661,7 +661,7 @@ new Thesis (
             "kelly.neudorfer@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "Democracy World War II Western Europe",
             testAuthorAddress
         ),
         new Examiner(
@@ -688,13 +688,13 @@ new Thesis (
 
     new Thesis (
         15,
-        "Denken mit Geländer Die Rolle von Metaphern in der Kommunikation von Bedrohungen",
+        "Thinking with Railings The role of metaphors in communicating threats",
         new Author(
             "Jan Robert Schulz",
             "jrschulz@web.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "constructivism politics Security research",
             testAuthorAddress
         ),
         new Examiner(
@@ -721,13 +721,13 @@ new Thesis (
 
     new Thesis (
         16,
-        "KLIMAWANDEL UND SICHERHEIT IM POLITISCHEN DISKURS DER USA Eine Analyse von Ansätzen der Versicherheitlichung im US-Kongress",
+        "CLIMATE CHANGE AND SECURITY IN THE US POLITICAL DISCOURSE An analysis of approaches to securitization in the US Congress",
         new Author(
             "Hanna Spanhel",
             "hanna.spanhel@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "CLIMATE CHANGE US Congress Neorealism global climate change",
             testAuthorAddress
         ),
         new Examiner(
@@ -754,13 +754,13 @@ new Thesis (
 
    new Thesis (
         17,
-        "Hybride Gerichtshöfe und ihre Legitimität in der Bevölkerung Weisen hybride Gerichtshöfe auf Grund von starkem Ownerships eine große Legitimität in der Bevölkerung auf?",
+        "Hybrid courts of justice and their legitimacy in the population Do hybrid courts of justice have a high level of legitimacy in the population due to strong ownership?",
         new Author(
             "Lisa Maren Steller",
             "lisa.steller@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Interregionalism Multilateralism Neorealism",
+            "Courts of Justice Judges hybrid courts",
             testAuthorAddress
         ),
         new Examiner(
@@ -787,13 +787,13 @@ new Thesis (
 
  new Thesis (
         18,
-        "Wie erfolgsversprechend sind die Kompetenz - Dimensionen des Sales Reports? Eine Korrelationsstudie über den Sales Report mit den Anstellungsempfehlungen der Assessoren in einem Assessment Center für potentielle Kundenberatende",
+        "How promising are the competence dimensions of the sales report? A correlation study on the sales report with the recruitment recommendations of the assessors in an assessment center for potential customer advisors",
         new Author(
             "Helen Burri",
             "-",
             "Zurich University of Applied Sciences",
             "Arbeits- und Organisationspsychologie",
-            "Interregionalism Multilateralism Neorealism",
+            "potential customer advisors Instrument sales report",
             testAuthorAddress
         ),
         new Examiner(
@@ -819,13 +819,13 @@ new Thesis (
 
 new Thesis (
         19,
-        "Haben deine Eltern manchmal Angst vor dir? Wenn Kinder ihre Eltern bedrohen oder schlagen",
+        "Are your parents sometimes afraid of you? When children threaten or beat their parents",
         new Author(
             "Helen Burri",
             "-",
             "Zurich University of Applied Sciences",
             "Arbeits- und Organisationspsychologie",
-            "Interregionalism Multilateralism Neorealism",
+            "violence threaten or beat their parents children",
             testAuthorAddress
         ),
         new Examiner(
@@ -852,13 +852,13 @@ new Thesis (
 
 new Thesis (
         20,
-        "Lebenszufriedenheit trotz Schädel-Hirn-Trauma Der Weg zurück in ein (zufriedenes) Leben? ",
+        "Life satisfaction despite traumatic brain injury The way back to a (satisfied) life?",
         new Author(
             "Andrea Elisabeth Filliger",
             "-",
             "Zurich University of Applied Sciences",
-            " Laufbahn- und Rehabilitationsberatung",
-            "Interregionalism Multilateralism Neorealism",
+            "Career and rehabilitation advice",
+            "brain injury rehabilitation Children traumatic brain injury",
             testAuthorAddress
         ),
         new Examiner(
@@ -884,13 +884,13 @@ new Thesis (
 
 new Thesis (
         21,
-        "Untersuchung der Methodentreue von Integrativen Körperpsychotherapeuten",
+        "Investigation of the methodological loyalty of integrative body psychotherapists",
         new Author(
             "Anika Veigel",
             "-",
             "Zurich University of Applied Sciences",
-            " Laufbahn- und Rehabilitationsberatung",
-            "Interregionalism Multilateralism Neorealism",
+            "Career and rehabilitation advice",
+            "psychotherapists Body psychotherapists Therapy",
             testAuthorAddress
         ),
         new Examiner(
@@ -918,13 +918,13 @@ new Thesis (
 
 new Thesis (
         22,
-        "Compliance und Vertrauen von schizophrenen Patientinnen und Patienten Ein Vergleich von forensischer und allgemeiner Psychiatrie",
+        "Compliance and Trust of Schizophrenic Patients A Comparison of Forensic and General Psychiatry",
         new Author(
             "Stefanie Flühler",
             "-",
             "Zurich University of Applied Sciences",
             "Klinische Psychologie",
-            "Interregionalism Multilateralism Neorealism",
+            "Compliance schizophrenia trust",
             testAuthorAddress
         ),
         new Examiner(
@@ -957,7 +957,7 @@ new Thesis (
             "-",
             "Southern Illinois University Carbondale",
             "Mathematics",
-            "Interregionalism Multilateralism Neorealism",
+            "ALGEBRA LINEARY Mathematics",
             testAuthorAddress
         ),
         new Examiner(
