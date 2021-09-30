@@ -287,6 +287,9 @@ After research, WebWorker could be a solution.
 #### No CORS-Unblock plugin
 No further need of the CORS-Unblock browser plugin
 
+#### Listener runs in a docker container
+The best way should be that the listener run in an seperate docker container, only interacting with the blockchain and elasticsearch without frontend. Therefore it only needs to run the startListener() function (of course you have to provide the functions which will be called by startListener() and actionOfListener()) in a nodeJS docker-container. For reasons of time, this solution could not be tested.
+
 ### Known Bugs
 - Elastic Search doesnt index pdfs
 - "No living Connection" with Elastic Search
