@@ -4,8 +4,15 @@ Open Source Student Theses
 ## Outline
 - Structure
 - Getting Started
+- Standard MetaMas-Addresses
 - Interfaces (important Functions)
 - Known Bugs
+
+### Standard MetaMask-Addresses
+The ganache container will always have the same 10 accounts with each 100 ETH for testing. We use two accounts:
+1. User account: 0x5fe9dD4c80ab7742B62Fb40CE1fBE37D226645A1, private key: 0xb2c488b68a775c823263a436bbb8876c4ba64c4b21a0713c5fede5ad369ef89b
+2. Examiner account: 0x388Ef493FaD03e3C73844Be82317017dEfdf6899, private key: 0x357304b1e6db5691b6102341f28c676905535d1c17cc64ef4d591c009776d742
+You can also find them in the console of the docker container.
 
 ### Interfaces
 #### elastic.js
