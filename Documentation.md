@@ -5,6 +5,7 @@ Open Source Student Theses
 - Structure
 - Getting Started
 - Standard MetaMask-Addresses
+- WARNING!! Infura IPFS
 - Interfaces (important Functions)
 - Possible improvements
 - Known Bugs
@@ -66,6 +67,13 @@ Private Keys
 (7) 0x0591fa96aefe23911faba79f3cc699c9d104dfa49097b81ef2560cccc7775fb3
 (8) 0xa72626308bbe1c4ea491b1f4a861636b008b25d743deb912f70b2ff9678cf97e
 (9) 0x357304b1e6db5691b6102341f28c676905535d1c17cc64ef4d591c009776d742
+
+### WARNING!! Infura IPFS
+Currently, the app is uploading files to an Infura IPFS and
+it is recommanded to not upload sensible data. 
+For more see: 
+https://infura.io/product/ipfs
+https://infura.io/docs/ipfs
 
 ### Interfaces
 ##### submit(thesisToSubmit)
