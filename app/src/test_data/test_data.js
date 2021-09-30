@@ -194,7 +194,7 @@ export const testTheses = [
     // ),
     new Thesis (
         0,
-        "Die Erweiterung des Asia-Europe Meeting – diminished multilateralism oder Erfolg des Interregionalismus?",
+        "The expansion of the Asia-Europe Meeting - diminished multilateralism or success of interregionalism?",
         new Author(
             "Sophie Veauthier",
             "sophie.veauthier@uni-tuebingen.de",
