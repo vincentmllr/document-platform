@@ -31,7 +31,9 @@ import { testTitles,
   testMetaMaskAddresses,
   testFilesBase64,
   testFilePaths,
-  testFileNames} from './test_data/test_data';
+  testFileNames,
+  testTheses,
+} from './test_data/test_data';
 
 
 const elastic = require("./elastic");
@@ -46,8 +48,8 @@ class App extends Component {
       loggedIn: false,
       account: "",
       searchTerm: "",
-      searchResults: [],
-      chosenThesis: new Thesis(),
+      searchResults: [], // For testing: [testTheses[0], testTheses[0], testTheses[0], testTheses[0]] instead of [],
+      chosenThesis: new Thesis(), // For testing: testTheses[0] instead of new Thesis(),
       changeThesis: false,
       uniqueAuthorValues: [],
       uniqueYearValues: [],
@@ -91,8 +93,11 @@ class App extends Component {
   };
 
   handleChangeThesis = () => {
-    console.log("Handle Change thesis!");
     this.setState({changeThesis: true});
+  };
+
+  handleThesisChanged = () => {
+    this.setState({changeThesis: false});
   };
 
   handleLogIn = async () => {
@@ -141,7 +146,7 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div id="app">
         <HashRouter>
           <Switch>
             <Route exact path="/" render={() => <IndexPage 
@@ -154,6 +159,7 @@ class App extends Component {
               account={this.state.account}
               chosenThesis={this.state.chosenThesis}
               changeThesis={this.state.changeThesis}
+              handleThesisChanged={this.state.handleThesisChanged}
               handleLogIn={this.handleLogIn}
               handleSearch={this.handleSearch} />} />
             <Route exact path="/search" render={() => <SearchPage

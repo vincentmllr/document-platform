@@ -1,52 +1,51 @@
-pragma solidity 0.5.1;
+pragma solidity ^0.8.0;
 
-contract scientificWork {
-    string title;
-    string author;
-    string path;
-    string hashcode;
-    bool isSignt = false;
-    address examiner; 
+contract thesis {
+    string public title;
+    string public author;
+    string public path;
+    string public hashcode;
+    bool public isSigned = true;
+    address public authorAddress;
+    address public examinerAddress; 
    
    
     
-    constructor(string memory _title, string memory _author, string memory _path, string memory _hashcode, address _examiner)public{
+    constructor (string memory _title, string memory _author, string memory _path, string memory _hashcode, address _authorAddress, address _examinerAddress){
         
         title =_title;
         author = _author;
         path = _path;
         hashcode = _hashcode;
-        examiner = _examiner;
+        authorAddress = _authorAddress;
+        examinerAddress = _examinerAddress;
     }
-      modifier onlyExaminer(){
-        require(msg.sender == examiner);
+    
+    modifier onlyExaminer(){
+        require(msg.sender == examinerAddress);
         _;
     }
     
-        function signScientificWork() public onlyExaminer {
-        isSignt = true;
+      modifier onlyAuthor(){
+        require(msg.sender == authorAddress);
+        _;
+    }
+    
+        function signThesis() public onlyExaminer {
+        isSigned = true;
         
     }
     
-    function getAllInformation() public view returns(string memory, string memory, string memory, string memory, address, bool){
-        return (title, author, path, hashcode, examiner, isSignt);
-    }
-    
-  
-    function getPath()public view returns(string memory){
-        return path;
-    }
-    
-    function changeTitle(string memory _title) public{
-        title = _title;
-        
-    }
-    
-    function changeAuthor(string memory _author) public{
+        function changeThesis(string memory _title, string memory _author, string memory _path, string memory _hashcode, address _authorAddress, address _examinerAddress) public onlyAuthor {
+        title =_title;
         author = _author;
+        path = _path;
+        hashcode = _hashcode;
+        authorAddress = _authorAddress;
+        examinerAddress = _examinerAddress;
         
     }
     
-
+    
     
 }

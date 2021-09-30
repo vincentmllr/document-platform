@@ -4,12 +4,11 @@ Open Source Student Theses
 ## Outline
 - Structure
 - Getting Started
-- Standard MetaMask-Addresses
 - Interfaces (important Functions)
-- Possible improvements
 - Known Bugs
 
-### Structure
+## Structure
+The structure of the app with a short description and the author of the content. Some files are left out to get a better overview.\
 peer\
  |\
  +-app: Nginx container for app, misc\
@@ -36,13 +35,8 @@ peer\
  +-elastic: Elastic container for elastic search, JS\
  +-test: Test environment without frontend, misc\
 
-### Standard MetaMask-Addresses
-The ganache container will always have the same 10 accounts with each 100 ETH for testing. We use two accounts:
-1. User account: 0x5fe9dD4c80ab7742B62Fb40CE1fBE37D226645A1, private key: 0xb2c488b68a775c823263a436bbb8876c4ba64c4b21a0713c5fede5ad369ef89b
-2. Examiner account: 0x388Ef493FaD03e3C73844Be82317017dEfdf6899, private key: 0x357304b1e6db5691b6102341f28c676905535d1c17cc64ef4d591c009776d742
-You can also find them in the console of the docker container.
-
 ### Interfaces
+#### actionHandler.js
 ##### submit(thesisToSubmit)
 - Desricption: Handles submitting Thesis by deploy to blockchain
 - Input: Thesis:thesisToSubmit
@@ -234,48 +228,16 @@ You can also find them in the console of the docker container.
 - Outputs: boolean:hashIsCorrect
 - Use: verificate() in actionHandler.js
 
-### Possible Improvements
-#### Using smart contract for getting all contract addresses
-Instead of execute a for-loop for getting contracts (how it is done in getAddressOfContracts(), getPathOfContracts(), getHashOfPath() and getContractOfPath(filePath)), there could be a smart contract which contains all contract addresses and there will be added new addresses after deploying a new contract-
-
-#### More than one author
-Currently its only possible to name one author per Thesis-
-
-#### Listener should not indexing all objects again after detected transaktion
-Instead of indexing all objects again after a detected transaktion, the listener should just index the objects which are new
-
-#### Reviews
-Its a big problem to integrate reviews. If they are located in a smart contract, every change needs a transaction which could be expensive with high amounts of reviews. A database speaks against the advantages of the blockchain concept.
-
-#### Compile contract in app
-The used smart contract is compiled in the Remix IDE (https://remix.ethereum.org) and ABI and bytecode are hard-coded in the ganache.js.
-After research, WebWorker could be a solution.
-
-#### No CORS-Unblock plugin
-No further need of the CORS-Unblock browser plugin
 
 ### Known Bugs
+- MetaMask Account zurücksetzen
+- Long connecting with Ganache in MetaMask
 - Elastic Search doesnt index pdfs
 - "No living Connection" with Elastic Search
-- Error: "the tx doesn’t have the correct nonce. account has nonce of: x tx has nonce of: y"
-- "execution of scripts is disabled on this system" during yarn install
-- "Can't resolve ipfs-http-client"
 
 #### Elastic Search doesnt index pdfs
 1. Delete Index with powershell command: Invoke-WebRequest -method DELETE http://localhost:9200/_all
 2. Reload page: You should see "created Index" in Console
 3. Reload again: You should see "indexing pdf was successful" in Console 
-
 #### "No living Connection" with Elastic Search
 1. Restart Docker Containers
-
-#### Error: "the tx doesn’t have the correct nonce. account has nonce of: x tx has nonce of: y"
-This usually happens, if a transaction failed because of a failure in the backend-code.
-If this happens, got to MetaMask->Settings->Advanced Settings and reset your account.
-This should fix the error.
-
-#### "execution of scripts is disabled on this system" during yarn install
-Run "Set-ExecutionPolicy RemoteSigned"
-
-#### "Can't resolve ipfs-http-client"
-Run "yarn add ipfs-http-client"

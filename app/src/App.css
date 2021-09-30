@@ -1,7 +1,11 @@
-/* Hide Overflow */
-body {
-  overflow-x: hidden;
+* {
+  font-family: Arial, Helvetica, sans-serif;
 }
+/* Hide Overflow */
+/* main {
+  overflow-x: hidden;
+  border: 2px solid red;
+} */
 
 /* Card Alignment */
 .card {
@@ -21,7 +25,7 @@ body {
 
 /* Footer Jumbotron */
 .jumbotron-fluid {
-  background: lightgrey;
+  background: grey;
   padding: 50px;
   text-align: center;
 }

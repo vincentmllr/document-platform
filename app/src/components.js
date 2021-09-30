@@ -8,6 +8,7 @@ import { withRouter } from 'react-router';
 import { Select } from "react-dropdown-select";
 import FileSaver from 'file-saver';
 import logo from "./assets/logo_cap_512.png";
+import document_symbol from "./assets/document_symbol_512.png";
 // import View from "react-native/React/Views/";
 // import {Stars} from "react-native-stars";
 import StarRatings from 'react-star-ratings';
@@ -35,8 +36,8 @@ import { testTitles,
 const elastic = require("./elastic");
 const ganache = require("./ganache");
 const actionHandler = require("./actionHandler");
-const PDFhandler = require("./PDFhandler");
-const ifps = require("./ifps");
+const PDFhandler = require("./pdfHandler");
+const ifps = require("./ipfs");
 
 
 export class Navigation extends Component {
@@ -51,30 +52,26 @@ export class Navigation extends Component {
     render() { // fixed-top navbar-toggleable-md navbar-inverse bg-primary
       return (
         <nav className="navbar navbar-expand-md" role="navigation">
-          <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
           <a className="navbar-brand" href="/">
             <img src={logo} width="60" height="60" class="d-inline-block align-top" alt=""/>
           </a>
-          <div className="collapse navbar-collapse" id="navbar">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse"  id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li>
                 <TestListener/>
               </li>
-              <li className="nav-item outframe"><Link className="btn btn-success" to="/submit">Submit</Link></li>
-              <li>
-                {this.props.loggedIn ?
-                  <button className="btn btn-dark disabled" onClick={this.props.handleLogIn}>Logged In</button>
-                :
-                  <button className="btn btn-success" onClick={this.props.handleLogIn}>Log In</button>
-                }
-              </li>
-              <li>
-                {this.props.loggedIn ? <p>as {this.props.account}</p> : null}
-              </li>
             </ul>
           </div>
+          <Link className="btn btn-success" to="/submit">Submit</Link>
+            {this.props.loggedIn ?
+              <button className="btn btn-dark disabled" onClick={this.props.handleLogIn}>Logged In</button>
+            :
+              <button className="btn btn-success" onClick={this.props.handleLogIn}>Log In</button>
+            }
+            {this.props.loggedIn ? <p>as {this.props.account}</p> : null}
         </nav>
       )
     };
@@ -101,45 +98,65 @@ export class HeroHeader extends Component {
 export class CardDeck extends Component {
   render () {
     return (
-      <div class="card-deck row">
-        <div class="card btn-spl col">
-          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="document symbol"/>
-          <div class="card-block">
-            <h4 class="card-title">Thesis 1</h4>
-            <p class="card-text">Abstract Teaser...</p>
-            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
+      <div>
+        <h6>Latest</h6>
+          <div className="card-group">
+              <button
+                className="card"
+                value=""
+                key={testTheses[0].id}
+                onClick={() => this.handleView(testTheses[0])}
+              >
+                <img src={document_symbol} class="card-img-top" alt="Thesis Preview" width="120" height="120"/>
+                <div class="card-body">
+                  <h5 class="card-title">{testTheses[0].title}</h5>
+                  <h6 class="card-title">{testTheses[0].author.name}</h6>
+                  <em class="card-text">{testTheses[0].university}</em>
+                  <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Uploaded {testTheses[0].year}</small>
+                </div>
+              </button>
+              <button
+                className="card"
+                value=""
+                key={testTheses[0].id}
+                onClick={() => this.handleView(testTheses[0])}
+              >
+                <img src={document_symbol} class="card-img-top" alt="Thesis Preview" width="120" height="120"/>
+                <div class="card-body">
+                  <h5 class="card-title">{testTheses[0].title}</h5>
+                  <h6 class="card-title">{testTheses[0].author.name}</h6>
+                  <em class="card-text">{testTheses[0].university}</em>
+                  <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Uploaded {testTheses[0].year}</small>
+                </div>
+              </button>
+              <button
+                className="card"
+                value=""
+                key={testTheses[0].id}
+                onClick={() => this.handleView(testTheses[0])}
+              >
+                <img src={document_symbol} class="card-img-top" alt="Thesis Preview" width="120" height="120"/>
+                <div class="card-body">
+                  <h5 class="card-title">{testTheses[0].title}</h5>
+                  <h6 class="card-title">{testTheses[0].author.name}</h6>
+                  <em class="card-text">{testTheses[0].university}</em>
+                  <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Uploaded {testTheses[0].year}</small>
+                </div>
+              </button>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Uploaded: Yesterday</small>
-          </div>
-        </div>
-        <div class="card btn-spl col">
-          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="Card image cap"/>
-          <div class="card-block">
-            <h4 class="card-title">Thesis 2</h4>
-            <p class="card-text">Abstract Teaser...</p>
-            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Uploaded: Yesterday</small>
-          </div>
-        </div>
-        <div class="card btn-spl col">
-          <img class="card-img-top" src="https://www.pmoadvisory.com/wp-content/uploads/2019/03/pdf-logo.png" alt="Card image cap"/>
-          <div class="card-block">
-            <h4 class="card-title">Thesis 3</h4>
-            <p class="card-text">Abstract Teaser...</p>
-            <button class="btn btn-primary btn-spl" href="#" role="button">Show</button>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Uploaded: Yesterday</small>
-          </div>
-        </div>
       </div>
     );
   }
 }
-
 
 
 class TestListener extends Component {
@@ -152,7 +169,6 @@ class TestListener extends Component {
   }
 }
 
-
 function Back(handleClick) {
   return (
     <button
@@ -163,7 +179,7 @@ function Back(handleClick) {
   );
 }
 
-class Search extends Component {
+export class Search extends Component {
   
     constructor(props) {
       super(props);
@@ -228,26 +244,32 @@ class Search extends Component {
     render() {     
       // TODO Hinzufügen der "Enter"-Funktion; Testweise entfernt von input: onKeyPress={this.onKeyUp}
       return (
-        <div id="searchbar">
-          <input type="text" id="keyword" placeholder="Enter Keyword" value={this.state.searchTerm} onChange={this.handleChange} ></input>
-          {this.state.advancedSearch ? <input type="text" id="title" placeholder="Enter Title"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="author"placeholder="Enter Author"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="year" placeholder="Enter Year"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="university" placeholder="Enter University"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="examiner" placeholder="Enter Examiner"></input> : null}
-          {this.props.onIndexPage ? 
-            <Link className="btn btn-primary" to="/search">Search</Link>
+        <div id="searchbar px-5" className="input-group">
+          <input type="text" id="keyword" className="form-control" placeholder="Enter Keyword" value={this.state.searchTerm} onChange={this.handleChange} ></input>
+          {this.state.advancedSearch ? <input type="text" id="title" className="form-control" placeholder="Enter Title"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="author" className="form-control"placeholder="Enter Author"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="year" className="form-control" placeholder="Enter Year"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="university" className="form-control" placeholder="Enter University"></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="examiner" className="form-control" placeholder="Enter Examiner"></input> : null}
+          <div className="input-group-append">
+            {!this.props.onIndexPage ? 
+              <div>{this.state.advancedSearch ?
+                <Link className="btn btn-outline-secondary" type="button" to="/search" onClick={this.handleSimple}>Simple</Link>
+              :
+                <Link className="btn btn-outline-secondary" type="button" to="/search" onClick={this.handleAdvanced}>Advanced</Link>
+              }</div>
             :
-            <button className="btn btn-primary" to="/search" onClick={this.handleClick}>Search</button>
+              null
             }
-          {!this.props.onIndexPage ? 
-            <div>{this.state.advancedSearch ?
-              <Link className="btn btn-secondary" to="/search" onClick={this.handleSimple}>Simple</Link>
+            {this.props.onIndexPage ? 
+              <Link className="btn btn-outline-primary" type="button" to="/search">Search</Link>
             :
-              <Link className="btn btn-secondary" to="/search" onClick={this.handleAdvanced}>Advanced</Link>
-            }</div> : null
-          } 
+              <button className="btn btn-outline-primary" type="button" to="/search" onClick={this.handleClick}>Search</button>
+            }
+          </div>
         </div>
+
+        
       );
     };
 }
@@ -353,7 +375,31 @@ export class List extends Component {
         {this.state.filtered ?
           this.state.filteredResults.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name} <Link to="/thesis">View</Link></button>)
         : 
-          this.props.thesisList.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name} <Link to="/thesis">View</Link></button>)
+          this.props.thesisList.map((thesis) =>
+            <button className="card"
+              class="list-group-item list-group-item-action list-group-item-primary bg-light"
+              value=""
+              key={thesis.id}
+              onClick={() => this.handleView(thesis)}>
+                  <div className="row">
+                    <div className="col-2 d-flex align-items-center justify-content-center">
+                      <img src={document_symbol} class="img-fluid rounded-start" alt="Thesis Preview" width="120" height="120"/>
+                    </div>
+                    <div className="col-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{thesis.title}</h5>
+                        <h6 class="card-title">{thesis.author.name}</h6>
+                        <em class="card-text">{thesis.university}</em>
+                        <p class="card-text">{thesis.abstract.slice(0,200)}...</p>
+                        <p class="card-text"><small class="text-muted">Uploaded {thesis.year}</small></p>
+                      </div>
+                    </div>
+                    <div className="col-1 d-flex align-items-center justify-content-center">
+                      <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                    </div>
+                  </div>
+            </button>
+          )
         }
       </ul>
     );
@@ -511,7 +557,7 @@ class Filterbar extends Component {
 
 }
 
-class SubmitForm extends Component {
+export class SubmitForm extends Component {
 
   constructor(props) {
     super(props);
@@ -541,50 +587,96 @@ class SubmitForm extends Component {
   };
 
   handleSubmit = async (event) => {
+
     event.preventDefault();
-    if (!this.props.loggedIn) {
-      alert("Please Log in to submit!");
-    } else {
-      let id = elastic.newID();
-      const thesisToSubmit = new Thesis(
-        id,
-        event.target.title.value,
-        new Author(
-          event.target.authorName.value,
-          event.target.authorEmail.value,
-          event.target.authorUniversity.value,
-          event.target.authorFieldOfStudy.value,
-          event.target.authorStudyInterests.value,
-          event.target.authorMetaMaskAddress.value
-        ),
-        new Examiner(
-          event.target.examinerName.value,
-          event.target.examinerEmail.value,
-          event.target.examinerUniversity.value,
-          event.target.examinerInstitute.value,
-          event.target.examinerWebsite.value,
-          event.target.examinerMetaMaskAddress.value
-        ),
-        event.target.year.value,
-        event.target.language.value,
-        event.target.country.value,
-        event.target.university.value,
-        event.target.abstract.value,
-        event.target.grade.value,
-        this.state.file,
-        this.state.fileBase64,
-        this.state.filePath,
-        this.state.fileName,
-        []
-      )
-      console.log(thesisToSubmit);
-      var change = false;
-      var oldId = 0;
-      if(change) {
+
+    if (this.props.loggedIn) {
+      
+      if (this.props.changeThesis) {
+
+        let oldId = this.props.chosenThesis.id;
+        let id = elastic.newID(); // await?
+
+        const thesisToSubmit = new Thesis(
+          id,
+          event.target.title.value,
+          new Author(
+            event.target.authorName.value,
+            event.target.authorEmail.value,
+            event.target.authorUniversity.value,
+            event.target.authorFieldOfStudy.value,
+            event.target.authorStudyInterests.value,
+            event.target.authorMetaMaskAddress.value
+          ),
+          new Examiner(
+            event.target.examinerName.value,
+            event.target.examinerEmail.value,
+            event.target.examinerUniversity.value,
+            event.target.examinerInstitute.value,
+            event.target.examinerWebsite.value,
+            event.target.examinerMetaMaskAddress.value
+          ),
+          event.target.year.value,
+          event.target.language.value,
+          event.target.country.value,
+          event.target.university.value,
+          event.target.abstract.value,
+          event.target.grade.value,
+          this.state.file,
+          this.state.fileBase64,
+          this.state.filePath,
+          this.state.fileName,
+          []
+        );
+
+        console.log(thesisToSubmit);
         actionHandler.changeThesis(thesisToSubmit, oldId);
+        this.props.handleThesisChanged();
+
       } else {
+
+        let id = elastic.newID(); // await?
+        
+        const thesisToSubmit = new Thesis(
+          id,
+          event.target.title.value,
+          new Author(
+            event.target.authorName.value,
+            event.target.authorEmail.value,
+            event.target.authorUniversity.value,
+            event.target.authorFieldOfStudy.value,
+            event.target.authorStudyInterests.value,
+            event.target.authorMetaMaskAddress.value
+          ),
+          new Examiner(
+            event.target.examinerName.value,
+            event.target.examinerEmail.value,
+            event.target.examinerUniversity.value,
+            event.target.examinerInstitute.value,
+            event.target.examinerWebsite.value,
+            event.target.examinerMetaMaskAddress.value
+          ),
+          event.target.year.value,
+          event.target.language.value,
+          event.target.country.value,
+          event.target.university.value,
+          event.target.abstract.value,
+          event.target.grade.value,
+          this.state.file,
+          this.state.fileBase64,
+          this.state.filePath,
+          this.state.fileName,
+          []
+        );
+
+        console.log(thesisToSubmit);
         actionHandler.submit(thesisToSubmit);
+
       }
+
+    } else {
+
+      alert("Please Log in to submit!");
 
     }
 
@@ -883,10 +975,8 @@ export class Footer extends Component {
     return (
     <div class="jumbotron-fluid">
       <div class="container">
-        <h2>footer section</h2>
-        <p class="lead">&copy; All Rights Reserved </p>
+        <p class="lead">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
       </div>
-      <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
     );
   }
@@ -1016,7 +1106,6 @@ export class TestDataForm extends Component {
   }
 }
 
-
 export class ItemView extends Component {
 
   constructor (props) {
@@ -1024,16 +1113,20 @@ export class ItemView extends Component {
     this.state = {
       item: undefined,
       testReviews: [[1,2,3],[4,5,3],[2,3,5]],
+      verified: false,
     };
 
-    this.props.item.reviews = this.state.testReviews;
+    // this.props.item.reviews = this.state.testReviews;
     console.log(this.props.item.reviews);
 
   }
 
-  handleVerification = () => {
-    var path = "";
-    actionHandler.verificate(path);
+  handleVerification = async () => {
+
+    var path = this.props.chosenThesis.filePath;
+    var verified = await actionHandler.verificate(path); // TODO Rename to verify(path)
+    this.setState({verified: verified});
+
   };
 
   changeRating = ( newRating, name ) => {
@@ -1051,47 +1144,56 @@ export class ItemView extends Component {
 
   render () {
     return (
-      <div>
-        <p>{console.log(this.props.item)}</p>
-        <p>{this.props.item.title}</p>
-        <p>{this.props.item.author.name}</p>
-        <p>{this.props.item.university}</p>
-        <p>{this.props.item.examiner.name}</p>
-        <p>{this.props.item.abstract}</p>
-        <p>{this.props.item.author.studyInterests}</p>
-        <p>{this.props.item.author.mail}</p>
-        <p>{this.props.item.reviews}</p>
-        <h4>General Rating</h4>
-        <StarRatings
-          rating={this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews[0].length}
-          starDimension="40px"
-          starSpacing="15px"
-          id="generalRatings"
-        />
-        <br/>
-        <input type="button" className="btn btn-primary" value="Verification" onClick={console.log("Verfification!")/*Im Action Handler Out:Pfad, In:Bool*/} />
-        <button onClick={() => this.handleChangeThesis()} >
-          <Link className="btn btn-success" to="/submit">Submit</Link>
-        </button>
-        <input type="button" className="btn btn-danger" value="Download" onClick={
-          ()=> {
-            console.log("Download Button pressed!")
-            FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf"); // In: File, Out: Thesis
-          }
-        }/>
+      <div className="container-fluid">
+      <div className="row">
+        <div className="col-8">
+          <h5>{this.props.item.title}</h5>
+          <h6>{this.props.item.author.name} @{this.props.item.university}</h6>
+          <div>
+            {this.props.item.author.studyInterests.split(" ").map((topic) => <span className="badge badge-primary">{topic}</span>)}
+          </div>
+        </div>
+        <div className="col-4 d-flex align-items-center justify-content-center">
+          <img src={document_symbol} class="img-fluid rounded-start" alt="Thesis Preview" width="120" height="120"/>
+        </div>
+      </div>
+          <div className="row">
+            <div className="col-8">
+              <p>{this.props.item.abstract}</p>
+              <h6>About the author</h6>
+              <p>{this.props.item.author.mail}</p>
+              <h6>About the examiner</h6>
+              <p>{this.props.item.examiner.name}</p>
+            </div>
+            <div className="col-4">
+            <button className="btn btn-light" onClick={() => this.handleChangeThesis()} >
+                <Link className="btn btn-danger" to="/submit">Edit</Link>
+              </button>
+              <input type="button" className="btn btn-primary" value="Verify" onClick={this.handleVerification} />
+              <input type="button" className="btn btn-primary" value="Download" onClick={
+                ()=> {
+                  console.log("Download Button pressed!")
+                  FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf"); // In: File, Out: Thesis
+                }
+              }/>
+              <StarRatings
+                rating={this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews[0].length}
+                starDimension="40px"
+                starSpacing="15px"
+                id="generalRatings"
+              />
+              <StarRatings
+                rating={this.state.rating}
+                starRatedColor="blue"
+                changeRating={this.changeRating}
+                numberOfStars={5}
+                name='general'
+              />
+              <p>{this.props.item.reviews}</p>
+            </div>
 
-        <h4>Rate:</h4>
-        <StarRatings
-          rating={this.state.rating}
-          starRatedColor="blue"
-          changeRating={this.changeRating}
-          numberOfStars={5}
-          name='general'
-        />
+          </div>
       </div>
     );
   }
 }
-
-
-export { Search, SubmitForm}; // TODO löschen und abändern
