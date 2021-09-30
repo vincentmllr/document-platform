@@ -364,7 +364,7 @@ new Thesis (
             "nicolas.gaeckle@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Frontex EU border Neorealism Middle East",
+            "Frontex EU border Middle-East",
             testAuthorAddress
         ),
         new Examiner(
@@ -661,7 +661,7 @@ new Thesis (
             "kelly.neudorfer@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Democracy World War II Western Europe",
+            "Democracy World-War-II Western Europe",
             testAuthorAddress
         ),
         new Examiner(
@@ -727,7 +727,7 @@ new Thesis (
             "hanna.spanhel@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "CLIMATE CHANGE US Congress Neorealism global climate change",
+            "CLIMATE CHANGE US Congress global climate change",
             testAuthorAddress
         ),
         new Examiner(
