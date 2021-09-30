@@ -342,10 +342,269 @@ new Thesis (
         []
     ),
 
+new Thesis (
+        5,
+        "Subjunctive Bordering. Governing the future at the EUropean border.",
+        new Author(
+            "Nicolas Gäckle",
+            "nicolas.gaeckle@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2020",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "In 2011, Frontex brought the future into being. This took the relatively unspectacular form of publishing a ‘Forward Study of European Border Checks’ (Frontex, 2011). Commissioned by Frontex, in this study consultants from Liron Systems Ltd. as well as academic researchers from the University of Southampton, UK, and the University of Ben Gurion, Israel, imagined different future scenarios relevant to EU border management on the grounds of what they perceived to be the status quo. While some of their scenarios – most notably the ‘Wild Card’ of uprisings in the Middle East – proofed to be surprisingly close to the ‘real future’ that eventually unfolded, the study understood itself more as an exercise in “triggering interest among practitioners and managers alike, to think about the future and futures risks and research them further” (Frontex, 2011: 95) than in prediction. The study offers a decidedly extravagant gaze on the border, confronting an unknowable future through imaginative capacities. Moving forward in time to the year 2018, and heading 982 km up north geographically, from the Frontex headquarters on Plac Europejski 6 in Warsaw, Poland to the ‘Swissôtel’ on Tornimäe 3 in Tallinn, Estonia, a conference hosted by eu-LISA (European Union Agency for the Operational Management of Large-Scale IT Systems in the Area of Freedom, Security and Justice) discusses how – and if for that matter – the EU border will be ‘Getting Smarter Through Technology’ (eu-LISA, 2018). After half an hour has passed with a welcome coffee and registration matters and once the directors of eu-LISA and Frontex, Mr. Garkov and Mr. Leggeri, have delivered their keynote addresses, a panel discussing the ‘Future of information driven integrated border management’ is scheduled from 10am to 11am. According to the official conference report, a major concern in this first discussion were the implications of the ‘new’ knowledge promised through the interoperability of a range of already existing or emerging databases within the European Union (eu-LISA, 2018: 16ff). In contrast to the 2011 study, the future here emerges through ever more nuanced forms of risk analysis.",
+        "1.3",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Gaeckle_2020.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
 
 
 
+   new Thesis (
+        6,
+        "Here Goes the Neighbourhood Deconstructing Migration Discourse in Russia",
+        new Author(
+            "Elizaveta Gaufman",
+            "elizaveta.gaufman@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2012",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "A typical European horror-scenario would include hordes of uneducated primitive newcomers who came to feast on the Western welfare system, causing a wave of crime and replacing crosses with crescents on their way1. With the expulsion of the Roma by the French government (The Economist 2010a) and the closing of borders for North African refugees (Reuters 2011), parties with a nationalistic agenda winning seats in Finnish, Dutch, Danish and Italian parliaments (Von Ertel, et al. 2011) Russia stands out with its violent outbursts of xenophobia (BBC 2010, Elder 2010) that is not only directed at international migrants, but also at the Russian citizens who come from other Russian regions and don’t conform with a stereotypical ethnic Russian appearance. Several authors (Delanty, Millward 2007, 141) argue that Europe in general is experiencing a new form of racism that was dubbed ‘cultural’ or ‘symbolic’ racism which is directed at immigrants and refugees and plays on ‘common-sense’ cross-group differences (van Dijk 1985).",
+        "1.0",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Gaufman_Here_Goes_the_Neighbourhood.pdf", // filename is used to identify the file at test file upload
+        []
+    ),   
 
+
+
+    new Thesis (
+        7,
+        "SECURITIZATION OF CLIMATE CHANGE TOWARDS AN ACCOUNT OF DIFFERENT FRAMES SECURITIZING CLIMATE CHANGE",
+        new Author(
+            "Julia Grauvogel",
+            "julia.grauvogel@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2013",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "On 17 April 2007 the Security Council held its first ever session on climate change. The United Kingdom had initiated the debate to discuss the security implications of global warming, suggesting in a background paper that climate change has the potential to threaten international peace and security by exacerbating border disputes, resource shortages, migration and humanitarian crises (UN Security Council 2007a). In the same year, the Nobel Peace Price was awarded to former US vice-president Al Gore and the International Panel on Climate Change (IPCC) for their efforts to spread information about anthropogenic global warming and potential counter-measures. In his acceptance speech for the IPCC, its chairman Rajendra Pachauri emphasized that the award was an acknowledgement of the threats to stability and human security caused by climate change. Some characterize the year 2007 as a turning point in the conceptualization of security (Brauch 2008: 12), but environmental concerns are not totally new on the agenda of security studies.",
+        "1.3",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Julia_Grauvogel_Securitization_of_Climate_Change.pdf", // filename is used to identify the file at test file upload
+        []
+    ),  
+
+
+    new Thesis (
+        8,
+        "(COUNTER-)HEGEMONY AND SUSTAINABLE DEVELOPMENT: THE STRUGGLE BETWEEN ANTHROPOCENTRIC AND ECOCENTRIC DISCOURSES IN THE REALM OF THE RI +20 CONFERENCE",
+        new Author(
+            "Judith Kron",
+            "judith.kron@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2013",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "In light of multiple current global crises such as climate change, resource depletion and destruction of biodiversity, global poverty and inequality, and the crisis of the global economic and financial system, one receives the impression that ‘things can’t go on like this’. Civilization in its current configuration seems to have reached a dead-end. Gabriela Oliveira de Paula and Rachel Negrão Cavalcanti put it like this: “We only have to observe what is happening with the world to notice that the western model of economic growth, founded on efficiency and on unlimited growth, has failed and that it does not provide most of society with even the basic conditions for living” (Oliveira de Paula & Negrão Cavalcanti 2000: 109). Peter Schmuck identifies a growing consensus in society about the fact that humanity causes existential problems for itself and the whole biosphere and that there is a need for fundamental changes (Schmuck 2005: 85). In the last decades a discourse evolved and became widely accepted that calls for a revision of the development pattern and that centres around the term ‘sustainable development’. This thesis is concerned with the concept of sustainable development (SD). It argues that it is highly contested, namely that there are two principal competing conceptions of SD. They differ in regard to the fundamentality of the advocated changes of the socio-economic order. One pursues a rather anthropocentric, the other a rather ecocentric discourse.",
+        "2.3",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Kron_Counter_Hegemony_and_Sustainable_Development.pdf", // filename is used to identify the file at test file upload
+        []
+    ),       
+
+
+    new Thesis (
+        9,
+        "Die Erweiterung des Asia-Europe Meeting – diminished multilateralism oder Erfolg des Interregionalismus?",
+        new Author(
+            "Louiza Charalambous",
+            "louiza.charalambous@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2019",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "Melina and I are sitting in a café in the old town of Nicosia, very close to the Green Line that divides Cyprus into a Turkish Cypriot north and a Greek Cypriot south. A few weeks ago Melina started an internship at a non-governmental organization (NGO) working both north and south of the Green Line and employing both Greek and Turkish Cypriots. As part of her internship, Melina has crossed to the north for the first time. Growing up, she knew about the ‘other side’ only what she had heard from her family and at school namely that “they took our villages and threw us out of our homes”. While for her parents, who are both refugees from villages in the Kyrenia area in the northern part of the island, the home in the north has always been associated with great longing, Melina tells me that she could never fully understand and relate to that as her Cyprus only went as far as the Green Line. She has therefore tried to avoid everything concerning the conflict. By choosing this particular internship, however, she was now in regular contact with the north and Turkish Cypriots. As the opening statement illustrates, this has led her to reconsider many of her views and perspectives, a fact she is now trying to navigate with the stories of her childhood.",
+        "2.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "MA-Charalambous.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+   new Thesis (
+        10,
+        "What about Sovereignty? Security and Defence Integration within the EU and Constructions of Sovereignty",
+        new Author(
+            "Eva-Maria Brändle",
+            "eva-marie.braendle@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2021",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "French President Emmanuel Macron is not reluctant to use the term sovereignty. In fact, if one follows his public speeches, it becomes obvious that he uses the very term quite often. In early 2020, for example, Macron elaborates on sovereignty in a speech at the ‘École de Guerre’– the training facility for prospective senior officers of the French armed forces in Paris. In his speech, he clearly emphasises that defence is at the heart of French sovereignty (Macron 2020). This may not seem particularly remarkable: after all, few would challenge the fact that sovereignty is important to national leaders in one way or another. Macron, however, does not leave it at French sovereignty. The French President is also eager to give programmatic speeches on the European Union (EU), in which he calls for European sovereignty. In this context, Macron insists on a “Europe de la Défense” (Macron 2017c) and presents himself as a fierce advocate of the Permanent Structured Cooperation (PESCO), which aims at deepening defence cooperation between 25 Member States of the EU (PESCO 2021). Some researchers and quite a few observers of the political sphere even regard PESCO as an institutional step towards a European army or at least a streamlined European Defence Union (von Achenbach 2017; Dembinski/Peters 2018: 1; Hughes 2018: 28). This obviously does not deter Macron from supporting the project – on the contrary, he too has proposed the creation of a European army (Bennhold/Erlanger 2018). Macron’s support of PESCO might seem surprising considering his statement on French sovereignty in front of the prospective officers at the ‘École de Guerre’: is sovereignty, especially in the crucial matter of defence, not something jealously guarded by states and irreconcilable with a ‘hand-over’ of power to international organisations? And if not, what does sovereignty mean? I am interested in this question both in the context of the French discourse around PESCO but also in, and in comparison to, the German discourse around this institutional landmark of European defence cooperation.",
+        "2.0",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "MA_Braendle_Eva-Maria_Discourses_of_Sovereignty.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+new Thesis (
+        11,
+        "Securitization and Data Protection: The Case of the Passenger Name Record Agreements and Security Knowledge",
+        new Author(
+            "Owe Langfeldt",
+            "o.langfeldt@googlemail.com",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2010",
+        "English",
+        "Germany",
+        "University of Tübingen",
+        "In the aftermath of 9/11, a plethora of measures to increase air transport security were enacted around the world. Organisations such as the International Civil Aviation Organization (ICAO) promulgated new standards and some states made unilateral changes, for example allowing armed “air marshals” on planes. Some of these new policies were uncontroversial, such as reinforcing cockpit doors; others caused heated discussions and diplomatic impasses. While there certainly are risks in aviation, perceptions differ a lot (Thomson et al. 2004), and there is no consensus on which remedies are to be chosen.",
+        "2.3",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "MA_Langfeldt__web.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+
+    new Thesis (
+        12,
+        "The English School Meets Africa: The African Regional International Society on Its Way to Solidarism?",
+        new Author(
+            "Julia Verena Klein",
+            "juliaverena.klein@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2014",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "Diese Magisterarbeit überträgt die aus der Englischen Schule der Internationalen Beziehungen stammenden Konzepte des Pluralismus und Solidarismus auf die afrikanische regionale internationale Gesellschaft. An Barry Buzan anknüpfend wird dabei davon ausgegangen, dass Pluralismus und Solidarismus sich primär durch die Art und Anzahl der geteilten Werte unterscheiden und ineinander übergehende Positionen auf einem Spektrum darstellen. Je höher die Anzahl der sich auf Kooperation und Konvergenz beziehenden gemeinsamen Werte einer Gruppe von Staaten ist, als umso solidaristischer ist diese anzusehen. Werden hingegen nur wenige Werte geteilt und beziehen sich diese eher auf die Bewahrung der einzelstaatlichen Souveränität, so ist von Pluralismus zu sprechen. Weiterhin wird in der Arbeit das Konzept der internationalen Gesellschaft angewendet und gezeigt, dass in Afrika seit der Gründungszeit der Organisation für Afrikanische Einheit eine regionale internationale Gesellschaft existiert, die heutzutage deckungsgleich mit der Afrikanischen Union ist. Der Kern der Arbeit bezieht sich auf die Frage, ob diese zunächst pluralistische afrikanische regionale internationale Gesellschaft, die nur wenige gemeinsame Werte verfolgte, aufgrund von Veränderungen in den letzten Jahrzehnten nunmehr im solidaristischen Teil des Spektrums nach Buzan zu verorten ist. Zur Beantwortung dieser Frage werden die Veränderungen untersucht, die in den Bereichen (1) „Menschenrechte“, (2) „Interventionsrecht in die Mitgliedsstaaten“ und (3) „wirtschaftliche Kooperation und Integration“ stattgefunden haben. Als Ergebnis zeigt sich, dass die afrikanische regionale internationale Gesellschaft vor allem in den Bereichen der wirtschaftlichen Kooperation und Integration und der Menschenrechte aufgrund der Verfolgung gemeinsamer Werte Veränderungen in Richtung Solidarismus verzeichnet. Gleichzeitig jedoch nehmen auch Staatssouveränität und Interventionsverbot und somit pluralistische Prinzipien immer noch Schlüsselpositionen in dieser internationalen Gesellschaft ein. Da jedoch verschiedene Entwicklungen innerhalb Afrikas darauf hindeuten, dass Staatssouveränität nicht mehr als absolut angesehen wird und da Staaten in einzelnen Bereichen inzwischen eine Einmischung in ihre inneren Angelegenheiten zulassen, kommt die Arbeit zu dem Ergebnis, dass innerhalb der heutigen afrikanischen regionalen internationalen Gesellschaft die solidaristischen Elemente leicht überwiegen. Die afrikanische regionale internationale Gesellschaft ist deshalb im solidaristischen Bereich des PluralismusSolidarismus Spektrums zu verorten.",
+        "1.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Magisterarbeit_Julia_Klein.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
 
     // new Thesis (
     //     1,
