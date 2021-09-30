@@ -265,7 +265,7 @@ new Thesis (
             "bettina.ahrens@student.uni-tuebingen.de",
             "University of Tübingen",
             "Political science",
-            "Political science Human rights norms United Nations",
+            "Politicalscience Human-rights-norms United-Nations",
             testAuthorAddress
         ),
         new Examiner(
@@ -299,7 +299,7 @@ new Thesis (
             "jonas.goecke@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "European Commission European identity criminality",
+            "EuropeanCommission European-identity criminality",
             testAuthorAddress
         ),
         new Examiner(
@@ -332,7 +332,7 @@ new Thesis (
             "-",
             "University of Applied Sciences ZHAW",
             "clinical psychology",
-            "clinical psychology obese people Discrimination",
+            "clinicalpsychology obese Discrimination",
             testAuthorAddress
         ),
         new Examiner(
@@ -364,7 +364,7 @@ new Thesis (
             "nicolas.gaeckle@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Frontex EU border Middle-East",
+            "Frontex EU-border Middle-East",
             testAuthorAddress
         ),
         new Examiner(
@@ -398,7 +398,7 @@ new Thesis (
             "elizaveta.gaufman@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "European North African refugees Russian citizens",
+            "European North-African refugees Russian-citizens",
             testAuthorAddress
         ),
         new Examiner(
@@ -432,7 +432,7 @@ new Thesis (
             "julia.grauvogel@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "climate change United Kingdom",
+            "climate-change United-Kingdom UK",
             testAuthorAddress
         ),
         new Examiner(
@@ -465,7 +465,7 @@ new Thesis (
             "judith.kron@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "climate change global poverty society",
+            "climate-change global poverty society",
             testAuthorAddress
         ),
         new Examiner(
@@ -530,7 +530,7 @@ new Thesis (
             "eva-marie.braendle@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "European Parliament Neorealism",
+            "European Parliament Politics Macron",
             testAuthorAddress
         ),
         new Examiner(
@@ -596,7 +596,7 @@ new Thesis (
             "juliaverena.klein@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Africa International relations Solidarität",
+            "Africa International-relations solidarity",
             testAuthorAddress
         ),
         new Examiner(
@@ -661,7 +661,7 @@ new Thesis (
             "kelly.neudorfer@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Democracy World-War-II Western Europe",
+            "Democracy World-War-II Western-Europe",
             testAuthorAddress
         ),
         new Examiner(
@@ -727,7 +727,7 @@ new Thesis (
             "hanna.spanhel@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "CLIMATE CHANGE US Congress global climate change",
+            "CLIMATE-CHANGE US-Congress politics",
             testAuthorAddress
         ),
         new Examiner(
@@ -760,7 +760,7 @@ new Thesis (
             "lisa.steller@uni-tuebingen.de",
             "University of Tübingen",
             "Political Science",
-            "Courts of Justice Judges hybrid courts",
+            "Courts Justice Judges hybrid-courts europ",
             testAuthorAddress
         ),
         new Examiner(
@@ -825,7 +825,7 @@ new Thesis (
             "-",
             "Zurich University of Applied Sciences",
             "Arbeits- und Organisationspsychologie",
-            "violence threaten or beat their parents children",
+            "violence threaten parents children",
             testAuthorAddress
         ),
         new Examiner(
@@ -858,7 +858,7 @@ new Thesis (
             "-",
             "Zurich University of Applied Sciences",
             "Career and rehabilitation advice",
-            "brain injury rehabilitation Children traumatic brain injury",
+            "brain injury rehabilitation Children traumatic",
             testAuthorAddress
         ),
         new Examiner(
@@ -890,7 +890,7 @@ new Thesis (
             "-",
             "Zurich University of Applied Sciences",
             "Career and rehabilitation advice",
-            "psychotherapists Body psychotherapists Therapy",
+            "psychotherapists Body Therapy",
             testAuthorAddress
         ),
         new Examiner(
