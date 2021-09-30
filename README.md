@@ -26,9 +26,8 @@ Open Source Student Theses
 2. Open PlugIn
 3. Add "Special RPS": Name: Ganache, URL: http://localhost:8545, ChainID: 1337
 4. Import Account: Enter private key: 0xb2c488b68a775c823263a436bbb8876c4ba64c4b21a0713c5fede5ad369ef89b
-If your private key shouldnt work:
-5. Go to Docker Destop in the console from our ganache container
-6. Copy first entry of list "private keys" in console 
+5. If your private key shouldnt work: Get one account from the account list in "./Documentation.md"
+6. Then Copy first entry of list "private keys" in console 
 7. Import Account: Enter private key from step before
 
 #### Making Changes
