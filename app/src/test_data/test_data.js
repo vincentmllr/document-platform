@@ -606,6 +606,176 @@ new Thesis (
         []
     ),
 
+   new Thesis (
+        13,
+        "Macht der Worte? Ein theoretischer Entwurf zur möglichen Wirkung verbaler Kritik auf menschenrechtsverletzende Großmächte am Beispiel der russischen „Anti-Terror-Operation“ in Tschetschenien",
+        new Author(
+            "Konstanze Jüngling",
+            "camjuengling@t-online.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Dr. Thomas Nielebock",
+            "thomas.nielebock@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2010",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "Mitte Dezember 1999 wurde es auf einmal wieder ruhig in Alchan-Jurt3 . Zwei Wochen lang war das Dorf bei Grosny von russischen4 Soldaten abgeriegelt worden. Die Armeemitglieder hatten die Häuser nach feindlichen Kämpfern durchkämmt, hatten Granaten in Keller geworfen, Frauen vergewaltigt, anschließend hatten sie die Gemeinde systematisch geplündert.5 Als Mitte Dezember schließlich Stille einkehrte in Alchan-Jurt, stand fest, dass bis zu 41 Menschen die „Säuberungsaktion“ nicht überlebt hatten.6 Die russische Militärführung wies jegliche Verantwortung für die Vorfälle zurück",
+        "1.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Masterarbeit_Jüngling.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+    new Thesis (
+        14,
+        "Democracy Promotion in the Middle East: A comparison of US and EU rhetoric and policies",
+        new Author(
+            "Kelly Neudorfer",
+            "kelly.neudorfer@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2009",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "Democracy promotion as a goal of foreign policy can be traced back to US President Woodrow Wilson‟s call for the League of Nations in order “to vindicate the principles of peace and justice in the life of the world as against selfish and autocratic power and to set up amongst the really free and self-governed peoples of the world such a concert of purpose and of action as will henceforth insure the observance of those principles” (Heckscher 1956: 277; Dalacoura 2005: 963). While this continued to be a reason (at least rhetorically) for especially the United States to intervene in the European theater in World War II, during the Cold War democracy promotion was put on hold in the “third world” according to the much-repeated witticism “He‟s a bastard, but at least he‟s our bastard” attributed to several US presidents about various notorious autocratic allies.1 Although democracies in Western Europe – particularly Germany – and Japan were erected and consolidated with the support of the United States, this push to democratize was not carried over into those parts of the world in which US influence was contested by the USSR (Southeast Asia, the Middle East, or Latin America, for example). The logic behind this reluctance to push for democracy was partially based on a purported dichotomy of democratization and stability, supported by a theory propagated by Samuel Huntington that authoritarian, and particularly military, regimes, were more stable during transition periods than if elected regimes tried to take power at the beginning of a transition toward democracy (Huntington: 1968). A statement made by Henry Kissinger before the US undermined the elected Allende regime in Chile in June of 1970 aptly summarizes the foreign policy priority of containment over democracy promotion during the Cold War: “I don‟t see why we need to stand by and watch a country go communist because of the irresponsibility of its own people” (Kissinger quoted in Smith 2000: 66). After the fall of the Berlin Wall and collapse of the Soviet Union, however, the dangers associated with political instability during the Cold War – namely, that a country aligned with the United States would realign with the Soviet Union – disappeared.",
+        "2.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Neudorfer_MA_Democracy_Promotion.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+    new Thesis (
+        15,
+        "Denken mit Geländer Die Rolle von Metaphern in der Kommunikation von Bedrohungen",
+        new Author(
+            "Jan Robert Schulz",
+            "jrschulz@web.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2010",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "Der Konstruktivismus nimmt an, dass wir keinen objektiven Zugang zur sozialen Realität haben. Sprache spielt eine zentrale Rolle in unserem Verständnis und Erleben von Realität. Realität wird dabei nicht durch eine beschreibende Sprache vermittelt, sondern vielmehr durch sie konstruiert. Wenn Sprache als der Schlüssel zur sozialen Realität angesehen wird, ist verständlich, warum sie der Hauptuntersuchungsgegenstand der Diskursanalyse ist. Der Prozess der Konstruktion sozialer Realität steht im Mittelpunkt dieses Forschungszweiges. Das Schlüsselwort unserer Zeit heißt Kommunikation. Dies gilt gerade für die Politik und Politikwissenschaft. Die Leistungsfähigkeit der Politik wird zunehmend durch deren Kommunikationsfähigkeit bestimmt (Hoinle 1999, 3–5). Ein besonders spannendes Feld der politischen Kommunikation ist die Kommunikation von Bedrohungen. Viele Maßnahmen werden durch den Verweis auf bestimmte Bedrohungen legitimiert. Dies gilt für alle Politikfelder, für Innen- und Außenpolitik. Umso wichtiger erscheint es in diesem Zusammenhang für die Politikwissenschaft, ein Untersuchungsinstrument zur Verfügung zu stellen, um die Prozesse von Bedrohungskonstruktionen analysieren zu können. Ole Wæver und Barry Buzan haben mit ihrem Konzept der securitization ein bereits viel benutztes Forschungswerkzeug geschaffen (Wæver 1995; Buzan, Wæver und Wilde 1998). Es ist das meist beachtete Konzept der sich seit Anfang der 1990er Jahre entwickelnden konstruktivistischen Sicherheitsforschung. Obwohl die Versicherheitlichungstheorie metatheoretisch, theoretisch und methodisch unterentwickelt ist, hat es eine enorme Anziehungskraft. Dieser Anziehungskraft konnte auch ich mich nicht entziehen.",
+        "2.3",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Schulz_Denken_mit_Geländer_BA-Arbeit.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+    new Thesis (
+        16,
+        "KLIMAWANDEL UND SICHERHEIT IM POLITISCHEN DISKURS DER USA Eine Analyse von Ansätzen der Versicherheitlichung im US-Kongress",
+        new Author(
+            "Hanna Spanhel",
+            "hanna.spanhel@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2012",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "In den vergangenen Jahren wird der globale Klimawandel sowohl in der wissenschaftlichen als auch in der politischen Debatte zunehmend als Bedrohung für die Sicherheit dargestellt. Im April 2007 wurde das Thema Klimawandel erstmals auch vom UN-Sicherheitsrat aufgegriffen und von UNGeneralsekretär Ban Ki-Moon als mögliche treibende Kraft für zukünftige Kriege und Konflikte bezeichnet (vgl. BBC 2007*1 ). Auch in den USA wird das Thema Klimawandel mehr und mehr als Sicherheitsbedrohung für den eigenen Staat wahrgenommen. So titelte die New York Times im August 2009: „Climate Change Seen as Threat to the U.S. Security“ und berichtete über die Warnungen von US-Militärs und Geheimdienst-Beratern in Bezug auf das Thema: The changing global climate will pose profound strategic challenges to the Unites States in coming decades, raising the prospect of military intervention to deal with the effects of violent storms, drought, mass migration and pandemics, military and intelligence analysts say. (Broder 2009) Seit 2007 erschienen in den USA mehrere Berichte und Gutachten zum Klimawandel und dessen Auswirkungen auf die Sicherheit. In „National Security and the Threat of Climate Change“ des „Center for a Naval Analysis“ (CNA 2007) warnten ehemalige US-Militärs, dass der Klimawandel als Multiplikator für bestehende Instabilitäten wirken und beispielsweise durch Ressourcenverknappung, klimabedingte Migration oder die Ausbreitung von Krankheiten letztlich zu Staatsversagen, Extremismus und Konflikten führen kann (vgl. CNA 2007: 6). Zwar fand gerade diese Studie in der amerikanischen Öffentlichkeit große Beachtung – dennoch wird dem Klimawandel in den USA trotz dieser Bedrohungswahrnehmung auch in den vergangenen Jahren politisch kaum aktiv begegnet. Vielmehr gelten die Vereinigten Staaten als „Bremser“ im internationalen Klimaschutz und sind bislang nicht bereit, sich zu konkreten Emissionsreduktionen zu verpflichten. Das ausbleibende Handeln trotz zunehmender Warnungen erscheint zunächst als widersprüchlich, ließe doch die zunehmende Wahrnehmung des Klimawandels als Sicherheitsbedrohung vielmehr aktives, politisches Handeln vermuten. Um dies genauer beurteilen und den Widerspruch aufklären zu können, bedarf es eines Blicks auf den politischen Diskurs der USA zum Thema Klimawandel – vielmehr auf den Diskurs der Entscheidungsfinder und Gesetzgeber im Kongress. Inwiefern wird der Klimawandel auch von amerikanischen Politikern als solch ein Problem für die Sicherheit dargestellt – und was bedeutet dies im Hinblick auf konkretes Handeln in Bezug auf den Klimawandel? In den vergangenen Jahren wird der globale Klimawandel sowohl in der wissenschaftlichen als auch in der politischen Debatte zunehmend als Bedrohung für die Sicherheit dargestellt. Im April 2007 wurde das Thema Klimawandel erstmals auch vom UN-Sicherheitsrat aufgegriffen und von UNGeneralsekretär Ban Ki-Moon als mögliche treibende Kraft für zukünftige Kriege und Konflikte bezeichnet (vgl. BBC 2007*1 ). Auch in den USA wird das Thema Klimawandel mehr und mehr als Sicherheitsbedrohung für den eigenen Staat wahrgenommen. So titelte die New York Times im August 2009: „Climate Change Seen as Threat to the U.S. Security“ und berichtete über die Warnungen von US-Militärs und Geheimdienst-Beratern in Bezug auf das Thema: The changing global climate will pose profound strategic challenges to the Unites States in coming decades, raising the prospect of military intervention to deal with the effects of violent storms, drought, mass migration and pandemics, military and intelligence analysts say. (Broder 2009) Seit 2007 erschienen in den USA mehrere Berichte und Gutachten zum Klimawandel und dessen Auswirkungen auf die Sicherheit. In „National Security and the Threat of Climate Change“ des „Center for a Naval Analysis“ (CNA 2007) warnten ehemalige US-Militärs, dass der Klimawandel als Multiplikator für bestehende Instabilitäten wirken und beispielsweise durch Ressourcenverknappung, klimabedingte Migration oder die Ausbreitung von Krankheiten letztlich zu Staatsversagen, Extremismus und Konflikten führen kann (vgl. CNA 2007: 6). Zwar fand gerade diese Studie in der amerikanischen Öffentlichkeit große Beachtung – dennoch wird dem Klimawandel in den USA trotz dieser Bedrohungswahrnehmung auch in den vergangenen Jahren politisch kaum aktiv begegnet. Vielmehr gelten die Vereinigten Staaten als „Bremser“ im internationalen Klimaschutz und sind bislang nicht bereit, sich zu konkreten Emissionsreduktionen zu verpflichten. Das ausbleibende Handeln trotz zunehmender Warnungen erscheint zunächst als widersprüchlich, ließe doch die zunehmende Wahrnehmung des Klimawandels als Sicherheitsbedrohung vielmehr aktives, politisches Handeln vermuten. Um dies genauer beurteilen und den Widerspruch aufklären zu können, bedarf es eines Blicks auf den politischen Diskurs der USA zum Thema Klimawandel – vielmehr auf den Diskurs der Entscheidungsfinder und Gesetzgeber im Kongress. Inwiefern wird der Klimawandel auch von amerikanischen Politikern als solch ein Problem für die Sicherheit dargestellt – und was bedeutet dies im Hinblick auf konkretes Handeln in Bezug auf den Klimawandel?",
+        "1.7",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Spanhel_Klimawandel_Sicherheit_politischen_Diskurs_USA.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+   new Thesis (
+        17,
+        "Hybride Gerichtshöfe und ihre Legitimität in der Bevölkerung Weisen hybride Gerichtshöfe auf Grund von starkem Ownerships eine große Legitimität in der Bevölkerung auf?",
+        new Author(
+            "Lisa Maren Steller",
+            "lisa.steller@uni-tuebingen.de",
+            "University of Tübingen",
+            "Political Science",
+            "Interregionalism Multilateralism Neorealism",
+            testAuthorAddress
+        ),
+        new Examiner(
+            "Prof. Dr. Thomas Diez",
+            "thomas.diez@uni-tuebingen.de",
+            "University of Tübingen",
+            "Institute of Political Science",
+            "www.uni-tuebingen.de",
+            testExaminerAddress
+        ),
+        "2013",
+        "German",
+        "Germany",
+        "University of Tübingen",
+        "Die neuste Form von internationalen Gerichtshöfen stellen hybriden Gerichtshöfe dar. Durch sie sollen solche Personen verfolgt werden, die gegen grundsätzliche Regelungen des Völkerrechts, wie Völkermord und Verbrechen gegen die Menschlichkeit, verstoßen haben. Hybride Gerichtshöfe weisen dabei einige Besonderheiten auf. So sind sie nicht ausschließlich international, sondern vereinen auch nationale Komponenten, wie die Anwendung von nationalem Recht und die teilweise Besetzung der Richterschaft durch nationale Richter1 . Während es nationalen Gerichten nach einem Konflikt oft an unabhängigen Richtern und Strafverfolgungsorganen fehlt, können internationale Gerichtshöfe diese garantieren. Doch auch die Errichtung von internationalen Gerichten kommt zu einem Preis, wie die Erfahrungen der AdHoc Tribunale für Ruanda und das ehemalige Jugoslawien Anfang der 1990er Jahre zeigten. Diese waren mit hohen Kosten, langen Verhandlungsdauern und dem Problem auf Grund der physischen Distanz der Bevölkerung zu den dort verhandelten Prozessen verbunden. Insbesondere letzteres führte zu einer mangelnden Identifizierung der Bevölkerung mit den Prozessen. Das Modell der hybriden Gerichtshöfe sollte diese Probleme der jeweils nationalen oder internationalen Gerichte umgehen, sowie die Stärken Beider vereinen.",
+        "2.0",// Use random grade as string
+        undefined, // File object goes here, will be added at test file upload
+        "", // Leave fileBase64 empty, will be added at test file upload
+        "", // Leave filepath empty
+        "Steller_Hybride_Gerichtshöfe_BA.pdf", // filename is used to identify the file at test file upload
+        []
+    ),
+
+
+
+
+
+
+
     // new Thesis (
     //     1,
     //     "An Analysis of the Three-Step Test in International and EC Copyright Law",
