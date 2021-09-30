@@ -1116,7 +1116,7 @@ export class ItemView extends Component {
       verified: false,
     };
 
-    this.props.item.reviews = this.state.testReviews;
+    // this.props.item.reviews = this.state.testReviews;
     console.log(this.props.item.reviews);
 
   }

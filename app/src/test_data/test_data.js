@@ -144,6 +144,20 @@ export const getRandomThesis = (file, fileBase64) => {
     );
 };
 
+const getRandomReviews = () => {
+
+    let randomReviewElement = () => Math.random()*5;
+
+    let randomReviews = [];
+    for(let i = 0; i < 25; i++) {
+        randomReviews.push(new Review(randomReviewElement, randomReviewElement, randomReviewElement));
+
+    }
+
+    return randomReviews;
+
+};
+
 export const testTheses = [
     // This list will be used in combination with the test files to fill the blockchain
     // This is a template how to add test thesis data to this list
