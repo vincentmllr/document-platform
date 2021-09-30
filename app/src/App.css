@@ -7,6 +7,10 @@
   border: 2px solid red;
 } */
 
+#root {
+  padding-bottom:60px;
+}
+
 /* Card Alignment */
 .card {
   margin: 30px;

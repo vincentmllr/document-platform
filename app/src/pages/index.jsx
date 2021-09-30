@@ -27,7 +27,6 @@ class IndexPage extends Component {
                 />
               </div>
               <div>
-                <CardDeck />
               </div>
               <div>
                 <TestDataForm 
@@ -37,7 +36,6 @@ class IndexPage extends Component {
               </div>
           </main>
           <footer className="row">
-              <Footer />
           </footer>
       </div>
     );

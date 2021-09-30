@@ -37,7 +37,6 @@ class SearchPage extends Component {
             />
           </main>
           <footer  className="row">
-            <Footer />
           </footer>
         </div>
       );

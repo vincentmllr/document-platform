@@ -4,41 +4,19 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  HashRouter,
-  Link,
-  Redirect
+  HashRouter
 } from "react-router-dom";
-import { Author, Examiner, Review, Thesis } from './model';
+import { Thesis } from './model';
 import IndexPage from './pages';
 import SubmitPage from './pages/submit';
 import SearchPage from './pages/search';
 import ThesisPage from './pages/thesis';
-import { testTitles,
-  testAuthorNames,
-  testAbstracts,
-  testCountries,
-  testEmails,
-  testExaminerNames,
-  testFieldOfStudies,
-  testGrades, 
-  testInstitutes,
-  testLanguages,
-  testStudyInterests,
-  testUniversities,
-  testWebsites,
-  testYears,
-  randomElement, 
-  testMetaMaskAddresses,
-  testFilesBase64,
-  testFilePaths,
-  testFileNames,
+import {
   testTheses,
 } from './test_data/test_data';
 
-
-const elastic = require("./elastic");
 const ganache = require("./ganache");
-var accounts = [];
+const elastic = require("./elastic");
 
 class App extends Component {
 
@@ -57,6 +35,8 @@ class App extends Component {
       uniqueFieldOfStudyValues: [],
       uniqueStudyInterestsValues: [], 
     };
+
+    elastic.createIndex();
     
   }
 
@@ -67,7 +47,6 @@ class App extends Component {
       searchResults: searchResults
     });
 
-    // Eigene HandleFilter Funktion?
     try {
       this.setState({
         uniqueAuthorValues : Array.from(new Set(this.state.searchResults.map(thesis => thesis.author.name))),
@@ -79,11 +58,11 @@ class App extends Component {
     } catch (error) {
       console.log("No Search Result!");
       this.setState({
-        uniqueAuthorValues : [],
-        uniqueYearValues : [],
-        uniqueLanguageValues : [],
-        uniqueFieldOfStudyValues : [],
-        uniqueStudyInterestsValues : [],
+        uniqueAuthorValues : new Array(0),
+        uniqueYearValues : new Array(0),
+        uniqueLanguageValues : new Array(0),
+        uniqueFieldOfStudyValues : new Array(0),
+        uniqueStudyInterestsValues : new Array(0),
       });
     }
   };
@@ -101,26 +80,20 @@ class App extends Component {
   };
 
   handleLogIn = async () => {
-    // Alte Parameter: loggedIn, accountAdress
-    // if (loggedIn === true) {
-    //   console.log("Logging in...");
-    //   await ganache.connectMetaMask().then(res => accounts = res);
-    //   this.setState({
-    //     loggedIn: loggedIn,
-    //     accountAdress: accountAdress
-    //   });
-    // }
     console.log("Login?")
     if(this.state.loggedIn) {
 
+      localStorage.setItem("loggedIn", true);
+
+      console.log(localStorage.getItem("loggedIn"))
       console.log("Was allready logged in.");
-      // this.setState({loggedIn: false});
+      
       return false;
 
     } else {
 
       console.log("Wasnt logged in. Logging in!");
-      var success = await ganache.connectMetaMask().then(res => accounts = res);
+      var success = await ganache.connectMetaMask();
 
       if (success) {
 

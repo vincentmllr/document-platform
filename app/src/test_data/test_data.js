@@ -151,7 +151,6 @@ const getRandomReviews = () => {
     let randomReviews = [];
     for(let i = 0; i < 25; i++) {
         randomReviews.push(new Review(randomReviewElement, randomReviewElement, randomReviewElement));
-
     }
 
     return randomReviews;
@@ -221,7 +220,7 @@ export const testTheses = [
         "", // Leave fileBase64 empty, will be added at test file upload
         "", // Leave filepath empty
         "Veauthier_BA-Arbeit.pdf", // filename is used to identify the file at test file upload
-        []
+        getRandomReviews()
     ),
 
 

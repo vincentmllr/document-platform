@@ -9,8 +9,6 @@ import { Select } from "react-dropdown-select";
 import FileSaver from 'file-saver';
 import logo from "./assets/logo_cap_512.png";
 import document_symbol from "./assets/document_symbol_512.png";
-// import View from "react-native/React/Views/";
-// import {Stars} from "react-native-stars";
 import StarRatings from 'react-star-ratings';
 import { testTitles,
   testAuthorNames,
@@ -49,7 +47,7 @@ export class Navigation extends Component {
       }
     }
 
-    render() { // fixed-top navbar-toggleable-md navbar-inverse bg-primary
+    render() {
       return (
         <nav className="navbar navbar-expand-md" role="navigation">
           <a className="navbar-brand" href="/">
@@ -60,9 +58,6 @@ export class Navigation extends Component {
           </button>
           <div className="collapse navbar-collapse"  id="navbarSupportedContent">
             <ul className="navbar-nav">
-              <li>
-                <TestListener/>
-              </li>
             </ul>
           </div>
           <Link className="btn btn-success" to="/submit">Submit</Link>
@@ -71,7 +66,6 @@ export class Navigation extends Component {
             :
               <button className="btn btn-success" onClick={this.props.handleLogIn}>Log In</button>
             }
-            {this.props.loggedIn ? <p>as {this.props.account}</p> : null}
         </nav>
       )
     };
@@ -158,27 +152,6 @@ export class CardDeck extends Component {
   }
 }
 
-
-class TestListener extends Component {
-  handleClick = async () => {
-    actionHandler.actionOfListener(); // await?
-  };
-
-  render() {
-    return <button className="btn btn-primary" onClick={this.handleClick}>Test Listener</button>;
-  }
-}
-
-function Back(handleClick) {
-  return (
-    <button
-              onClick={this.props.handleClick}
-              class="btn btn-secondary">
-              Back
-      </button>
-  );
-}
-
 export class Search extends Component {
   
     constructor(props) {
@@ -190,18 +163,6 @@ export class Search extends Component {
       };
       this.state.searchTerm = this.props.searchTerm;
     }
-
-    onKeyUp = (event) => {
-      console.log(`Searching for ${event.target.value}...`);
-      this.props.handleSearch(event.target.value);
-      event.preventDefault();
-      // if (event.charCode === 13) {
-      //   console.log("Redirect to Search Page")
-      //   this.setState({ value: event.target.value });
-      //   this.props.history.push('#/search/');
-      //   return  <Redirect  to="#/search/" />;
-      // }
-    };
     
     handleClick = async () => {
       if (this.state.advancedSearch) {
@@ -220,17 +181,15 @@ export class Search extends Component {
         this.props.handleSearch(this.state.searchTerm, this.state.searchResults);
       } else {
         const keyword = document.getElementById("keyword").value;
+        this.setState({searchTerm: keyword});
         const searchResults = await elastic.simpleSearchPDF(keyword);
         this.setState({searchResults: searchResults});
         this.props.handleSearch(this.state.searchTerm, this.state.searchResults);
       }
     };
     
-    handleChange = async (event) => {
-      this.setState({searchTerm: event.target.value});
-      const searchResults = await elastic.simpleSearchPDF(this.state.searchTerm);
-      this.setState({searchResults: searchResults});
-      this.props.handleSearch(this.state.searchTerm, this.state.searchResults);
+    handleChange = async () => {
+      this.handleClick();
     };
 
     handleAdvanced = () => {
@@ -242,15 +201,24 @@ export class Search extends Component {
     };
     
     render() {     
-      // TODO Hinzufügen der "Enter"-Funktion; Testweise entfernt von input: onKeyPress={this.onKeyUp}
       return (
         <div id="searchbar px-5" className="input-group">
           <input type="text" id="keyword" className="form-control" placeholder="Enter Keyword" value={this.state.searchTerm} onChange={this.handleChange} ></input>
-          {this.state.advancedSearch ? <input type="text" id="title" className="form-control" placeholder="Enter Title"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="author" className="form-control"placeholder="Enter Author"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="year" className="form-control" placeholder="Enter Year"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="university" className="form-control" placeholder="Enter University"></input> : null}
-          {this.state.advancedSearch ? <input type="text" id="examiner" className="form-control" placeholder="Enter Examiner"></input> : null}
+          {this.state.advancedSearch ? 
+            <input
+              type="text"
+              id="title"
+              className="form-control"
+              placeholder="Enter Title"
+            >
+            </input>
+          :
+            null
+          }
+          {this.state.advancedSearch ? <input type="text" id="author" className="form-control"placeholder="Enter Author" onChange={this.handleChange}></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="year" className="form-control" placeholder="Enter Year" onChange={this.handleChange}></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="university" className="form-control" placeholder="Enter University" onChange={this.handleChange}></input> : null}
+          {this.state.advancedSearch ? <input type="text" id="examiner" className="form-control" placeholder="Enter Examiner" onChange={this.handleChange}></input> : null}
           <div className="input-group-append">
             {!this.props.onIndexPage ? 
               <div>{this.state.advancedSearch ?
@@ -282,7 +250,6 @@ export class List extends Component {
       filtered: false,
       filteredResults: [],
     }
-    
   }
 
   handleView = (thesis) => {
@@ -298,7 +265,7 @@ export class List extends Component {
       studyInterests: studyInterestsFilterValues,
       year: yearFilterValues
     };
-
+    console.log(taggedFilters)
     let numberOfFilters = 0;
     for(let filter in taggedFilters) {
       if(taggedFilters[filter].length > 0) {
@@ -349,6 +316,7 @@ export class List extends Component {
       }
 
       const filteredResults = unfilteredResults.filter(checkFilter);
+      console.log(filteredResults)
       this.setState({filteredResults: filteredResults});
 
     } else {
@@ -371,9 +339,33 @@ export class List extends Component {
           uniqueStudyInterestsValues={this.props.uniqueStudyInterestsValues}
           uniqueYearValues={this.props.uniqueYearValues}
         />
-        {this.props.thesisList.length === 0 ? <button class="list-group-item list-group-item-action disabled list-group-item-primary" >Nothing Found. Try a different term.</button> : null}
-        {this.state.filtered ?
-          this.state.filteredResults.map((thesis) => <button class="list-group-item list-group-item-action list-group-item-primary bg-light" value="" key={thesis.id} onClick={() => this.handleView(thesis)}>{thesis.title}, {thesis.author.name}, {thesis.year}, {thesis.university}, {thesis.examiner.name} <Link to="/thesis">View</Link></button>)
+        {Array.isArray(this.props.thesisList) && this.props.thesisList.length === 0 ? <button class="list-group-item list-group-item-action disabled list-group-item-primary" >Nothing Found. Try a different term.</button> : null}
+        {(this.state.filtered && Array.isArray(this.state.filteredResults) ) ?
+          this.state.filteredResults.map((thesis) =>
+            <button className="card"
+                class="list-group-item list-group-item-action list-group-item-primary bg-light"
+                value=""
+                key={thesis.id}
+                onClick={() => this.handleView(thesis)}>
+                    <div className="row">
+                      <div className="col-2 d-flex align-items-center justify-content-center">
+                        <img src={document_symbol} class="img-fluid rounded-start" alt="Thesis Preview" width="120" height="120"/>
+                      </div>
+                      <div className="col-9">
+                        <div class="card-body">
+                          <h5 class="card-title">{thesis.title}</h5>
+                          <h6 class="card-title">{thesis.author.name}</h6>
+                          <em class="card-text">{thesis.university}</em>
+                          <p class="card-text">{thesis.abstract.slice(0,200)}...</p>
+                          <p class="card-text"><small class="text-muted">Uploaded {thesis.year}</small></p>
+                        </div>
+                      </div>
+                      <div className="col-1 d-flex align-items-center justify-content-center">
+                        <Link class="btn btn-primary btn-spl" to="/thesis">View</Link>
+                      </div>
+                    </div>
+              </button>
+          )
         : 
           this.props.thesisList.map((thesis) =>
             <button className="card"
@@ -474,8 +466,10 @@ class Filterbar extends Component {
 
   arrayToDropdownOptions = (array) => {
       const dropdownOptions = [];
-      for(let i=0; i < array.length; i++) {
-        dropdownOptions.push({ label: array[i], value: i });
+      if(Array.isArray(array)) {
+        for(let i=0; i < array.length; i++) {
+          dropdownOptions.push({ label: array[i], value: i });
+        }
       }
       return dropdownOptions;
   };
@@ -483,75 +477,67 @@ class Filterbar extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-3"></div>
-          <div className="col-md-6">
-            {(
-              this.props.uniqueAuthorValues !== undefined &&
-              this.props.uniqueFieldOfStudyValues !== undefined &&
-              this.props.uniqueLanguageValues !== undefined &&
-              this.props.uniqueStudyInterestsValues !== undefined &&
-              this.props.uniqueYearValues !== undefined ) ? <div>
-            {(this.props.uniqueAuthorValues.length > 0) ? 
-              <Select
-                placeholder="Filter Author..."
-                options={this.arrayToDropdownOptions(this.props.uniqueAuthorValues)}
-                onChange={this.handleAuthorChange}
-                multi
-                clearable
-                closeOnScroll
-              />
-              : "No Filter available" 
-            }
-            {(this.props.uniqueFieldOfStudyValues.length > 0) ? 
-              <Select
-                placeholder="Filter Field of Study..."
-                options={this.arrayToDropdownOptions(this.props.uniqueFieldOfStudyValues)}
-                onChange={this.handleFieldOfStudyChange}
-                multi
-                clearable
-                closeOnScroll
-              />
-              : null 
-            }
-            {(this.props.uniqueLanguageValues.length > 0) ? 
-              <Select
-                placeholder="Filter Language..."
-                options={this.arrayToDropdownOptions(this.props.uniqueLanguageValues)}
-                onChange={this.handleLanguageChange}
-                multi
-                clearable
-                closeOnScroll
-              />
-              : null 
-            }
-            {(this.props.uniqueStudyInterestsValues.length > 0) ? 
-              <Select 
-                placeholder="Filter Study Interest..."
-                options={this.arrayToDropdownOptions(this.props.uniqueStudyInterestsValues)}
-                onChange={this.handleStudyInterestsChange}
-                multi
-                clearable
-                closeOnScroll
-              />
-              : null 
-            }
-            {(this.props.uniqueYearValues.length > 0) ? 
-              <Select 
-                placeholder="Filter Year..."
-                options={this.arrayToDropdownOptions(this.props.uniqueYearValues)}
-                onChange={this.handleYearChange}
-                multi
-                clearable
-                closeOnScroll
-              />
-              : null 
-            }
-           </div> : "No Results yet" }
+            {
+              (
+                this.props.uniqueAuthorValues !== undefined &&
+                this.props.uniqueFieldOfStudyValues !== undefined &&
+                this.props.uniqueLanguageValues !== undefined &&
+                this.props.uniqueStudyInterestsValues !== undefined &&
+                this.props.uniqueYearValues !== undefined
+              ) ? 
+                <div className="row"> 
+                  <div className="col">
+                    <Select
+                      placeholder="Filter Author..."
+                      options={this.arrayToDropdownOptions(this.props.uniqueAuthorValues)}
+                      onChange={this.handleAuthorChange}
+                      multi
+                      clearable
+                      closeOnScroll
+                    />
+                  </div>
+                  <div className="col">
+                    <Select
+                      placeholder="Filter Field of Study..."
+                      options={this.arrayToDropdownOptions(this.props.uniqueFieldOfStudyValues)}
+                      onChange={this.handleFieldOfStudyChange}
+                      multi
+                      clearable
+                      closeOnScroll
+                    />
+                  </div>
+                  <div className="col">
+                    <Select
+                      placeholder="Filter Language..."
+                      options={this.arrayToDropdownOptions(this.props.uniqueLanguageValues)}
+                      onChange={this.handleLanguageChange}
+                      multi
+                      clearable
+                      closeOnScroll
+                    />
+                  </div>
+                  <div className="col">
+                    <Select 
+                      placeholder="Filter Study Interest..."
+                      options={this.arrayToDropdownOptions(this.props.uniqueStudyInterestsValues)}
+                      onChange={this.handleStudyInterestsChange}
+                      multi
+                      clearable
+                      closeOnScroll
+                    />
+                  </div>
+                  <div className="col">
+                    <Select 
+                      placeholder="Filter Year..."
+                      options={this.arrayToDropdownOptions(this.props.uniqueYearValues)}
+                      onChange={this.handleYearChange}
+                      multi
+                      clearable
+                      closeOnScroll
+                    />
+                  </div>
+            </div> : "" }
           </div>
-          <div className="col-md-4"></div>
-        </div>
-      </div>
     );
   }
 
@@ -1066,6 +1052,18 @@ export class TestDataForm extends Component {
     }
 
   };
+
+  handleListener = async () => {
+    if(this.props.loggedIn) {
+
+      await actionHandler.startListener();
+
+    } else {
+
+      alert("Please Log in before starting listener!");
+
+    }
+  };
   
   render () {
     return (
@@ -1098,7 +1096,8 @@ export class TestDataForm extends Component {
               >
                 Upload Test Data
               </button>
-            } 
+            }
+            <button className="btn btn-primary" onClick={this.handleListener}>Start Listener</button>
           </div>
         </form>
       </div>
@@ -1115,30 +1114,17 @@ export class ItemView extends Component {
       testReviews: [[1,2,3],[4,5,3],[2,3,5]],
       verified: false,
     };
-
-    // this.props.item.reviews = this.state.testReviews;
-    console.log(this.props.item.reviews);
-
   }
 
   handleVerification = async () => {
 
     var path = this.props.chosenThesis.filePath;
-    var verified = await actionHandler.verificate(path); // TODO Rename to verify(path)
+    var verified = await actionHandler.verificate(path);
     this.setState({verified: verified});
 
   };
 
-  changeRating = ( newRating, name ) => {
-    console.log(this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews.length)
-    this.props.item.reviews[0].push(newRating);
-    this.setState({
-      rating: newRating
-    });
-  }
-
   handleChangeThesis = () => {
-      /*Nur wenn Author anschaut, Out: Neue Thesis, Alte ID*/
       this.props.handleChangeThesis();
   };
 
@@ -1149,50 +1135,24 @@ export class ItemView extends Component {
         <div className="col-8">
           <h5>{this.props.item.title}</h5>
           <h6>{this.props.item.author.name} @{this.props.item.university}</h6>
-          <div>
-            {this.props.item.author.studyInterests.split(" ").map((topic) => <span className="badge badge-primary">{topic}</span>)}
-          </div>
+          {this.props.item.author.studyInterests.split(" ").map((topic) => <span className="badge badge-primary">{topic}</span>)}
         </div>
         <div className="col-4 d-flex align-items-center justify-content-center">
           <img src={document_symbol} class="img-fluid rounded-start" alt="Thesis Preview" width="120" height="120"/>
         </div>
       </div>
-          <div className="row">
-            <div className="col-8">
-              <p>{this.props.item.abstract}</p>
-              <h6>About the author</h6>
-              <p>{this.props.item.author.mail}</p>
-              <h6>About the examiner</h6>
-              <p>{this.props.item.examiner.name}</p>
-            </div>
-            <div className="col-4">
-            <button className="btn btn-light" onClick={() => this.handleChangeThesis()} >
-                <Link className="btn btn-danger" to="/submit">Edit</Link>
-              </button>
-              <input type="button" className="btn btn-primary" value="Verify" onClick={this.handleVerification} />
-              <input type="button" className="btn btn-primary" value="Download" onClick={
-                ()=> {
-                  console.log("Download Button pressed!")
-                  FileSaver.saveAs(process.env.PUBLIC_URL + "/data/testpdf.pdf", "Downloaded Thesis from Peer.pdf"); // In: File, Out: Thesis
-                }
-              }/>
-              <StarRatings
-                rating={this.props.item.reviews[0].reduce((a,b) => a + b) / this.props.item.reviews[0].length}
-                starDimension="40px"
-                starSpacing="15px"
-                id="generalRatings"
-              />
-              <StarRatings
-                rating={this.state.rating}
-                starRatedColor="blue"
-                changeRating={this.changeRating}
-                numberOfStars={5}
-                name='general'
-              />
-              <p>{this.props.item.reviews}</p>
-            </div>
-
-          </div>
+      <div className="row">
+        <div className="col-8">
+          <p>{this.props.item.abstract}</p>
+        </div>
+        <div className="col-4">
+          <button className="btn btn-light" onClick={() => this.handleChangeThesis()} >
+            <Link className="btn btn-danger" to="/submit">Edit</Link>
+          </button>
+          <input type="button" className="btn btn-primary" value="Verify" onClick={this.handleVerification} />
+          <p>{console.log(this.props.chosenThesis)}</p>
+        </div>
+      </div>
       </div>
     );
   }

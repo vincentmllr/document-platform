@@ -34,7 +34,7 @@ peer\
  |\
  +-blockchain: Ganche container for blockchain, JS\
  +-elastic: Elastic container for elastic search, JS\
- +-test: Test environment without frontend, misc\
+ +-test: Test environment without frontend, misc
 
 ### Standard MetaMask-Addresses
 The ganache container will always have the same 10 accounts with each 100 ETH for testing. We use two accounts:

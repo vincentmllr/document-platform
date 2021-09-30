@@ -23,7 +23,6 @@ class SubmitPage extends Component {
           />
         </div>
         <footer className="row">
-          <Footer />
         </footer>
       </div>
     );

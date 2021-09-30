@@ -31,6 +31,12 @@ If your private key shouldnt work:
 6. Copy first entry of list "private keys" in console 
 7. Import Account: Enter private key from step before
 
+#### Uploading Test Data
+1. On the index page: Click on file input and choose all the pdf in test_data
+2. Click on upload files
+3. Click on start listener
+4. Wait till you see indexing pdf in console
+
 #### Making Changes
 ##### To test your changes in /app:
 1. In /app: yarn start
