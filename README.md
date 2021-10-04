@@ -15,6 +15,9 @@ Open Source Student Theses
 3. Install requirements with: yarn install.
 
 #### Start Docker Containers
+1. In /peer/app: yarn build
+2. In /peer: docker-compose up --build
+
 ##### How to start the app-Container seperate
 1. cd app
 2. yarn build
