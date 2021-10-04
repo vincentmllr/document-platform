@@ -82,3 +82,17 @@
   width: 40%;
   height: auto;
 }
+
+.btn-success, .btn-primary, .btn-outline-secondary, .btn-danger{
+  margin: 5px 10px 5px 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+}
+
+p {
+}
+
+a {
+  color: white;
+}

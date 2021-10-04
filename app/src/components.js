@@ -581,7 +581,7 @@ export class SubmitForm extends Component {
       if (this.props.changeThesis) {
 
         let oldId = this.props.chosenThesis.id;
-        let id = elastic.newID(); // await?
+        let id = await elastic.newID();
 
         const thesisToSubmit = new Thesis(
           id,
@@ -621,7 +621,7 @@ export class SubmitForm extends Component {
 
       } else {
 
-        let id = elastic.newID(); // await?
+        let id = await elastic.newID();
         
         const thesisToSubmit = new Thesis(
           id,
@@ -690,25 +690,25 @@ export class SubmitForm extends Component {
   };
 
   handleFill = () => {
-    // TODO Instead fill in a specific thesis
-    document.getElementById("title").value = randomElement(this.randomTitles);
-    document.getElementById("authorName").value = randomElement(this.randomAuthorNames);
-    document.getElementById("authorEmail").value = "info" + randomElement(this.randomEmails);
-    document.getElementById("authorUniversity").value = randomElement(this.randomUniversities);
-    document.getElementById("authorFieldOfStudy").value = randomElement(this.randomFieldOfStudies);
-    document.getElementById("authorStudyInterests").value = randomElement(this.randomStudyInterests);
-    document.getElementById("examinerName").value = randomElement(this.randomExaminerNames);
-    document.getElementById("examinerEmail").value = "info" + randomElement(this.randomEmails);
-    document.getElementById("examinerUniversity").value = randomElement(this.randomUniversities);
-    document.getElementById("examinerInstitute").value = randomElement(this.randomInstitutes);
-    document.getElementById("examinerWebsite").value = randomElement(this.randomWebsites);
-    document.getElementById("examinerMetaMaskAddress").value = randomElement(this.randomMetaMaskAddresses);
-    document.getElementById("year").value = randomElement(this.randomYears);
-    document.getElementById("language").value = randomElement(this.randomLanguages);
-    document.getElementById("country").value = randomElement(this.randomCountries);
-    document.getElementById("university").value = randomElement(this.randomUniversities);
-    document.getElementById("abstract").value = randomElement(this.randomAbstracts);
-    document.getElementById("grade").value = randomElement(this.randomGrades);
+    let randomThesis = randomElement(testTheses);
+    document.getElementById("title").value = randomThesis.title;
+    document.getElementById("authorName").value = randomThesis.author.name;
+    document.getElementById("authorEmail").value = randomThesis.author.email;
+    document.getElementById("authorUniversity").value = randomThesis.author.university;
+    document.getElementById("authorFieldOfStudy").value = randomThesis.author.fieldOfStudy;
+    document.getElementById("authorStudyInterests").value = randomThesis.author.studyInterests;
+    document.getElementById("examinerName").value = randomThesis.examiner.name;
+    document.getElementById("examinerEmail").value = randomThesis.examiner.email;
+    document.getElementById("examinerUniversity").value = randomThesis.examiner.university;
+    document.getElementById("examinerInstitute").value = randomThesis.examiner.institute;
+    document.getElementById("examinerWebsite").value = randomThesis.examiner.website;
+    document.getElementById("examinerMetaMaskAddress").value = randomThesis.examiner.metaMaskAddress;
+    document.getElementById("year").value = randomThesis.year;
+    document.getElementById("language").value = randomThesis.language;
+    document.getElementById("country").value = randomThesis.country;
+    document.getElementById("university").value = randomThesis.university;
+    document.getElementById("abstract").value = randomThesis.abstract;
+    document.getElementById("grade").value = randomThesis.grade;
   };
 
   render() {
@@ -717,75 +717,76 @@ export class SubmitForm extends Component {
         <p>{console.log(this.props.changeThesis)}{ console.log(this.props.chosenThesis)}</p>
         <button class="btn btn-secondary" onClick={this.handleFill}>Fill Form for Testing</button>
         <form onSubmit={this.handleSubmit}>
+          <div className="border border-secondary rounded my-3 p-3">
           <h6>About the Thesis</h6>
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
+          <div className="form-group form-floating">
             <input 
               id="title"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomTitles)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.title : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.title : null}
             />
+            <label htmlFor="title">Title</label>
+
           </div>
-          <div className="form-group">
-            <label htmlFor="abstract">Abstract</label>
+          <div className="form-group form-floating">
             <input 
               id="abstract"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomAbstracts)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.abstract : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.abstract : null}
             />
+            <label htmlFor="abstract">Abstract</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="university">University</label>
+          <div className="form-group form-floating">
             <input 
               id="university"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomUniversities)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.university : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.university : null}
             />
+            <label htmlFor="university">University</label>            
           </div>
-          <div className="form-group">
-            <label htmlFor="language">Language</label>
+          <div className="form-group form-floating">
             <input 
               id="language"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomLanguages)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.language : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.language : null}
             />
+            <label htmlFor="language">Language</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="country">Country</label>
+          <div className="form-group form-floating">
             <input 
               id="country"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomCountries)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.country : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.country : null}
             />
+            <label htmlFor="country">Country</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="year">Year</label>
+          <div className="form-group form-floating">
             <input
               id="year"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomYears)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.year : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.year : null}
             />
+            <label htmlFor="year">Year</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="grade">Grade</label>
+          <div className="form-group form-floating">
             <input
               id="grade"
               className="form-control"
@@ -793,11 +794,12 @@ export class SubmitForm extends Component {
               step="0.1"
               placeholder={randomElement(this.randomGrades)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.grade : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.grade : null}
             />
+            <label htmlFor="grade">Grade</label>
           </div>
           <div className="form-group">
-            <label htmlFor="file">File</label>
+            <label htmlFor="file" className="form-label">File</label>
             <input
               type="file"
               className="form-control"
@@ -806,67 +808,68 @@ export class SubmitForm extends Component {
               onChange={this.handleFileChange}
               accept="application/pdf"
               required
-              files={this.props.changeThesis ? [this.props.chosenThesis.file] : ""}
+              files={this.props.changeThesis ? [this.props.chosenThesis.file] : null}
             />
           </div>
+          </div>
+          <div className="border border-secondary rounded my-3 p-3">
           <h6>About the Author</h6>
-          <div className="form-group">
-            <label htmlFor="authorName">Name</label>
+          <div className="form-group form-floating">
             <input
               id="authorName"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomAuthorNames)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.author.name : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.author.name : null}
             />
+            <label htmlFor="authorName">Name</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="authorEmail">E-Mail</label>
+          <div className="form-group form-floating">
             <input
               id="authorEmail"
               className="form-control"
               type="email"
               placeholder={randomElement(this.randomEmails)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.author.email : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.author.email : null}
             />
+            <label htmlFor="authorEmail">E-Mail</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="authorUniversity">University</label>
+          <div className="form-group form-floating">
             <input
               id="authorUniversity"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomUniversities)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.author.university : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.author.university : null}
             />
+            <label htmlFor="authorUniversity">University</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="authorFieldOfStudy">Field of Study</label>
+          <div className="form-group form-floating">
             <input
               id="authorFieldOfStudy"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomFieldOfStudies)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.author.fieldOfStudy : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.author.fieldOfStudy : null}
             />
+            <label htmlFor="authorFieldOfStudy">Field of Study</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="authorStudyInterests">Study Interests</label>
+          <div className="form-group form-floating">
             <input
               id="authorStudyInterests"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomStudyInterests)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.author.studyInterests : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.author.studyInterests : null}
             />
+            <label htmlFor="authorStudyInterests">Study Interests</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="authorMetaMaskAddress">MetaMask Adress</label>
+          <div className="form-group form-floating">
             <input
               id="authorMetaMaskAddress"
               className="form-control"
@@ -875,73 +878,77 @@ export class SubmitForm extends Component {
               value={this.props.account}
               required
             />
+            <label htmlFor="authorMetaMaskAddress">MetaMask Adress</label>
           </div>
+          </div>
+          <div className="border border-secondary rounded my-3 p-3">
           <h6>About the Examiner</h6>
-          <div className="form-group">
-            <label htmlFor="examinerName">Name</label>
+          <div className="form-group form-floating">
             <input
               id="examinerName"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomExaminerNames)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.examiner.email : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.email : null}
             />
+            <label htmlFor="examinerName">Name</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="examinerEmail">E-Mail</label>
+          <div className="form-group form-floating">
             <input
               id="examinerEmail"
               className="form-control"
               type="email"
               placeholder={randomElement(this.randomEmails)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.examiner.email : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.email : null}
             />
+            <label htmlFor="examinerEmail">E-Mail</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="examinerUniversity">University</label>
+          <div className="form-group form-floating">
             <input
               id="examinerUniversity"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomUniversities)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.examiner.university : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.university : null}
             />
+            <label htmlFor="examinerUniversity">University</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="examinerInstitute">Institute</label>
+          <div className="form-group form-floating">
             <input
               id="examinerInstitute"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomInstitutes)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.examiner.institute : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.institute : null}
             />
+            <label htmlFor="examinerInstitute">Institute</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="examinerWebsite">Website</label>
+          <div className="form-group form-floating">
             <input
               id="examinerWebsite"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomWebsites)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.examiner.website : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.website : null}
             />
+            <label htmlFor="examinerWebsite">Website</label>
           </div>
-          <div className="form-group">
-            <label htmlFor="examinerMetaMaskAddress">MetaMask Adress</label>
+          <div className="form-group form-floating">
             <input
               id="examinerMetaMaskAddress"
               className="form-control"
               type="text"
               placeholder={randomElement(this.randomMetaMaskAddresses)}
               required
-              value={this.props.changeThesis ? this.props.chosenThesis.examiner.metaMaskAddress : ""}
+              value={this.props.changeThesis ? this.props.chosenThesis.examiner.metaMaskAddress : null}
             />
+            <label htmlFor="examinerMetaMaskAddress">MetaMask Adress</label>
+          </div>
           </div>
           <input
             id="submit"
@@ -976,6 +983,7 @@ export class TestDataForm extends Component {
       fileList: [],
       filesBase64: [],
       testData: [],
+      filesWithBase64NEW: [],
     };
   }
 
@@ -985,8 +993,9 @@ export class TestDataForm extends Component {
       filesWithBase64.push([files[i], filesBase64[i]]);
     }
     console.log(filesWithBase64);
+    console.log(this.state.filesWithBase64NEW);
     console.log(theses);
-    for(let file of filesWithBase64) {
+    for(let file of this.state.filesWithBase64NEW) {
       for(let thesis of theses) {
         if(file[0].name === thesis.fileName) {
           thesis.file = file[0];
@@ -994,20 +1003,19 @@ export class TestDataForm extends Component {
         }
       }
     }
-    console.log(theses);
     this.setState({testData: theses});
     return theses;
   };
 
-  submitTestThesis = async (file, fileBase64) => {
-    const thesisToSubmit = getRandomThesis(file, fileBase64);
-    console.log(thesisToSubmit)
-    actionHandler.submit(thesisToSubmit);
-  };
+  // submitTestThesis = async (file, fileBase64) => {
+  //   const thesisToSubmit = getRandomThesis(file, fileBase64);
+  //   console.log(thesisToSubmit)
+  //   actionHandler.submit(thesisToSubmit);
+  // };
 
   handleChange = async (event) => {
     
-    this.setState({fileList: event.target.files})
+    // this.setState({fileList: event.target.files})
 
     // Base 64 Generation
 
@@ -1017,7 +1025,9 @@ export class TestDataForm extends Component {
         if (result) {
           // console.log(result);
           this.setState({
-            filesBase64: this.state.filesBase64.concat(result)
+            fileList: this.state.fileList.concat(file),
+            filesBase64: this.state.filesBase64.concat(result),
+            filesWithBase64NEW: this.state.filesWithBase64NEW.concat([[file, result]])
           });
         };
       };
@@ -1042,7 +1052,10 @@ export class TestDataForm extends Component {
       let testData = this.matchThesesToFiles(testTheses, this.state.fileList, this.state.filesBase64);
       console.log(testData);
       for (let testThesis of testData) {
-        actionHandler.submit(testThesis);
+        if (testThesis.fileBase64 !== "") {
+          console.log(testThesis)
+          actionHandler.submit(testThesis);
+        }
       }
 
     } else {
@@ -1067,37 +1080,42 @@ export class TestDataForm extends Component {
   
   render () {
     return (
-      <div>
+      <div className="alert alert-secondary" role="alert">
         <form
           id="file-catcher"
           onSubmit={this.handleSubmit}
         >
+           <legend>Test Data Upload</legend>
+
           <div className="form-group">
-            <label htmlFor="fileInput">Here you can upload the test data from /peer/app/src/test_data:</label>
+            <label htmlFor="fileInput">Here you can upload the test data from /peer/app/src/test_data. Please upload all PDF-files in the folder:</label>
             <input
               id="fileInput"
               type="file"
+              name="filetobase64"
+              accept="application/pdf"
               className="form-control"
               onChange={this.handleChange}
               multiple
+              required
             />
             {(this.state.fileList.length !== 0 && this.state.filesBase64.length === this.state.fileList.length) ? 
               <button
                 type="submit"
-                className="btn btn-success"
+                className="btn btn-outline-secondary"
               >
                 Upload Test Data
               </button>
             :
               <button
                 type="submit"
-                className="btn btn-success"
+                className="btn btn-outline-secondary"
                 disabled
               >
                 Upload Test Data
               </button>
             }
-            <button className="btn btn-primary" onClick={this.handleListener}>Start Listener</button>
+            <button className="btn btn-success" onClick={this.handleListener}>Start Listener</button>
           </div>
         </form>
       </div>
@@ -1118,14 +1136,29 @@ export class ItemView extends Component {
 
   handleVerification = async () => {
 
-    var path = this.props.chosenThesis.filePath;
-    var verified = await actionHandler.verificate(path);
-    this.setState({verified: verified});
+    if(this.props.loggedIn) {
+
+      var path = this.props.item.filePath;
+      var verified = await actionHandler.verificate(path);
+      if(!verified) {
+        alert("Verification not successfull!");
+      } else {
+        alert("Verification successfull!");
+      }
+      this.setState({verified: verified});
+
+    } else {
+      alert("Please Log In to verify!");
+    }
 
   };
 
-  handleChangeThesis = () => {
-      this.props.handleChangeThesis();
+  handleChangeThesis = async () => {
+      if (this.props.item.author.metaMaskAddress === await ganache.getAccount()) {
+        this.props.handleChangeThesis();
+      } else {
+        alert("Only author can change thesis!");
+      }
   };
 
   render () {
@@ -1146,12 +1179,29 @@ export class ItemView extends Component {
           <p>{this.props.item.abstract}</p>
         </div>
         <div className="col-4">
-          <button className="btn btn-light" onClick={() => this.handleChangeThesis()} >
-            <Link className="btn btn-danger" to="/submit">Edit</Link>
-          </button>
+        <Link className="btn btn-danger" to="/submit" onClick={() => this.handleChangeThesis()}>Edit</Link>
+          {this.state.verified ?
+          <input type="button" className="btn btn-success" value="Verified!" onClick={this.handleVerification} />
+          :
           <input type="button" className="btn btn-primary" value="Verify" onClick={this.handleVerification} />
-          <p>{console.log(this.props.chosenThesis)}</p>
+          }
+          <button className="btn btn-primary"><a href={"data:application/pdf;base64,"+ this.props.item.fileBase64} download={this.props.item.fileName}>Download</a></button>
+          <p>{console.log(this.props.item)}</p>
         </div>
+        <div className="alert alert-primary my-3 p-3">
+          <h5>About the author</h5>
+          <p>{this.props.item.author.name}</p>
+          <p>{this.props.item.author.email}</p>
+          <p>{this.props.item.author.fieldOfStudy}</p>
+        </div>
+        <div className="alert alert-primary my-3 p-3">
+          <h5>About the examiner</h5>
+          <p>{this.props.item.examiner.name}</p>
+          <p>{this.props.item.examiner.email}</p>
+          <p>{this.props.item.examiner.institute}</p>
+          <p>{this.props.item.examiner.website}</p>
+        </div>
+
       </div>
       </div>
     );

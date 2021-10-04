@@ -304,6 +304,7 @@ The best way should be that the listener run in an seperate docker container, on
 
 #### "No living Connection" with Elastic Search
 1. Restart Docker Containers
+2. If that doesnt help: try steps under "Elastic Search doesnt index pdfs" above
 
 #### Error: "the tx doesn’t have the correct nonce. account has nonce of: x tx has nonce of: y"
 This usually happens, if a transaction failed because of a failure in the backend-code.

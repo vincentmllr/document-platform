@@ -31,10 +31,11 @@ Open Source Student Theses
 7. Import Account: Enter private key from step before
 
 #### Uploading Test Data
-1. On the index page: Click on file input and choose all the pdf in test_data
-2. Click on upload files
-3. Click on start listener
-4. Wait till you see indexing pdf in console
+1. On the index page: Click on file input and choose all the pdf in test_data.
+2. Click on upload test data.
+3. Wait till MetaMask prompted to submit each contract.
+4. Click on start listener.
+6. Wait till you see indexing pdf for each test thesis in console. This may take a while.
 
 #### Making Changes
 ##### To test your changes in /app:
