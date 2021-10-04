@@ -299,7 +299,7 @@ export async function newID() {
       resultsObject = JSON.parse(results);
     }
 
-    var IDs = new Array();
+    var IDs = [];
     var gotResults = (resultsObject.hits.total.value !== 0);      //check if there are results
     if (gotResults) {
 

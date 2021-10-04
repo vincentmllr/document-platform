@@ -362,7 +362,7 @@ export async function getHashOfPath(filePath) {
 		for (var i = 0; i < addressList.length; i++) {
 			var contract = await new web3.eth.Contract(abi, addressList[i]);
 			var contractPath = await contract.methods.path().call();
-			if (contractPath == filePath) {
+			if (contractPath === filePath) {
 				var hash = await contract.methods.hashcode().call();
 				return hash;
 
@@ -386,7 +386,7 @@ export async function getContractOfPath(filePath) {
 		for (var i = 0; i < addressList.length; i++) {
 			var contract = await new web3.eth.Contract(abi, addressList[i]);
 			var contractPath = await contract.methods.path().call();
-			if (contractPath == filePath) {
+			if (contractPath === filePath) {
 				return contract;
 			}
 		}

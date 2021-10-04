@@ -1,7 +1,6 @@
 import './App.css';
 import { React, Component } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   HashRouter
@@ -11,9 +10,6 @@ import IndexPage from './pages';
 import SubmitPage from './pages/submit';
 import SearchPage from './pages/search';
 import ThesisPage from './pages/thesis';
-import {
-  testTheses,
-} from './test_data/test_data';
 
 const ganache = require("./ganache");
 const elastic = require("./elastic");
@@ -26,8 +22,8 @@ class App extends Component {
       loggedIn: false,
       account: "",
       searchTerm: "",
-      searchResults: [], // For testing: [testTheses[0], testTheses[0], testTheses[0], testTheses[0]] instead of [],
-      chosenThesis: new Thesis(), // For testing: testTheses[0] instead of new Thesis(),
+      searchResults: [], // For testing without elastic: [testTheses[0], testTheses[0], testTheses[0], testTheses[0]] instead of [],
+      chosenThesis: new Thesis(), // For testing without elaastic: testTheses[0] instead of new Thesis(),
       changeThesis: false,
       uniqueAuthorValues: [],
       uniqueYearValues: [],

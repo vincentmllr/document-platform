@@ -1,13 +1,9 @@
 import { Component } from "react";
-import { Navigation, HeroHeader, Footer, CardDeck, ItemView } from "../components";
+import { Navigation, ItemView } from "../components";
 
 
 
 class ThesisPage extends Component {
-
-  constructor (props) {
-    super(props);
-  }
 
   render () {
     return (

@@ -1,6 +1,4 @@
 import { Thesis, Author, Examiner, Review } from "../model"; 
-const elastic = require("../elastic");
-
 
 var idIncrementer = 0;
 const testAuthorAddress = "0x5fe9dD4c80ab7742B62Fb40CE1fBE37D226645A1";
@@ -90,22 +88,6 @@ export const randomElement = (items) => {
     return items[Math.floor(Math.random()*items.length)];
 };
 
-const fileToBase64 = (file) => {
-
-    const callBackFunction = (error, result) => {
-        if (result) {
-            return result;
-        };
-    };
-  
-    if(file !== undefined) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => callBackFunction(null, reader.result);
-        reader.onerror = (error) => callBackFunction(error, null);
-    }
-
-};
 
 export const getRandomThesis = (file, fileBase64) => {
 

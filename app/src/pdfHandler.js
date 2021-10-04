@@ -317,7 +317,7 @@ export async function checkHash(hashToCheck, uint8) {
     var base64 = await doc.saveAsBase64();
     var file = urltoFile('data:application/pdf;base64,' + base64, 'FileToCheck.pdf', 'application/pdf');
     const newHash = CryptoJS.SHA256(file).toString(CryptoJS.enc.Hex);
-    if (hashToCheck == newHash) {
+    if (hashToCheck === newHash) {
 
       return true;
     }

@@ -1,15 +1,8 @@
 import { Component } from "react";
-import { Navigation, HeroHeader, Footer, CardDeck, TestDataForm } from "../components";
-
-
-const elastic = require("../elastic");
+import { Navigation, HeroHeader, TestDataForm } from "../components";
 
 
 class IndexPage extends Component {
-
-  constructor (props) {
-    super(props);
-  }
 
   render () {
     return (

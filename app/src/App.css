@@ -83,7 +83,7 @@
   height: auto;
 }
 
-.btn-success, .btn-primary, .btn-outline-secondary, .btn-danger{
+.btn-success, .btn-primary, .btn-secondary, .btn-danger{
   margin: 5px 10px 5px 0px;
 }
 
@@ -95,4 +95,8 @@ p {
 
 a {
   color: white;
+}
+
+.badge {
+  margin: 2px;
 }

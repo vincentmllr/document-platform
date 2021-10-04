@@ -1,5 +1,5 @@
 import { Component } from "react";
-import {Navigation, SubmitForm, Footer} from "../components";
+import {Navigation, SubmitForm} from "../components";
 
 class SubmitPage extends Component {
 

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Navigation, Search, List, Footer } from "../components";
+import { Navigation, Search, List} from "../components";
 
 class SearchPage extends Component {
 
