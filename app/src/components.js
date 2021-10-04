@@ -261,34 +261,37 @@ export class List extends Component {
       this.setState({filtered: true})
       let unfilteredResults = this.props.thesisList;
 
-      const checkFilter = (thesis) => {
+      let correctFilterValuesInThesis = [];
+
+      const checkFilter = (thesis, index) => {
         if (true) {
+          correctFilterValuesInThesis.push(0);
           for(let filter in taggedFilters) {
             for(let filterValue of taggedFilters[filter]) {
               switch (filter) {
                 case "author":
                   if (thesis.author.name === filterValue) {
-                    return true;
+                    correctFilterValuesInThesis[index] += 1 ;
                   }
                   break;
                 case "language":
                   if (thesis.language === filterValue) {
-                    return true;
+                    correctFilterValuesInThesis[index] += 1 ;
                   }
                   break;
                 case "fieldOfStudy":
                   if (thesis.author.fieldOfStudy === filterValue) {
-                    return true;
+                    correctFilterValuesInThesis[index] += 1 ;
                   }
                   break;
                 case "studyInterests":
                   if (thesis.author.studyInterests === filterValue) {
-                    return true;
+                    correctFilterValuesInThesis[index] += 1 ;
                   }
                   break;
                 case "year":
                   if (thesis.year === filterValue) {
-                    return true;
+                    correctFilterValuesInThesis[index] += 1 ;
                   }
                   break;
                 default:
@@ -297,10 +300,15 @@ export class List extends Component {
               
             }
           }
+
+          if(correctFilterValuesInThesis[index] === numberOfFilters) {
+            return true;
+          }
         }
       }
-
+ 
       const filteredResults = unfilteredResults.filter(checkFilter);
+
       this.setState({filteredResults: filteredResults});
 
     } else {
