@@ -1,3 +1,7 @@
+# Disclaimer
+This project was imported from the KIT GitLab and was created in a team of three students. My part was only the JavaScript frontend based on React.
+You can find the original orject under https://git.scc.kit.edu/uhksn/peer.
+
 # Peer
 Open Source Student Theses
 
